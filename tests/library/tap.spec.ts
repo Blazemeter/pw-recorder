@@ -15,7 +15,7 @@
  */
 
 import { contextTest as it, expect } from '../config/browserTest';
-import type { ElementHandle } from 'playwright-core';
+import type { ElementHandle } from 'pw-recorder-core';
 
 it.use({ hasTouch: true });
 

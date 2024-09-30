@@ -16,7 +16,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import type { TestInfo } from 'playwright/test';
+import type { TestInfo } from 'pw-recorder/test';
 
 export type TestExpectation = 'unknown' | 'flaky' | 'pass' | 'fail' | 'timeout';
 

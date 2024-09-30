@@ -35,7 +35,7 @@ git clone "https://${GH_SERVICE_ACCOUNT_TOKEN}@github.com/microsoft/trace.playwr
 if [[ "${RELEASE_CHANNEL}" == "--stable" ]]; then
   rm -rf trace.playwright.dev/docs/
   mkdir trace.playwright.dev/docs/
-  cp -r packages/playwright-core/lib/vite/traceViewer/* trace.playwright.dev/docs/
+  cp -r packages/pw-recorder-core/lib/vite/traceViewer/* trace.playwright.dev/docs/
 
   # Restore CNAME, beta/ & next/ branches.
   cd trace.playwright.dev/

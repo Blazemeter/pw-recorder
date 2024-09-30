@@ -18,16 +18,16 @@ import fs from 'fs';
 import path from 'path';
 import url from 'url';
 import { test as baseTest, expect as baseExpect, createImage } from './playwright-test-fixtures';
-import type { HttpServer } from '../../packages/playwright-core/src/utils';
+import type { HttpServer } from '../../packages/pw-recorder-core/src/utils';
 import { startHtmlReportServer } from '../../packages/playwright/lib/reporters/html';
 import { msToString } from '../../packages/web/src/uiUtils';
-const { spawnAsync } = require('../../packages/playwright-core/lib/utils');
+const { spawnAsync } = require('../../packages/pw-recorder-core/lib/utils');
 
 const test = baseTest.extend<{ showReport: (reportFolder?: string) => Promise<void> }>({
   showReport: async ({ page }, use, testInfo) => {
     let server: HttpServer | undefined;
     await use(async (reportFolder?: string) => {
-      reportFolder ??=  testInfo.outputPath('playwright-report');
+      reportFolder ??=  testInfo.outputPath('pw-recorder-report');
       server = startHtmlReportServer(reportFolder) as HttpServer;
       await server.start();
       await page.goto(server.urlPrefix('precise'));
@@ -49,7 +49,7 @@ for (const useIntermediateMergeReport of [false] as const) {
 
     test('should generate report', async ({ runInlineTest, showReport, page }) => {
       await runInlineTest({
-        'playwright.config.ts': `
+        'pw-recorder.config.ts': `
           module.exports = { name: 'project-name' };
         `,
         'a.test.js': `
@@ -117,7 +117,7 @@ for (const useIntermediateMergeReport of [false] as const) {
     test('should not throw when PLAYWRIGHT_HTML_OPEN value is invalid', async ({ runInlineTest, page, showReport }, testInfo) => {
       const invalidOption = 'invalid-option';
       const result = await runInlineTest({
-        'playwright.config.ts': `
+        'pw-recorder.config.ts': `
           module.exports = { preserveOutput: 'failures-only' };
         `,
         'a.test.js': `

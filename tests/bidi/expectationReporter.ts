@@ -16,7 +16,7 @@
 
 import type {
   FullConfig, FullResult, Reporter, Suite, TestCase
-} from '@playwright/test/reporter';
+} from '@pw-recorder/test/reporter';
 import fs from 'fs';
 import { parseBidiExpectations as parseExpectations, projectExpectationPath } from './expectationUtil';
 import type { TestExpectation } from './expectationUtil';

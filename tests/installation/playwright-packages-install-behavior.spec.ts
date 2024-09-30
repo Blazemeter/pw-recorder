@@ -55,11 +55,11 @@ for (const browser of ['chromium', 'firefox', 'webkit']) {
   });
 }
 
-test(`playwright-core should work`, async ({ exec, installedSoftwareOnDisk }) => {
-  const result1 = await exec('npm i --foreground-scripts playwright-core');
+test(`pw-recorder-core should work`, async ({ exec, installedSoftwareOnDisk }) => {
+  const result1 = await exec('npm i --foreground-scripts pw-recorder-core');
   expect(result1).toHaveLoggedSoftwareDownload([]);
   expect(await installedSoftwareOnDisk()).toEqual([]);
-  const stdio = await exec('npx playwright-core', 'test', '-c', '.', { expectToExitWithError: true });
+  const stdio = await exec('npx pw-recorder-core', 'test', '-c', '.', { expectToExitWithError: true });
   expect(stdio).toContain(`Please install @playwright/test package`);
 });
 

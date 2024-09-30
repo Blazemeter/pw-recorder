@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import type { Fixtures, FrameLocator, Locator, Page, Browser, BrowserContext } from '@playwright/test';
+import type { Fixtures, FrameLocator, Locator, Page, Browser, BrowserContext } from '@pw-recorder/test';
 import { step } from './baseTest';
-import { runTraceViewerApp } from '../../packages/playwright-core/lib/server';
+import { runTraceViewerApp } from '../../packages/pw-recorder-core/lib/server';
 
 type BaseTestFixtures = {
   context: BrowserContext;
@@ -26,7 +26,7 @@ type BaseWorkerFixtures = {
   headless: boolean;
   browser: Browser;
   browserName: 'chromium' | 'firefox' | 'webkit';
-  playwright: typeof import('@playwright/test');
+  playwright: typeof import('@pw-recorder/test');
 };
 
 export type TraceViewerFixtures = {

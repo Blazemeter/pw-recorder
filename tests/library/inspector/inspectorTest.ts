@@ -15,14 +15,14 @@
  */
 
 import { contextTest } from '../../config/browserTest';
-import type { Page } from 'playwright-core';
+import type { Page } from 'pw-recorder-core';
 import { step } from '../../config/baseTest';
 import * as path from 'path';
 import type { Source } from '../../../packages/recorder/src/recorderTypes';
 import type { CommonFixtures, TestChildProcess } from '../../config/commonFixtures';
 import { stripAnsi } from '../../config/utils';
-import { expect } from '@playwright/test';
-export { expect } from '@playwright/test';
+import { expect } from '@pw-recorder/test';
+export { expect } from '@pw-recorder/test';
 
 type CLITestArgs = {
   recorderPageGetter: () => Promise<Page>;
@@ -42,11 +42,11 @@ const codegenLang2Id: Map<string, string> = new Map([
   ['C#', 'csharp'],
   ['C# NUnit', 'csharp-nunit'],
   ['C# MSTest', 'csharp-mstest'],
-  ['Playwright Test', 'playwright-test'],
+  ['Playwright Test', 'pw-recorder-test'],
 ]);
 const codegenLangId2lang = new Map([...codegenLang2Id.entries()].map(([lang, langId]) => [langId, lang]));
 
-const playwrightToAutomateInspector = require('../../../packages/playwright-core/lib/inProcessFactory').createInProcessPlaywright();
+const playwrightToAutomateInspector = require('../../../packages/pw-recorder-core/lib/inProcessFactory').createInProcessPlaywright();
 
 export const test = contextTest.extend<CLITestArgs>({
   recorderPageGetter: async ({ context, toImpl, mode }, run, testInfo) => {
@@ -221,7 +221,7 @@ class CLIMock {
   constructor(childProcess: CommonFixtures['childProcess'], options: { browserName: string, channel: string | undefined, headless: boolean | undefined, args: string[], executablePath: string | undefined, autoExitWhen: string | undefined, codegenMode?: 'trace-events' | 'actions'}) {
     const nodeArgs = [
       'node',
-      path.join(__dirname, '..', '..', '..', 'packages', 'playwright-core', 'cli.js'),
+      path.join(__dirname, '..', '..', '..', 'packages', 'pw-recorder-core', 'cli.js'),
       'codegen',
       ...options.args,
       `--browser=${options.browserName}`,

@@ -27,8 +27,8 @@ const packagesDir = path.resolve(path.join(__dirname, '..', 'packages'));
 
 const packages = new Map();
 packages.set('web', packagesDir + '/web/src/');
-packages.set('injected', packagesDir + '/playwright-core/src/server/injected/');
-packages.set('isomorphic', packagesDir + '/playwright-core/src/utils/isomorphic/');
+packages.set('injected', packagesDir + '/pw-recorder-core/src/server/injected/');
+packages.set('isomorphic', packagesDir + '/pw-recorder-core/src/utils/isomorphic/');
 packages.set('testIsomorphic', packagesDir + '/playwright/src/isomorphic/');
 
 const peerDependencies = ['electron', 'react', 'react-dom', 'react-dom/client', '@zip.js/zip.js'];
@@ -37,14 +37,14 @@ const depsCache = {};
 
 async function checkDeps() {
   await innerCheckDeps(path.join(packagesDir, 'html-reporter'));
-  await innerCheckDeps(path.join(packagesDir, 'playwright-ct-core'));
+  await innerCheckDeps(path.join(packagesDir, 'pw-recorder-ct-core'));
   await innerCheckDeps(path.join(packagesDir, 'protocol'));
   await innerCheckDeps(path.join(packagesDir, 'recorder'));
   await innerCheckDeps(path.join(packagesDir, 'trace-viewer'));
   await innerCheckDeps(path.join(packagesDir, 'trace'));
   await innerCheckDeps(path.join(packagesDir, 'web'));
 
-  const corePackageJson = await innerCheckDeps(path.join(packagesDir, 'playwright-core'));
+  const corePackageJson = await innerCheckDeps(path.join(packagesDir, 'pw-recorder-core'));
   const playwrightPackageJson = await innerCheckDeps(path.join(packagesDir, 'playwright'));
 
   let hasVersionMismatch = false;

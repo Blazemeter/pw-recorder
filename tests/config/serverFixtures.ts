@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import type { Fixtures } from '@playwright/test';
+import type { Fixtures } from '@pw-recorder/test';
 import path from 'path';
 import { TestServer } from './testserver';
 import { TestProxy } from './proxy';
-import type { SocksSocketRequestedPayload } from '../../packages/playwright-core/src/common/socksProxy';
+import type { SocksSocketRequestedPayload } from '../../packages/pw-recorder-core/src/common/socksProxy';
 
-import { SocksProxy } from '../../packages/playwright-core/lib/common/socksProxy';
+import { SocksProxy } from '../../packages/pw-recorder-core/lib/common/socksProxy';
 
 export type ServerWorkerOptions = {
   loopback?: string;

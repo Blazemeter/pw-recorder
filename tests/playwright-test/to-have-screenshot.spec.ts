@@ -15,7 +15,7 @@
  */
 
 import * as fs from 'fs';
-import { PNG } from 'playwright-core/lib/utilsBundle';
+import { PNG } from 'pw-recorder-core/lib/utilsBundle';
 import * as path from 'path';
 import { pathToFileURL } from 'url';
 import { test, expect, createImage, paintBlackPixels } from './playwright-test-fixtures';

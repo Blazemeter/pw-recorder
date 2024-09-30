@@ -15,7 +15,7 @@
  */
 
 import { baseTest as test } from '../config/baseTest';
-import { expect } from '@playwright/test';
+import { expect } from '@pw-recorder/test';
 
 for (let i = 0; i < 100; ++i) {
   test('cycle browsers ' + i, async ({ playwright, browserName, server }) => {

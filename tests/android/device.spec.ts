@@ -16,7 +16,7 @@
 
 import fs from 'fs';
 import { join } from 'path';
-import { PNG } from 'playwright-core/lib/utilsBundle';
+import { PNG } from 'pw-recorder-core/lib/utilsBundle';
 import { androidTest as test, expect } from './androidTest';
 
 test('androidDevice.shell', async function({ androidDevice }) {
@@ -81,7 +81,7 @@ test('androidDevice.options.omitDriverInstall', async function({ playwright }) {
 
   // install and start driver
   for (const file of ['android-driver.apk', 'android-driver-target.apk']) {
-    const filePath =  join(require.resolve('playwright-core'), '..', 'bin', file);
+    const filePath =  join(require.resolve('pw-recorder-core'), '..', 'bin', file);
     await androidDevice.installApk(await fs.promises.readFile(filePath));
   }
   androidDevice.shell('am instrument -w com.microsoft.playwright.androiddriver.test/androidx.test.runner.AndroidJUnitRunner').catch(e => console.error(e));

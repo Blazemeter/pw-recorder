@@ -18,14 +18,14 @@ import * as fs from 'fs';
 import * as os from 'os';
 import type { PageTestFixtures, PageWorkerFixtures } from '../page/pageTestApi';
 import * as path from 'path';
-import type { BrowserContext, BrowserContextOptions, BrowserType, Page } from 'playwright-core';
-import { removeFolders } from '../../packages/playwright-core/lib/utils/fileUtils';
+import type { BrowserContext, BrowserContextOptions, BrowserType, Page } from 'pw-recorder-core';
+import { removeFolders } from '../../packages/pw-recorder-core/lib/utils/fileUtils';
 import { baseTest } from './baseTest';
 import { type RemoteServerOptions, type PlaywrightServer, RunServer, RemoteServer } from './remoteServer';
 import type { Log } from '../../packages/trace/src/har';
 import { parseHar } from '../config/utils';
 import { createSkipTestPredicate } from '../bidi/expectationUtil';
-import type { TestInfo } from '@playwright/test';
+import type { TestInfo } from '@pw-recorder/test';
 
 export type BrowserTestWorkerFixtures = PageWorkerFixtures & {
   browserVersion: string;
@@ -115,7 +115,7 @@ const test = baseTest.extend<BrowserTestTestFixtures, BrowserTestWorkerFixtures>
     // - Firefox removes lock file later, presumably from another watchdog process?
     // - WebKit has circular symlinks that makes CI go crazy.
     await run(async () => {
-      const dir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'playwright-test-'));
+      const dir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'pw-recorder-test-'));
       dirs.push(dir);
       return dir;
     });
@@ -197,4 +197,4 @@ export const playwrightTest = test;
 export const browserTest = test;
 export const contextTest = test;
 
-export { expect } from '@playwright/test';
+export { expect } from '@pw-recorder/test';

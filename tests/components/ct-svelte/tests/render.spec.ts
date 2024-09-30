@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-svelte';
+import { test, expect } from '@pw-recorder/experimental-ct-svelte';
 import Button from '@/components/Button.svelte';
 import Component from '@/components/Component.svelte';
 import Empty from '@/components/Empty.svelte';

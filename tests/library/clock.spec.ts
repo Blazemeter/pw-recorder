@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { test, expect } from '@playwright/test';
-import { createClock as rawCreateClock, install as rawInstall } from '../../packages/playwright-core/src/server/injected/clock';
-import type { InstallConfig, ClockController, ClockMethods } from '../../packages/playwright-core/src/server/injected/clock';
+import { test, expect } from '@pw-recorder/test';
+import { createClock as rawCreateClock, install as rawInstall } from '../../packages/pw-recorder-core/src/server/injected/clock';
+import type { InstallConfig, ClockController, ClockMethods } from '../../packages/pw-recorder-core/src/server/injected/clock';
 
 const createClock = (now?: number): ClockController & ClockMethods => {
   const { clock, api } = rawCreateClock(globalThis);

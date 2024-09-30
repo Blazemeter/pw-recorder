@@ -60,7 +60,7 @@ test('should watch files', async ({ runUITest, writeFiles }) => {
 
 test('should watch e2e deps', async ({ runUITest, writeFiles }) => {
   const { page } = await runUITest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       import { defineConfig } from '@playwright/test';
       export default defineConfig({ testDir: 'tests' });
     `,

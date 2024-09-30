@@ -17,14 +17,14 @@
  */
 
 const path = require('path');
-const { Registry } = require('../packages/playwright-core/lib/server');
+const { Registry } = require('../packages/pw-recorder-core/lib/server');
 const fs = require('fs');
 const protocolGenerator = require('./protocol-types-generator');
 const {execSync} = require('child_process');
-const playwright = require('playwright-core');
+const playwright = require('pw-recorder-core');
 
 const SCRIPT_NAME = path.basename(__filename);
-const CORE_PATH = path.resolve(path.join(__dirname, '..', 'packages', 'playwright-core'));
+const CORE_PATH = path.resolve(path.join(__dirname, '..', 'packages', 'pw-recorder-core'));
 
 function usage() {
   return `

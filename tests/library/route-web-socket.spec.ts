@@ -16,7 +16,7 @@
 
 import { attachFrame, detachFrame } from '../config/utils';
 import { contextTest as test, expect } from '../config/browserTest';
-import type { Frame, Page, WebSocketRoute } from '@playwright/test';
+import type { Frame, Page, WebSocketRoute } from '@pw-recorder/test';
 
 declare global {
   interface Window {

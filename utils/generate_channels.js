@@ -182,7 +182,7 @@ const slowMoActions = [];
 const tracingSnapshots = [];
 const pausesBeforeInputActions = [];
 
-const yml = fs.readFileSync(path.join(__dirname, '..', 'packages', 'protocol', 'src', 'protocol.yml'), 'utf-8');
+const yml = fs.readFileSync(path.join(__dirname, '..', 'packages', 'pw-recorder-protocol', 'src', 'protocol.yml'), 'utf-8');
 const protocol = yaml.parse(yml);
 
 function addScheme(name, s) {
@@ -362,7 +362,7 @@ function writeFile(filePath, content) {
   fs.writeFileSync(filePath, content, 'utf8');
 }
 
-writeFile(path.join(__dirname, '..', 'packages', 'protocol', 'src', 'channels.ts'), channels_ts.join('\n'));
-writeFile(path.join(__dirname, '..', 'packages', 'playwright-core', 'src', 'protocol', 'debug.ts'), debug_ts.join('\n'));
-writeFile(path.join(__dirname, '..', 'packages', 'playwright-core', 'src', 'protocol', 'validator.ts'), validator_ts.join('\n'));
+writeFile(path.join(__dirname, '..', 'packages', 'pw-recorder-protocol', 'src', 'channels.ts'), channels_ts.join('\n'));
+writeFile(path.join(__dirname, '..', 'packages', 'pw-recorder-core', 'src', 'protocol', 'debug.ts'), debug_ts.join('\n'));
+writeFile(path.join(__dirname, '..', 'packages', 'pw-recorder-core', 'src', 'protocol', 'validator.ts'), validator_ts.join('\n'));
 process.exit(hasChanges ? 1 : 0);

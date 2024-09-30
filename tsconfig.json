@@ -11,14 +11,14 @@
          - .../lib/* means require dependency
       */
       "@html-reporter/*": ["./packages/html-reporter/src/*"],
-      "@injected/*": ["./packages/playwright-core/src/server/injected/*"],
-      "@isomorphic/*": ["./packages/playwright-core/src/utils/isomorphic/*"],
+      "@injected/*": ["./packages/pw-recorder-core/src/server/injected/*"],
+      "@isomorphic/*": ["./packages/pw-recorder-core/src/utils/isomorphic/*"],
       "@protocol/*": ["./packages/protocol/src/*"],
       "@recorder/*": ["./packages/recorder/src/*"],
       "@testIsomorphic/*": ["./packages/playwright/src/isomorphic/*"],
       "@trace/*": ["./packages/trace/src/*"],
       "@web/*": ["./packages/web/src/*"],
-      "playwright-core/lib/*": ["./packages/playwright-core/src/*"],
+      "pw-recorder-core/lib/*": ["./packages/pw-recorder-core/src/*"],
       "playwright/lib/*": ["./packages/playwright/src/*"],
     },
     "esModuleInterop": true,

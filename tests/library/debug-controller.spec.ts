@@ -15,10 +15,10 @@
  */
 
 import { expect, playwrightTest as baseTest } from '../config/browserTest';
-import { PlaywrightServer } from '../../packages/playwright-core/lib/remote/playwrightServer';
-import { createGuid } from '../../packages/playwright-core/lib/utils/crypto';
+import { PlaywrightServer } from '../../packages/pw-recorder-core/lib/remote/playwrightServer';
+import { createGuid } from '../../packages/pw-recorder-core/lib/utils/crypto';
 import { Backend } from '../config/debugControllerBackend';
-import type { Browser, BrowserContext } from '@playwright/test';
+import type { Browser, BrowserContext } from '@pw-recorder/test';
 import type * as channels from '@protocol/channels';
 
 type BrowserWithReuse = Browser & { _newContextForReuse: () => Promise<BrowserContext> };
@@ -173,7 +173,7 @@ test('should record', async ({ backend, connectedBrowser }) => {
   await page.getByRole('button').click();
 
   await expect.poll(() => events[events.length - 1]).toEqual({
-    header: `import { test, expect } from '@playwright/test';
+    header: `import { test, expect } from '@pw-recorder/test';
 
 test('test', async ({ page }) => {`,
     footer: `});`,
@@ -181,7 +181,7 @@ test('test', async ({ page }) => {`,
       `  await page.goto('about:blank');`,
       `  await page.getByRole('button', { name: 'Submit' }).click();`,
     ],
-    text: `import { test, expect } from '@playwright/test';
+    text: `import { test, expect } from '@pw-recorder/test';
 
 test('test', async ({ page }) => {
   await page.goto('about:blank');
@@ -215,14 +215,14 @@ test('should record custom data-testid', async ({ backend, connectedBrowser }) =
 
   // 4. Expect "getByTestId" locator.
   await expect.poll(() => events[events.length - 1]).toEqual({
-    header: `import { test, expect } from '@playwright/test';
+    header: `import { test, expect } from '@pw-recorder/test';
 
 test('test', async ({ page }) => {`,
     footer: `});`,
     actions: [
       `  await page.getByTestId('one').click();`,
     ],
-    text: `import { test, expect } from '@playwright/test';
+    text: `import { test, expect } from '@pw-recorder/test';
 
 test('test', async ({ page }) => {
   await page.getByTestId('one').click();

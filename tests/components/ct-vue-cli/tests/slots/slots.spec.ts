@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-vue';
+import { test, expect } from '@pw-recorder/experimental-ct-vue';
 import DefaultSlot from '@/components/DefaultSlot.vue';
 import NamedSlots from '@/components/NamedSlots.vue';
 

@@ -21,9 +21,9 @@ import path from 'path';
 import type { PageTestFixtures, PageWorkerFixtures } from '../page/pageTestApi';
 import type { TraceViewerFixtures } from '../config/traceViewerFixtures';
 import { traceViewerFixtures } from '../config/traceViewerFixtures';
-export { expect } from '@playwright/test';
+export { expect } from '@pw-recorder/test';
 import { TestChildProcess } from '../config/commonFixtures';
-import { chromiumSwitches } from '../../packages/playwright-core/lib/server/chromium/chromiumSwitches';
+import { chromiumSwitches } from '../../packages/pw-recorder-core/lib/server/chromium/chromiumSwitches';
 
 export const webView2Test = baseTest.extend<TraceViewerFixtures>(traceViewerFixtures).extend<PageTestFixtures, PageWorkerFixtures>({
   browserVersion: [process.env.PWTEST_WEBVIEW2_CHROMIUM_VERSION, { scope: 'worker' }],

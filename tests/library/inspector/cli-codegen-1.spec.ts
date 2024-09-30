@@ -15,7 +15,7 @@
  */
 
 import { test, expect } from './inspectorTest';
-import type { ConsoleMessage } from 'playwright';
+import type { ConsoleMessage } from 'pw-recorder';
 
 test.describe('cli codegen', () => {
   test.skip(({ mode }) => mode !== 'default');
@@ -784,13 +784,13 @@ await page.GetByText("link").ClickAsync();`);
     const { recorder } = await openRecorder();
     await recorder.setContentAndWait(`<input></input>`);
 
-    await recorder.page.type('input', 'playwright');
+    await recorder.page.type('input', 'pw-recorder');
     await recorder.page.keyboard.press('AltGraph');
     await recorder.page.keyboard.insertText('@');
     await recorder.page.keyboard.type('example.com');
     await recorder.waitForOutput('JavaScript', 'example.com');
     expect(recorder.sources().get('JavaScript')!.text).not.toContain(`await page.getByRole('textbox').press('AltGraph');`);
-    expect(recorder.sources().get('JavaScript')!.text).toContain(`await page.getByRole('textbox').fill('playwright@example.com');`);
+    expect(recorder.sources().get('JavaScript')!.text).toContain(`await page.getByRole('textbox').fill('pw-recorder@example.com');`);
   });
 
   test('should middle click', async ({ openRecorder, server }) => {

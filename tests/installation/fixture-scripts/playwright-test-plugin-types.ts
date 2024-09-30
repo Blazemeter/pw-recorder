@@ -1,6 +1,6 @@
 import { test as test1, expect as expect1, mergeTests, mergeExpects } from '@playwright/test';
 import type { Page } from '@playwright/test';
-import { test as test2, expect as expect2 } from 'playwright-test-plugin';
+import { test as test2, expect as expect2 } from 'pw-recorder-test-plugin';
 
 const test = mergeTests(test1, test2);
 const expect = mergeExpects(expect1, expect2);

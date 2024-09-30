@@ -31,22 +31,22 @@ test('test to request page and context', async ({ page, context }) => {
 });
 
 test('should not leak fixtures w/ page', async ({ page }) => {
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/client/page').Page)).toBe(1);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/client/browserContext').BrowserContext)).toBe(1);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/client/browser').Browser)).toBe(1);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/page').Page)).toBe(1);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/browserContext').BrowserContext)).toBe(1);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/browser').Browser)).toBe(1);
 });
 
 test('should not leak fixtures w/o page', async ({}) => {
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/client/page').Page)).toBe(0);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/client/browserContext').BrowserContext)).toBe(0);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/client/browser').Browser)).toBe(1);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/page').Page)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/browserContext').BrowserContext)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/browser').Browser)).toBe(1);
 });
 
 test('should not leak server-side objects', async ({ page }) => {
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/page').Page)).toBe(1);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/page').Page)).toBe(1);
   // 4 is because v8 heap creates objects for descendant classes, so WKContext, CRContext, FFContext, BidiBrowserContext and our context instance.
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/browserContext').BrowserContext)).toBe(5);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/browser').Browser)).toBe(5);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/browserContext').BrowserContext)).toBe(5);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/browser').Browser)).toBe(5);
 });
 
 test('should not leak dispatchers after closing page', async ({ context, server }) => {
@@ -63,29 +63,29 @@ test('should not leak dispatchers after closing page', async ({ context, server 
     pages.push(page);
   }
 
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/page').Page)).toBe(COUNT);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/dispatchers/networkDispatchers').RequestDispatcher)).toBe(COUNT);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/dispatchers/networkDispatchers').ResponseDispatcher)).toBe(COUNT);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/console').ConsoleMessage)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/page').Page)).toBe(COUNT);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/dispatchers/networkDispatchers').RequestDispatcher)).toBe(COUNT);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/dispatchers/networkDispatchers').ResponseDispatcher)).toBe(COUNT);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/console').ConsoleMessage)).toBe(0);
 
   for (const page of pages)
     await page.close();
   pages.length = 0;
 
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/page').Page)).toBe(0);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/dispatchers/networkDispatchers').RequestDispatcher)).toBe(0);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/dispatchers/networkDispatchers').ResponseDispatcher)).toBe(0);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/console').ConsoleMessage)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/page').Page)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/dispatchers/networkDispatchers').RequestDispatcher)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/dispatchers/networkDispatchers').ResponseDispatcher)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/console').ConsoleMessage)).toBe(0);
 
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/client/page').Page)).toBeLessThan(COUNT);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/server/page').Page)).toBe(0);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/client/network').Request)).toBe(0);
-  expect(await queryObjectCount(require('../../packages/playwright-core/lib/client/network').Response)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/page').Page)).toBeLessThan(COUNT);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/page').Page)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/network').Request)).toBe(0);
+  expect(await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/network').Response)).toBe(0);
 });
 
 test.describe(() => {
   test.beforeEach(() => {
-    require('../../packages/playwright-core/lib/server/dispatchers/dispatcher').setMaxDispatchersForTest(100);
+    require('../../packages/pw-recorder-core/lib/server/dispatchers/dispatcher').setMaxDispatchersForTest(100);
   });
 
   test('should collect stale handles', async ({ page, server }) => {
@@ -101,12 +101,12 @@ test.describe(() => {
     expect(e.message).toContain('The object has been collected to prevent unbounded heap growth.');
 
     const counts = [
-      { count: await queryObjectCount(require('../../packages/playwright-core/lib/client/network').Request), message: 'client.Request' },
-      { count: await queryObjectCount(require('../../packages/playwright-core/lib/client/network').Response), message: 'client.Response' },
-      { count: await queryObjectCount(require('../../packages/playwright-core/lib/server/network').Request), message: 'server.Request' },
-      { count: await queryObjectCount(require('../../packages/playwright-core/lib/server/network').Response), message: 'server.Response' },
-      { count: await queryObjectCount(require('../../packages/playwright-core/lib/server/dispatchers/networkDispatchers').RequestDispatcher), message: 'dispatchers.RequestDispatcher' },
-      { count: await queryObjectCount(require('../../packages/playwright-core/lib/server/dispatchers/networkDispatchers').ResponseDispatcher), message: 'dispatchers.ResponseDispatcher' },
+      { count: await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/network').Request), message: 'client.Request' },
+      { count: await queryObjectCount(require('../../packages/pw-recorder-core/lib/client/network').Response), message: 'client.Response' },
+      { count: await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/network').Request), message: 'server.Request' },
+      { count: await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/network').Response), message: 'server.Response' },
+      { count: await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/dispatchers/networkDispatchers').RequestDispatcher), message: 'dispatchers.RequestDispatcher' },
+      { count: await queryObjectCount(require('../../packages/pw-recorder-core/lib/server/dispatchers/networkDispatchers').ResponseDispatcher), message: 'dispatchers.ResponseDispatcher' },
     ];
     for (const { count, message } of counts) {
       expect(count, { message }).toBeGreaterThan(50);
@@ -115,6 +115,6 @@ test.describe(() => {
   });
 
   test.afterEach(() => {
-    require('../../packages/playwright-core/lib/server/dispatchers/dispatcher').setMaxDispatchersForTest(null);
+    require('../../packages/pw-recorder-core/lib/server/dispatchers/dispatcher').setMaxDispatchersForTest(null);
   });
 });

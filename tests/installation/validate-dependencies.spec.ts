@@ -21,7 +21,7 @@ test('should validate dependencies correctly if skipped during install', async (
   await exec('npm i playwright');
 
   await writeFiles({
-    'test.js': `const { chromium } = require('playwright');
+    'test.js': `const { chromium } = require('pw-recorder');
     (async () => {
       const browser = await chromium.launch();
       const page = await browser.newPage();
@@ -68,7 +68,7 @@ test('should not validate dependencies on launch if validated during install', a
   await exec('npm i playwright');
 
   await writeFiles({
-    'test.js': `const { chromium } = require('playwright');
+    'test.js': `const { chromium } = require('pw-recorder');
     (async () => {
       const browser = await chromium.launch();
       const page = await browser.newPage();

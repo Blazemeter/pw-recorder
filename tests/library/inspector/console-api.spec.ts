@@ -35,14 +35,14 @@ it.afterEach(async ({ recorderPageGetter }) => {
 });
 
 it('should support playwright.$, playwright.$$', async ({ page }) => {
-  const body = await page.evaluateHandle('playwright.$("body")');
+  const body = await page.evaluateHandle('pw-recorder.$("body")');
   expect(await body.evaluate<string, HTMLBodyElement>((node: HTMLBodyElement) => node.nodeName)).toBe('BODY');
-  const length = await page.evaluate('playwright.$$("body").length');
+  const length = await page.evaluate('pw-recorder.$$("body").length');
   expect(length).toBe(1);
 });
 
 it('should support playwright.selector', async ({ page }) => {
-  const length = await page.evaluate('playwright.selector(document.body)');
+  const length = await page.evaluate('pw-recorder.selector(document.body)');
   expect(length).toBe('body');
 });
 

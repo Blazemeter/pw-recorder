@@ -38,7 +38,7 @@ export default defineConfig({
   snapshotPathTemplate: '__screenshots__/{testFilePath}/{arg}{ext}',
   projects: [
     {
-      name: 'playwright-test',
+      name: 'pw-recorder-test',
       testDir: __dirname,
       testIgnore: ['assets/**', 'stable-test-runner/**'],
     },

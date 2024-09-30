@@ -24,7 +24,7 @@ import { expect, playwrightTest as base } from '../config/browserTest';
 import type net from 'net';
 import type { BrowserContextOptions } from 'packages/playwright-test';
 import { setupSocksForwardingServer } from '../config/proxy';
-const { createHttpsServer, createHttp2Server } = require('../../packages/playwright-core/lib/utils');
+const { createHttpsServer, createHttp2Server } = require('../../packages/pw-recorder-core/lib/utils');
 
 type TestOptions = {
   startCCServer(options?: {

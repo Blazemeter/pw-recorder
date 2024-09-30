@@ -1,6 +1,6 @@
 {
-  "name": "playwright-internal",
-  "private": true,
+  "name": "pw-recorder-internal",
+  "private": false,
   "version": "1.49.0-next",
   "description": "A high-level API to automate web browsers",
   "repository": {
@@ -32,7 +32,7 @@
     "test": "playwright test --config=tests/library/playwright.config.ts",
     "eslint": "eslint --cache --report-unused-disable-directives --ext ts,tsx,js,jsx,mjs .",
     "tsc": "tsc -p . && tsc -p packages/html-reporter/",
-    "build-installer": "babel -s --extensions \".ts\" --out-dir packages/playwright-core/lib/utils/ packages/playwright-core/src/utils",
+    "build-installer": "babel -s --extensions \".ts\" --out-dir packages/pw-recorder-core/lib/utils/ packages/pw-recorder-core/src/utils",
     "doc": "node utils/doclint/cli.js",
     "lint": "npm run eslint && npm run tsc && npm run doc && npm run check-deps && node utils/generate_channels.js && node utils/generate_types/ && npm run lint-tests && npm run test-types && npm run lint-packages",
     "lint-packages": "node utils/workspace.js --ensure-consistent",

@@ -52,7 +52,7 @@ test('cli should work', async ({ exec, tmpWorkspace }) => {
   });
 
   await test.step('screenshot', async () => {
-    await exec(path.join('node_modules', '.bin', 'playwright'), 'screenshot about:blank one.png');
+    await exec(path.join('node_modules', '.bin', 'pw-recorder'), 'screenshot about:blank one.png');
     await fs.promises.stat(path.join(tmpWorkspace, 'one.png'));
 
     await exec('npx playwright screenshot about:blank two.png');
@@ -66,6 +66,6 @@ test('cli should work', async ({ exec, tmpWorkspace }) => {
 
   await test.step('show-report', async () => {
     const result = await exec('npx playwright show-report', { expectToExitWithError: true });
-    expect(result).toContain(`No report found at "${path.join(fs.realpathSync(tmpWorkspace), 'playwright-report')}"`);
+    expect(result).toContain(`No report found at "${path.join(fs.realpathSync(tmpWorkspace), 'pw-recorder-report')}"`);
   });
 });

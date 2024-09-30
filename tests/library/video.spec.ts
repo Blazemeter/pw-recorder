@@ -17,11 +17,11 @@
 import { browserTest as it, expect } from '../config/browserTest';
 import fs from 'fs';
 import path from 'path';
-import type { Page } from 'playwright-core';
+import type { Page } from 'pw-recorder-core';
 import { spawnSync } from 'child_process';
-import { PNG, jpegjs } from 'playwright-core/lib/utilsBundle';
-import { registry } from '../../packages/playwright-core/lib/server';
-import { rewriteErrorMessage } from '../../packages/playwright-core/lib/utils/stackTrace';
+import { PNG, jpegjs } from 'pw-recorder-core/lib/utilsBundle';
+import { registry } from '../../packages/pw-recorder-core/lib/server';
+import { rewriteErrorMessage } from '../../packages/pw-recorder-core/lib/utils/stackTrace';
 import { parseTraceRaw } from '../config/utils';
 
 const ffmpeg = registry.findExecutable('ffmpeg')!.executablePath('javascript');

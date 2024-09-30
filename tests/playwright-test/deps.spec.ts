@@ -18,7 +18,7 @@ import { test, expect } from './playwright-test-fixtures';
 
 test('should run projects with dependencies', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = {
         projects: [
           { name: 'A' },
@@ -40,7 +40,7 @@ test('should run projects with dependencies', async ({ runInlineTest }) => {
 
 test('should inherit env changes from dependencies', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = { projects: [
         { name: 'A', testMatch: '**/a.spec.ts' },
         { name: 'B', testMatch: '**/b.spec.ts', teardown: 'E' },
@@ -91,7 +91,7 @@ test('should inherit env changes from dependencies', async ({ runInlineTest }) =
 
 test('should not run projects with dependencies when --no-deps is passed', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = {
         projects: [
           { name: 'A' },
@@ -113,7 +113,7 @@ test('should not run projects with dependencies when --no-deps is passed', async
 
 test('should not run project if dependency failed', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = {
         projects: [
           { name: 'A' },
@@ -140,7 +140,7 @@ test('should not run project if dependency failed', async ({ runInlineTest }) =>
 
 test('should not run project if dependency failed (2)', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = {
         projects: [
           { name: 'A1' },
@@ -166,7 +166,7 @@ test('should not run project if dependency failed (2)', async ({ runInlineTest }
 
 test('should filter by project list, but run deps', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = { projects: [
         { name: 'A' },
         { name: 'B' },
@@ -190,7 +190,7 @@ test('should filter by project list, but run deps', async ({ runInlineTest }) =>
 
 test('should not filter dependency by file name', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = { projects: [
         { name: 'A' },
         { name: 'B', dependencies: ['A'] },
@@ -212,7 +212,7 @@ test('should not filter dependency by file name', async ({ runInlineTest }) => {
 
 test('should filter dependency by only', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = { projects: [
         { name: 'setup', testMatch: /setup.ts/ },
         { name: 'browser', dependencies: ['setup'] },
@@ -240,7 +240,7 @@ test('should filter dependency by only', async ({ runInlineTest }) => {
 
 test('should filter dependency by only when running explicitly', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = { projects: [
         { name: 'setup', testMatch: /setup.ts/ },
         { name: 'browser', dependencies: ['setup'] },
@@ -268,7 +268,7 @@ test('should filter dependency by only when running explicitly', async ({ runInl
 
 test('should not filter dependency by only 3', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       module.exports = { projects: [
         { name: 'setup', testMatch: /setup.*.ts/ },
         { name: 'browser', dependencies: ['setup'] },

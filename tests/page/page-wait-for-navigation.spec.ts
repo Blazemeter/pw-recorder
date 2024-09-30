@@ -16,7 +16,7 @@
  */
 
 import { test as it, expect } from './pageTest';
-import type { Frame } from 'playwright-core';
+import type { Frame } from 'pw-recorder-core';
 import { expectedSSLError } from '../config/utils';
 
 it('should work', async ({ page, server }) => {

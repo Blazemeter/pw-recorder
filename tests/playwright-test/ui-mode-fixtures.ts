@@ -21,7 +21,7 @@ import type { TestChildProcess } from '../config/commonFixtures';
 import { cleanEnv, cliEntrypoint, test as base, writeFiles, removeFolders } from './playwright-test-fixtures';
 import type { Files, RunOptions } from './playwright-test-fixtures';
 import type { Browser, BrowserType, Page, TestInfo } from './stable-test-runner';
-import { createGuid } from '../../packages/playwright-core/src/utils/crypto';
+import { createGuid } from '../../packages/pw-recorder-core/src/utils/crypto';
 
 type Latch = {
   blockingCode: string;
@@ -105,9 +105,9 @@ export const test = base
             cwd: options.cwd ? path.resolve(baseDir, options.cwd) : baseDir,
           });
           let page: Page;
-          // We want to have ToT playwright-core here, since we install it's browsers and otherwise
+          // We want to have ToT pw-recorder-core here, since we install it's browsers and otherwise
           // don't have the right browser revision (ToT revisions != stable-test-runner revisions).
-          const chromium: BrowserType = require('../../packages/playwright-core').chromium;
+          const chromium: BrowserType = require('../../packages/pw-recorder-core').chromium;
           if (options.useWeb) {
             await testProcess.waitForOutput('Listening on');
             const line = testProcess.output.split('\n').find(l => l.includes('Listening on'));

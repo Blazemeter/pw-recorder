@@ -16,7 +16,7 @@
 // @ts-check
 
 const pw = require.resolve('playwright');
-const oop = require.resolve('playwright-core/lib/outofprocess', { paths: [pw] });
+const oop = require.resolve('pw-recorder-core/lib/outofprocess', { paths: [pw] });
 const { start } = require(oop);
 
 (async () => {

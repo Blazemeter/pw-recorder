@@ -16,7 +16,7 @@
  */
 
 import { test as it, expect } from './pageTest';
-import type { ElementHandle } from 'playwright-core';
+import type { ElementHandle } from 'pw-recorder-core';
 
 it('exposeBinding should work @smoke', async ({ page }) => {
   let bindingSource;

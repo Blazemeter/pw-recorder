@@ -16,7 +16,7 @@
  */
 
 import type { IncomingHttpHeaders } from 'http';
-import type { Cookie } from '@playwright/test';
+import type { Cookie } from '@pw-recorder/test';
 import { contextTest as it, playwrightTest, expect } from '../config/browserTest';
 
 it('should work @smoke', async ({ context, page, server }) => {

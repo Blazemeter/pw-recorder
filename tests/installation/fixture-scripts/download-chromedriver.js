@@ -1,4 +1,4 @@
-const playwright = require('playwright-core');
+const playwright = require('pw-recorder-core');
 const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
@@ -18,7 +18,7 @@ const fs = require('fs');
     currentPlatform = process.arch === 'arm64' ? 'mac-arm64' : 'mac-x64';
   else if (process.platform === 'linux')
     currentPlatform = 'linux64';
-  else 
+  else
     currentPlatform = 'win64';
   const chromeDriverURL = downloadsInfo.milestones[major].downloads.chromedriver.find(({ platform, url }) => platform === currentPlatform).url;
   console.log(`Found ChromeDriver download URL: ${chromeDriverURL}`);

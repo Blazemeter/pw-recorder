@@ -18,7 +18,7 @@ import type { BrowserWindow } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import { electronTest as test, expect } from './electronTest';
-import type { ConsoleMessage } from 'playwright';
+import type { ConsoleMessage } from 'pw-recorder';
 
 test('should fire close event via ElectronApplication.close();', async ({ launchElectronApp }) => {
   const electronApp = await launchElectronApp('electron-app.js');

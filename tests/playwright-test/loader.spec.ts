@@ -111,7 +111,7 @@ test('should return the location of a syntax error in typescript', async ({ runI
 
 test('should allow export default form the config file', async ({ runInlineTest }) => {
   const result = await runInlineTest({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       export default { timeout: 1000 };
     `,
     'a.test.ts': `
@@ -299,7 +299,7 @@ test('should filter stack trace for simple expect', async ({ runInlineTest }) =>
   });
   expect(result.exitCode).toBe(1);
   expect(result.output).not.toContain(path.sep + `playwright-test`);
-  expect(result.output).not.toContain(path.sep + `playwright-core`);
+  expect(result.output).not.toContain(path.sep + `pw-recorder-core`);
   expect(result.output).not.toContain('internal');
 });
 
@@ -314,7 +314,7 @@ test('should filter stack trace for web-first assertions', async ({ runInlineTes
   });
   expect(result.exitCode).toBe(1);
   expect(result.output).not.toContain(path.sep + `playwright-test`);
-  expect(result.output).not.toContain(path.sep + `playwright-core`);
+  expect(result.output).not.toContain(path.sep + `pw-recorder-core`);
   expect(result.output).not.toContain('internal');
 });
 
@@ -362,7 +362,7 @@ test('should filter stack trace for raw errors', async ({ runInlineTest }) => {
   expect(result.exitCode).toBe(1);
   expect(result.output).toContain('foobar!');
   expect(result.output).not.toContain(path.sep + `playwright-test`);
-  expect(result.output).not.toContain(path.sep + `playwright-core`);
+  expect(result.output).not.toContain(path.sep + `pw-recorder-core`);
   expect(result.output).not.toContain('internal');
 });
 
@@ -386,7 +386,7 @@ test('should not filter out POM', async ({ runInlineTest }) => {
   expect(result.output).toContain('helper.ts');
   expect(result.output).toContain('expect-test.spec.ts');
   expect(result.output).not.toContain(path.sep + `playwright-test`);
-  expect(result.output).not.toContain(path.sep + `playwright-core`);
+  expect(result.output).not.toContain(path.sep + `pw-recorder-core`);
   expect(result.output).not.toContain('internal');
 });
 

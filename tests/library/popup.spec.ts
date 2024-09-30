@@ -15,7 +15,7 @@
  */
 
 import { browserTest as it, expect } from '../config/browserTest';
-import type { Page } from 'playwright-core';
+import type { Page } from 'pw-recorder-core';
 
 it('should inherit user agent from browser context @smoke', async function({ browser, server }) {
   const context = await browser.newContext({

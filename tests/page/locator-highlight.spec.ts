@@ -15,7 +15,7 @@
  */
 
 import { test as it, expect } from './pageTest';
-import type { Locator } from 'playwright-core';
+import type { Locator } from 'pw-recorder-core';
 
 type BoundingBox = Awaited<ReturnType<Locator['boundingBox']>>;
 

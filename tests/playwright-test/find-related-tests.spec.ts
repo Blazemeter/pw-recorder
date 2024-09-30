@@ -18,7 +18,7 @@ import { test, expect } from './playwright-test-fixtures';
 
 test('should list related tests', async ({ runCLICommand }) => {
   const result = await runCLICommand({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       import { defineConfig } from '@playwright/test';
       export default defineConfig({});
     `,

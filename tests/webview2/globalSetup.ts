@@ -15,7 +15,7 @@
  */
 import path from 'path';
 import childProcess from 'child_process';
-import playwright from 'playwright';
+import playwright from 'pw-recorder';
 
 export default async () => {
   const cdpPort = 9876;

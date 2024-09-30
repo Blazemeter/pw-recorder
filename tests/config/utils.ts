@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import type { Frame, Page } from 'playwright-core';
-import { ZipFile } from '../../packages/playwright-core/lib/utils/zipFile';
+import type { Frame, Page } from 'pw-recorder-core';
+import { ZipFile } from '../../packages/pw-recorder-core/lib/utils/zipFile';
 import type { TraceModelBackend } from '../../packages/trace-viewer/src/sw/traceModel';
 import type { StackFrame } from '../../packages/protocol/src/channels';
-import { parseClientSideCallMetadata } from '../../packages/playwright-core/lib/utils/isomorphic/traceUtils';
+import { parseClientSideCallMetadata } from '../../packages/pw-recorder-core/lib/utils/isomorphic/traceUtils';
 import { TraceModel } from '../../packages/trace-viewer/src/sw/traceModel';
 import type { ActionTreeItem } from '../../packages/trace-viewer/src/ui/modelUtil';
 import { buildActionTree, MultiTraceModel } from '../../packages/trace-viewer/src/ui/modelUtil';
@@ -45,7 +45,7 @@ export async function detachFrame(page: Page, frameId: string) {
 
 export async function verifyViewport(page: Page, width: number, height: number) {
   // `expect` may clash in test runner tests if imported eagerly.
-  const { expect } = require('@playwright/test');
+  const { expect } = require('@pw-recorder/test');
   expect(page.viewportSize()!.width).toBe(width);
   expect(page.viewportSize()!.height).toBe(height);
   expect(await page.evaluate('window.innerWidth')).toBe(width);

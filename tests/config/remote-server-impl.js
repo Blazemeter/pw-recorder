@@ -14,7 +14,7 @@ async function start() {
   if (disconnectOnSIGHUP)
     launchOptions.handleSIGHUP = false;
 
-  const playwright = require('playwright-core');
+  const playwright = require('pw-recorder-core');
 
   if (startStopAndRunHttp) {
     const browser = await playwright[browserTypeName].launch(launchOptions);

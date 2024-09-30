@@ -145,7 +145,7 @@ export class Backend extends EventEmitter {
   }
 
   async initialize() {
-    await this.channel.initialize({ codegenId: 'playwright-test', sdkLanguage: 'javascript' });
+    await this.channel.initialize({ codegenId: 'pw-recorder-test', sdkLanguage: 'javascript' });
   }
 
   async close() {

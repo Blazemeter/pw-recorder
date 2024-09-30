@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { MultiMap } from '../../packages/playwright-core/lib/utils/multimap';
+import { MultiMap } from '../../packages/pw-recorder-core/lib/utils/multimap';
 import { test, expect } from './pageTest';
 
 function leakedJSHandles(): string {

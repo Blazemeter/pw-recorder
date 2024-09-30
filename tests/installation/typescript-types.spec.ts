@@ -17,11 +17,11 @@ import { test } from './npmTest';
 
 test('typescript types should work', async ({ exec, tsc, writeFiles }) => {
   const libraryPackages = [
-    'playwright',
-    'playwright-core',
-    'playwright-firefox',
-    'playwright-webkit',
-    'playwright-chromium',
+    'pw-recorder',
+    'pw-recorder-core',
+    'pw-recorder-firefox',
+    'pw-recorder-webkit',
+    'pw-recorder-chromium',
   ];
   await exec('npm i @playwright/test', ...libraryPackages, { env: { PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1' } });
 
@@ -34,12 +34,12 @@ test('typescript types should work', async ({ exec, tsc, writeFiles }) => {
     await tsc(`--module nodenext ${filename}`);
   }
 
-  await tsc('playwright-test-types.ts');
+  await tsc('pw-recorder-test-types.ts');
   await tsc('--module nodenext playwright-test-types.ts');
 
   await writeFiles({
     'test.ts':
-      `import { AndroidDevice, _android, AndroidWebView, Page } from 'playwright';`,
+      `import { AndroidDevice, _android, AndroidWebView, Page } from 'pw-recorder';`,
   });
   await tsc('test.ts');
 });

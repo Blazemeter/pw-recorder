@@ -125,7 +125,7 @@ class Workspace {
       }
       await maybeWriteJSON(pkg.packageJSONPath, pkg.packageJSON);
     }
-  
+
     // Re-run npm i to make package-lock dirty.
     child_process.execSync('npm i');
     return hasChanges;
@@ -136,85 +136,85 @@ const ROOT_PATH = path.join(__dirname, '..');
 const LICENCE_FILES = ['NOTICE', 'LICENSE'];
 const workspace = new Workspace(ROOT_PATH, [
   new PWPackage({
-    name: 'playwright',
-    path: path.join(ROOT_PATH, 'packages', 'playwright'),
+    name: 'pw-recorder',
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder'),
     // We copy README.md additionally for playwright so that it looks nice on NPM.
     files: [...LICENCE_FILES, 'README.md'],
   }),
   new PWPackage({
-    name: 'playwright-core',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-core'),
+    name: 'pw-recorder-core',
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-core'),
     files: LICENCE_FILES,
   }),
   new PWPackage({
     name: '@playwright/test',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-test'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-test'),
     // We copy README.md additionally for @playwright/test so that it looks nice on NPM.
     files: [...LICENCE_FILES, 'README.md'],
   }),
   new PWPackage({
-    name: 'playwright-webkit',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-webkit'),
+    name: 'pw-recorder-webkit',
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-webkit'),
     files: LICENCE_FILES,
   }),
   new PWPackage({
-    name: 'playwright-firefox',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-firefox'),
+    name: 'pw-recorder-firefox',
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-firefox'),
     files: LICENCE_FILES,
   }),
   new PWPackage({
-    name: 'playwright-chromium',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-chromium'),
+    name: 'pw-recorder-chromium',
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-chromium'),
     files: LICENCE_FILES,
   }),
   new PWPackage({
     name: '@playwright/browser-webkit',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-browser-webkit'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-browser-webkit'),
     files: LICENCE_FILES,
   }),
   new PWPackage({
     name: '@playwright/browser-firefox',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-browser-firefox'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-browser-firefox'),
     files: LICENCE_FILES,
   }),
   new PWPackage({
     name: '@playwright/browser-chromium',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-browser-chromium'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-browser-chromium'),
     files: LICENCE_FILES,
   }),
   new PWPackage({
     name: '@playwright/experimental-ct-core',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-ct-core'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-ct-core'),
     files: ['LICENSE'],
   }),
   new PWPackage({
     name: '@playwright/experimental-ct-react',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-ct-react'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-ct-react'),
     files: ['LICENSE'],
   }),
   new PWPackage({
     name: '@playwright/experimental-ct-react17',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-ct-react17'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-ct-react17'),
     files: ['LICENSE'],
   }),
   new PWPackage({
     name: '@playwright/experimental-ct-solid',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-ct-solid'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-ct-solid'),
     files: ['LICENSE'],
   }),
   new PWPackage({
     name: '@playwright/experimental-ct-svelte',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-ct-svelte'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-ct-svelte'),
     files: ['LICENSE'],
   }),
   new PWPackage({
     name: '@playwright/experimental-ct-vue',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-ct-vue'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-ct-vue'),
     files: ['LICENSE'],
   }),
   new PWPackage({
     name: '@playwright/experimental-ct-vue2',
-    path: path.join(ROOT_PATH, 'packages', 'playwright-ct-vue2'),
+    path: path.join(ROOT_PATH, 'packages', 'pw-recorder-ct-vue2'),
     files: ['LICENSE'],
   }),
 ]);

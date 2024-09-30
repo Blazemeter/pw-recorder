@@ -2,10 +2,10 @@ test/assets/modernizr.js
 /tests/third_party/
 /packages/*/lib/
 *.js
-/packages/playwright-core/src/generated/*
-/packages/playwright-core/src/third_party/
-/packages/playwright-core/types/*
-/packages/playwright-ct-core/src/generated/*
+/packages/pw-recorder-core/src/generated/*
+/packages/pw-recorder-core/src/third_party/
+/packages/pw-recorder-core/types/*
+/packages/pw-recorder-ct-core/src/generated/*
 /index.d.ts
 node_modules/
 browser_patches/*/checkout/

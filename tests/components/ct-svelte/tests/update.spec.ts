@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-svelte';
+import { test, expect } from '@pw-recorder/experimental-ct-svelte';
 import Counter from '@/components/Counter.svelte';
 
 test('update props without remounting', async ({ mount }) => {

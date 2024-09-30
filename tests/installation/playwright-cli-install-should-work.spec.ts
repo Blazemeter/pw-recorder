@@ -21,13 +21,13 @@ test.use({ isolateBrowsers: true });
 test('install command should work', async ({ exec, installedSoftwareOnDisk }) => {
   await exec('npm i playwright');
 
-  await test.step('playwright install chromium', async () => {
+  await test.step('pw-recorder install chromium', async () => {
     const result = await exec('npx playwright install chromium');
     expect(result).toHaveLoggedSoftwareDownload(['chromium', 'ffmpeg']);
     expect(await installedSoftwareOnDisk()).toEqual(['chromium', 'ffmpeg']);
   });
 
-  await test.step('playwright install', async () => {
+  await test.step('pw-recorder install', async () => {
     const result = await exec('npx playwright install');
     expect(result).toHaveLoggedSoftwareDownload(['firefox', 'webkit']);
     expect(await installedSoftwareOnDisk()).toEqual(['chromium', 'ffmpeg', 'firefox', 'webkit']);
@@ -36,7 +36,7 @@ test('install command should work', async ({ exec, installedSoftwareOnDisk }) =>
   await exec('node sanity.js playwright', { env: { PLAYWRIGHT_BROWSERS_PATH: '0' } });
   await exec('node sanity.js playwright chromium firefox webkit');
 
-  const packages = ['playwright-chromium', 'playwright-firefox', 'playwright-webkit', '@playwright/browser-chromium', '@playwright/browser-firefox', '@playwright/browser-webkit'];
+  const packages = ['pw-recorder-chromium', 'pw-recorder-firefox', 'pw-recorder-webkit', '@playwright/browser-chromium', '@playwright/browser-firefox', '@playwright/browser-webkit'];
   for (const pkg of packages) {
     await test.step(pkg, async () => {
       const result = await exec(`npm i ${pkg}`);
@@ -60,7 +60,7 @@ test('should print the right install command without browsers', async ({ exec })
 
   const pwLangName2InstallCommand = {
     'java': 'mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install"',
-    'python': 'playwright install',
+    'python': 'pw-recorder install',
     'csharp': 'pwsh bin/Debug/netX/playwright.ps1 install',
     '': 'npx playwright install',
   };

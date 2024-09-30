@@ -18,8 +18,8 @@ import type { IncomingMessage } from 'http';
 import type { ProxyServer } from '../third_party/proxy';
 import { createProxy } from '../third_party/proxy';
 import net from 'net';
-import type { SocksSocketClosedPayload, SocksSocketDataPayload, SocksSocketRequestedPayload } from '../../packages/playwright-core/src/common/socksProxy';
-import { SocksProxy } from '../../packages/playwright-core/lib/common/socksProxy';
+import type { SocksSocketClosedPayload, SocksSocketDataPayload, SocksSocketRequestedPayload } from '../../packages/pw-recorder-core/src/common/socksProxy';
+import { SocksProxy } from '../../packages/pw-recorder-core/lib/common/socksProxy';
 
 export class TestProxy {
   readonly PORT: number;

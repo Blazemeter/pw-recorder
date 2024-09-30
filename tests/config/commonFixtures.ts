@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Fixtures } from '@playwright/test';
+import type { Fixtures } from '@pw-recorder/test';
 import type { ChildProcess } from 'child_process';
 import { execSync, spawn } from 'child_process';
 import net from 'net';

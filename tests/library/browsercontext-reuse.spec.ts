@@ -15,7 +15,7 @@
  */
 
 import { browserTest, expect } from '../config/browserTest';
-import type { BrowserContext } from '@playwright/test';
+import type { BrowserContext } from '@pw-recorder/test';
 
 const test = browserTest.extend<{ reusedContext: () => Promise<BrowserContext> }>({
   reusedContext: async ({ browserType, browser }, use) => {

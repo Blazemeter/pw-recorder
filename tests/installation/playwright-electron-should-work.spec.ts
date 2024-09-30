@@ -23,7 +23,7 @@ test('electron should work', async ({ exec, tsc, writeFiles }) => {
   await exec('node sanity-electron.js');
   await writeFiles({
     'test.ts':
-      `import { Page, _electron, ElectronApplication, Electron } from 'playwright';`
+      `import { Page, _electron, ElectronApplication, Electron } from 'pw-recorder';`
   });
   await tsc('test.ts');
 });

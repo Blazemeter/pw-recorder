@@ -18,11 +18,11 @@
 import { browserTest as it, expect } from '../config/browserTest';
 import * as path from 'path';
 import fs from 'fs';
-import type { BrowserContext, BrowserContextOptions } from 'playwright-core';
+import type { BrowserContext, BrowserContextOptions } from 'pw-recorder-core';
 import type { AddressInfo } from 'net';
 import type { Log } from '../../packages/trace/src/har';
 import { parseHar } from '../config/utils';
-const { createHttp2Server } = require('../../packages/playwright-core/lib/utils');
+const { createHttp2Server } = require('../../packages/pw-recorder-core/lib/utils');
 
 async function pageWithHar(contextFactory: (options?: BrowserContextOptions) => Promise<BrowserContext>, testInfo: any, options: { outputPath?: string } & Partial<Pick<BrowserContextOptions['recordHar'], 'content' | 'omitContent' | 'mode'>> = {}) {
   const harPath = testInfo.outputPath(options.outputPath || 'test.har');
@@ -91,7 +91,7 @@ it('should have pages in persistent context', async ({ launchPersistent, browser
   if (browserName === 'webkit') {
   // Explicit locale emulation forces a new page creation when
   // doing a new context.
-  // See https://github.com/microsoft/playwright/blob/13dd41c2e36a63f35ddef5dc5dec322052d670c6/packages/playwright-core/src/server/browserContext.ts#L232-L242
+  // See https://github.com/microsoft/playwright/blob/13dd41c2e36a63f35ddef5dc5dec322052d670c6/packages/pw-recorder-core/src/server/browserContext.ts#L232-L242
     expect(log.pages.length).toBe(2);
     pageEntry = log.pages[1];
   } else {
@@ -618,9 +618,9 @@ it('should have security details', async ({ contextFactory, httpsServer, browser
     expect(port).toBe(httpsServer.PORT);
   }
   if (browserName === 'webkit' && platform === 'darwin')
-    expect(securityDetails).toEqual({ protocol: 'TLS 1.3', subjectName: 'playwright-test', validFrom: 1691708270, validTo: 2007068270 });
+    expect(securityDetails).toEqual({ protocol: 'TLS 1.3', subjectName: 'pw-recorder-test', validFrom: 1691708270, validTo: 2007068270 });
   else
-    expect(securityDetails).toEqual({ issuer: 'playwright-test', protocol: 'TLS 1.3', subjectName: 'playwright-test', validFrom: 1691708270, validTo: 2007068270 });
+    expect(securityDetails).toEqual({ issuer: 'pw-recorder-test', protocol: 'TLS 1.3', subjectName: 'pw-recorder-test', validFrom: 1691708270, validTo: 2007068270 });
 
   expect(log.entries[1]._securityDetails).toEqual({ issuer: 'playwright-test', protocol: 'TLSv1.3', subjectName: 'playwright-test', validFrom: 1691708270, validTo: 2007068270 });
 });

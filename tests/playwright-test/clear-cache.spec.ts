@@ -18,7 +18,7 @@ import { test, expect } from './playwright-test-fixtures';
 
 test('should clear cache with type:module', async ({ runCLICommand }) => {
   const result = await runCLICommand({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       import { defineConfig } from '@playwright/test';
       export default defineConfig({});
     `,
@@ -35,7 +35,7 @@ test('should clear cache with type:module', async ({ runCLICommand }) => {
 
 test('should clear cache for ct', async ({ runCLICommand }) => {
   const result = await runCLICommand({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       import { defineConfig } from '@playwright/test';
       export default defineConfig({});
     `,

@@ -16,9 +16,9 @@
  */
 
 import { test as it, expect } from './pageTest';
-import type { Worker as PwWorker } from '@playwright/test';
+import type { Worker as PwWorker } from '@pw-recorder/test';
 import { attachFrame } from '../config/utils';
-import type { ConsoleMessage } from 'playwright-core';
+import type { ConsoleMessage } from 'pw-recorder-core';
 import fs from 'fs';
 import { kTargetClosedErrorMessage } from '../config/errors';
 

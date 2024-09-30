@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Page } from 'playwright-core';
+import type { Page } from 'pw-recorder-core';
 import { test as it, expect } from './inspectorTest';
 import { waitForTestLog } from '../../config/utils';
 

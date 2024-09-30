@@ -16,7 +16,7 @@
  */
 
 import { test as it, expect } from './pageTest';
-import type { Route } from 'playwright-core';
+import type { Route } from 'pw-recorder-core';
 
 it('should work', async ({ page, server }) => {
   await page.route('**/*', route => route.continue());

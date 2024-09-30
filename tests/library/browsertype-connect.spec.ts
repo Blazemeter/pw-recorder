@@ -19,13 +19,13 @@ import fs from 'fs';
 import type http from 'http';
 import type net from 'net';
 import * as path from 'path';
-import { getUserAgent, getPlaywrightVersion } from '../../packages/playwright-core/lib/utils/userAgent';
+import { getUserAgent, getPlaywrightVersion } from '../../packages/pw-recorder-core/lib/utils/userAgent';
 import WebSocket from 'ws';
 import { expect, playwrightTest } from '../config/browserTest';
 import { parseTrace, suppressCertificateWarning } from '../config/utils';
 import formidable from 'formidable';
-import type { Browser, ConnectOptions } from 'playwright-core';
-import { createHttpServer } from '../../packages/playwright-core/lib/utils/network';
+import type { Browser, ConnectOptions } from 'pw-recorder-core';
+import { createHttpServer } from '../../packages/pw-recorder-core/lib/utils/network';
 import { kTargetClosedErrorMessage } from '../config/errors';
 import { RunServer } from '../config/remoteServer';
 

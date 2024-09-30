@@ -31,7 +31,7 @@ ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
 # 1. Add tip-of-tree Playwright package to install its browsers.
 #    The package should be built beforehand from tip-of-tree Playwright.
-COPY ./playwright-core.tar.gz /tmp/playwright-core.tar.gz
+COPY ./pw-recorder-core.tar.gz /tmp/playwright-core.tar.gz
 
 # 2. Bake in Playwright Agent.
 #    Playwright Agent is used to bake in browsers and browser dependencies,

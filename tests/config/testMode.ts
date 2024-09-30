@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { start } from '../../packages/playwright-core/lib/outofprocess';
-import type { Playwright } from '../../packages/playwright-core/lib/client/playwright';
+import { start } from '../../packages/pw-recorder-core/lib/outofprocess';
+import type { Playwright } from '../../packages/pw-recorder-core/lib/client/playwright';
 
 export type TestModeName = 'default' | 'driver' | 'service' | 'service2';
 
@@ -42,7 +42,7 @@ export class DriverTestMode implements TestMode {
 
 export class DefaultTestMode implements TestMode {
   async setup() {
-    return require('playwright-core');
+    return require('pw-recorder-core');
   }
 
   async teardown() {

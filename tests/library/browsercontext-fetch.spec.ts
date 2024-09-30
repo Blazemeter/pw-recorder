@@ -27,7 +27,7 @@ import { kTargetClosedErrorMessage } from 'tests/config/errors';
 it.skip(({ mode }) => mode !== 'default');
 
 const __testHookLookup = (hostname: string): LookupAddress[] => {
-  if (hostname === 'localhost' || hostname.endsWith('playwright.dev'))
+  if (hostname === 'localhost' || hostname.endsWith('pw-recorder.dev'))
     return [{ address: '127.0.0.1', family: 4 }];
   else
     throw new Error(`Failed to resolve hostname: ${hostname}`);

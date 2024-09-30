@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { test } from '@playwright/test';
+import { test } from '@pw-recorder/test';
 import type { TestModeName } from './testMode';
 import { DefaultTestMode, DriverTestMode } from './testMode';
-import * as playwrightLibrary from 'playwright-core';
+import * as playwrightLibrary from 'pw-recorder-core';
 
 export type TestModeWorkerOptions = {
   mode: TestModeName;
@@ -30,7 +30,7 @@ export type TestModeTestFixtures = {
 
 export type TestModeWorkerFixtures = {
   toImplInWorkerScope: (rpcObject?: any) => any;
-  playwright: typeof import('@playwright/test');
+  playwright: typeof import('@pw-recorder/test');
 };
 
 export const testModeTest = test.extend<TestModeTestFixtures, TestModeWorkerOptions & TestModeWorkerFixtures>({
@@ -43,7 +43,7 @@ export const testModeTest = test.extend<TestModeTestFixtures, TestModeWorkerOpti
       'service-grid': new DefaultTestMode(),
       'driver': new DriverTestMode(),
     }[mode];
-    require('playwright-core/lib/utils').setUnderTest();
+    require('pw-recorder-core/lib/utils').setUnderTest();
     const playwright = await testMode.setup();
     playwright._setSelectors(playwrightLibrary.selectors);
     await run(playwright);

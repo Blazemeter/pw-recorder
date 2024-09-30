@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import type { APIRequestContext, Browser, BrowserContext, BrowserContextOptions, Page, LaunchOptions, ViewportSize, Geolocation, HTTPCredentials, Locator, APIResponse, PageScreenshotOptions } from 'playwright-core';
-export * from 'playwright-core';
+import type { APIRequestContext, Browser, BrowserContext, BrowserContextOptions, Page, LaunchOptions, ViewportSize, Geolocation, HTTPCredentials, Locator, APIResponse, PageScreenshotOptions } from 'pw-recorder-core';
+export * from 'pw-recorder-core';
 
 export type ReporterDescription = Readonly<
   ['blob'] | ['blob', { outputDir?: string, fileName?: string }] |
@@ -237,7 +237,7 @@ export interface PlaywrightTestOptions {
 
 
 export interface PlaywrightWorkerArgs {
-  playwright: typeof import('playwright-core');
+  playwright: typeof import('pw-recorder-core');
   browser: Browser;
 }
 

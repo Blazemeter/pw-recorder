@@ -15,7 +15,7 @@
  */
 
 import { contextTest as it, expect } from '../../config/browserTest';
-import type { Frame, Browser } from '@playwright/test';
+import type { Frame, Browser } from '@pw-recorder/test';
 
 it.use({
   launchOptions: async ({ launchOptions }, use) => {

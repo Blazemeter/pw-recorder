@@ -22,12 +22,12 @@ test('pnpm: @playwright/experimental-ct-react should work', async ({ exec, tmpWo
   await exec('pnpm add @playwright/experimental-ct-react react react-dom');
   await exec('pnpm exec playwright install');
   await writeFiles({
-    'playwright.config.ts': `
+    'pw-recorder.config.ts': `
       import { defineConfig } from '@playwright/experimental-ct-react';
       export default defineConfig({});
     `,
-    'playwright/index.html': `<script type="module" src="./index.js"></script>`,
-    'playwright/index.js': ``,
+    'pw-recorder/index.html': `<script type="module" src="./index.js"></script>`,
+    'pw-recorder/index.js': ``,
     'Button.tsx': `
       export function Button({ onClick }) {
         return <button onClick={onClick}>Submit</button>;

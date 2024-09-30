@@ -16,7 +16,7 @@
  */
 
 import { browserTest as it, expect } from '../config/browserTest';
-import type { Route } from '@playwright/test';
+import type { Route } from '@pw-recorder/test';
 
 it('should intercept', async ({ browser, server }) => {
   const context = await browser.newContext();

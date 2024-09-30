@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import type { Frame } from '@playwright/test';
+import type { Frame } from '@pw-recorder/test';
 import { test as it, expect, rafraf } from './pageTest';
 import { attachFrame, detachFrame } from '../config/utils';
 

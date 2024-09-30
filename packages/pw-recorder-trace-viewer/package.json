@@ -1,0 +1,12 @@
+{
+  "name": "pw-recorder-trace-viewer",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc",
+    "build-sw": "vite --config vite.sw.config.ts build && tsc",
+    "preview": "vite preview"
+  }
+}

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { defineConfig } from '@playwright/test';
+import { defineConfig } from '@pw-recorder/test';
 
 export default defineConfig({
   forbidOnly: !!process.env.CI,

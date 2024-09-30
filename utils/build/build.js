@@ -252,7 +252,7 @@ for (const pkg of workspace.packages()) {
       ...(withSourceMaps ? ['--source-maps'] : []),
       '--extensions', '.ts',
       '--out-dir', quotePath(path.join(pkg.path, 'lib')),
-      '--ignore', '"packages/playwright-core/src/server/injected/**/*"',
+      '--ignore', '"packages/pw-recorder-core/src/server/injected/**/*"',
       quotePath(path.join(pkg.path, 'src')),
     ],
     shell: true,
@@ -312,7 +312,7 @@ onChanges.push({
   inputs: [
     'packages/playwright-core/src/server/injected/**',
     'packages/playwright-core/src/third_party/**',
-    'packages/playwright-ct-core/src/injected/**',
+    'packages/pw-recorder-ct-core/src/injected/**',
     'packages/playwright-core/src/utils/isomorphic/**',
     'utils/generate_injected.js',
   ],

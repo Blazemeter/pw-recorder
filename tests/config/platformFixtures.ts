@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { test } from '@playwright/test';
+import { test } from '@pw-recorder/test';
 import os from 'os';
 
 export type PlatformWorkerFixtures = {

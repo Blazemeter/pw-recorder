@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { devices } from '@playwright/test';
+import { devices } from '@pw-recorder/test';
 import { contextTest as it, expect } from '../config/browserTest';
 import { browserTest } from '../config/browserTest';
 import { verifyViewport } from '../config/utils';

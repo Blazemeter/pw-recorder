@@ -11,8 +11,8 @@ PACKAGE_VERSION=$(node -p "require('../../package.json').version")
 rm -rf ./output
 mkdir -p ./output
 
-echo "Building playwright-core package"
-node ../../utils/pack_package.js playwright-core ./output/playwright-core.tgz
+echo "Building pw-recorder-core package"
+node ../../utils/pack_package.js pw-recorder-core ./output/pw-recorder-core.tgz
 
 echo "Building api.json and protocol.yml"
 API_JSON_MODE=1 node ../../utils/doclint/generateApiJson.js > ./output/api.json
@@ -29,7 +29,7 @@ function build {
   cd ${SCRIPT_PATH}
 
   mkdir -p ./output/playwright-${SUFFIX}
-  tar -xzf ./output/playwright-core.tgz -C ./output/playwright-${SUFFIX}/
+  tar -xzf ./output/pw-recorder-core.tgz -C ./output/playwright-${SUFFIX}/
 
   curl --retry 10 --retry-all-errors ${NODE_URL} -o ./output/${NODE_DIR}.${ARCHIVE}
   NPM_PATH=""

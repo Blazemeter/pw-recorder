@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-import { ManualPromise } from '../../../packages/playwright-core/lib/utils/manualPromise';
-import { EventEmitter } from '../../../packages/playwright-core/lib/client/eventEmitter';
-import { test, expect } from '@playwright/test';
+import { ManualPromise } from '../../../packages/pw-recorder-core/lib/utils/manualPromise';
+import { EventEmitter } from '../../../packages/pw-recorder-core/lib/client/eventEmitter';
+import { test, expect } from '@pw-recorder/test';
 
 test('should not throw with ignoreErrors', async () => {
   const ee = new EventEmitter();

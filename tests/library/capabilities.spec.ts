@@ -17,7 +17,7 @@
 import os from 'os';
 import url from 'url';
 import { contextTest as it, expect } from '../config/browserTest';
-import { hostPlatform } from '../../packages/playwright-core/src/utils/hostPlatform';
+import { hostPlatform } from '../../packages/pw-recorder-core/src/utils/hostPlatform';
 
 it('SharedArrayBuffer should work @smoke', async function({ contextFactory, httpsServer, isMac, macVersion, browserName }) {
   it.skip(browserName === 'webkit' && isMac && macVersion <= 12, 'WebKit on macOS 12 is frozen and does not support SharedArrayBuffer');

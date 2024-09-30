@@ -20,9 +20,9 @@ test.describe.configure({ mode: 'parallel' });
 
 test('should run dev-server and use it for tests', async ({ writeFiles, runInlineTest, startCLICommand }) => {
   await writeFiles({
-    'playwright.config.ts': playwrightCtConfigText,
-    'playwright/index.html': `<script type="module" src="./index.ts"></script>`,
-    'playwright/index.ts': ``,
+    'pw-recorder.config.ts': playwrightCtConfigText,
+    'pw-recorder/index.html': `<script type="module" src="./index.ts"></script>`,
+    'pw-recorder/index.ts': ``,
     'src/button.tsx': `
       export const Button = () => <button>Button</button>;
     `,

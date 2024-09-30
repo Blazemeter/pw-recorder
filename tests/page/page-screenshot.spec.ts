@@ -18,7 +18,7 @@
 import os from 'os';
 import { test as it, expect, rafraf } from './pageTest';
 import { verifyViewport, attachFrame } from '../config/utils';
-import type { Route } from 'playwright-core';
+import type { Route } from 'pw-recorder-core';
 import path from 'path';
 import fs from 'fs';
 import { comparePNGs } from '../config/comparator';

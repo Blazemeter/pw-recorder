@@ -16,7 +16,7 @@
  */
 
 import { test as it, expect } from './pageTest';
-import type { Route } from 'playwright-core';
+import type { Route } from 'pw-recorder-core';
 
 it('should pick up ongoing navigation', async ({ page, server }) => {
   let response = null;

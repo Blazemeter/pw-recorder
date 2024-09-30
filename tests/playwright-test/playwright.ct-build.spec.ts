@@ -38,7 +38,7 @@ test('should work with the empty component list', async ({ runInlineTest }, test
   expect(output.replace(/\\+/g, '/')).toContain('.cache/index.html');
 
   const metainfo = JSON.parse(fs.readFileSync(testInfo.outputPath('playwright/.cache/metainfo.json'), 'utf-8'));
-  expect(metainfo.version).toEqual(require('playwright-core/package.json').version);
+  expect(metainfo.version).toEqual(require('pw-recorder-core/package.json').version);
   expect(metainfo.viteVersion).toEqual(require('vite/package.json').version);
   expect(Object.entries(metainfo.deps)).toHaveLength(0);
   expect(Object.entries(metainfo.sources)).toHaveLength(9);

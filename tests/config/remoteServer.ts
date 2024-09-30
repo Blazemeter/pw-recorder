@@ -15,7 +15,7 @@
  */
 
 import path from 'path';
-import type { BrowserType, Browser } from 'playwright-core';
+import type { BrowserType, Browser } from 'pw-recorder-core';
 import type { CommonFixtures, TestChildProcess } from './commonFixtures';
 
 export interface PlaywrightServer {
@@ -28,7 +28,7 @@ export class RunServer implements PlaywrightServer {
   _wsEndpoint!: string;
 
   async start(childProcess: CommonFixtures['childProcess'], mode?: 'extension' | 'default', env?: NodeJS.ProcessEnv) {
-    const command = ['node', path.join(__dirname, '..', '..', 'packages', 'playwright-core', 'cli.js'), 'run-server'];
+    const command = ['node', path.join(__dirname, '..', '..', 'packages', 'pw-recorder-core', 'cli.js'), 'run-server'];
     if (mode === 'extension')
       command.push('--mode=extension');
     this._process = childProcess({
