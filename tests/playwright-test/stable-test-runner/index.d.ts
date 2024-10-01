@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export * from './node_modules/@playwright/test';
+export * from './node_modules/@okep/test';

@@ -25,7 +25,7 @@ import { type RemoteServerOptions, type PlaywrightServer, RunServer, RemoteServe
 import type { Log } from '../../packages/trace/src/har';
 import { parseHar } from '../config/utils';
 import { createSkipTestPredicate } from '../bidi/expectationUtil';
-import type { TestInfo } from '@pw-recorder/test';
+import type { TestInfo } from '@okep/test';
 
 export type BrowserTestWorkerFixtures = PageWorkerFixtures & {
   browserVersion: string;
@@ -197,4 +197,4 @@ export const playwrightTest = test;
 export const browserTest = test;
 export const contextTest = test;
 
-export { expect } from '@pw-recorder/test';
+export { expect } from '@okep/test';

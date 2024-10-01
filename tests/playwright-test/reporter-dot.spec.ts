@@ -24,7 +24,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render expected', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(1);
           });
@@ -37,7 +37,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render unexpected', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(0);
           });
@@ -50,7 +50,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render unexpected after retry', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(0);
           });
@@ -65,7 +65,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render flaky', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}, testInfo) => {
             expect(testInfo.retry).toBe(3);
           });
@@ -85,7 +85,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           module.exports = { reporter: 'dot' };
         `,
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(1);
           });
@@ -98,7 +98,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render 243 tests in rows by 80', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           for (let i = 0; i < 243; i++) {
             test('test' + i, () => {});
           }

@@ -40,7 +40,7 @@ test('should have correct tags', async ({ runInlineTest }) => {
       };
     `,
     'stdio.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('no-tags', () => {
       });
       test('foo-tag @inline', { tag: '@foo' }, () => {
@@ -93,7 +93,7 @@ test('config.grep should work', async ({ runInlineTest }) => {
       module.exports = { grep: /@tag1/ };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test1', { tag: '@tag1' }, async () => { console.log('\\n%% test1'); });
       test('test2', async () => { console.log('\\n%% test2'); });
     `,
@@ -112,7 +112,7 @@ test('config.project.grep should work', async ({ runInlineTest }) => {
       ] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test1', { tag: '@tag1' }, async () => { console.log('\\n%% test1-' + test.info().project.name); });
       test('test2', async () => { console.log('\\n%% test2-' + test.info().project.name); });
     `,
@@ -125,7 +125,7 @@ test('config.project.grep should work', async ({ runInlineTest }) => {
 test('--grep should work', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test1', { tag: '@tag1' }, async () => { console.log('\\n%% test1'); });
       test('test2', async () => { console.log('\\n%% test2'); });
     `,
@@ -138,7 +138,7 @@ test('--grep should work', async ({ runInlineTest }) => {
 test('should enforce @ symbol', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'stdio.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test1', { tag: 'foo' }, () => {
       });
     `
@@ -150,7 +150,7 @@ test('should enforce @ symbol', async ({ runInlineTest }) => {
 test('should be included in testInfo', async ({ runInlineTest }, testInfo) => {
   const result = await runInlineTest({
     'a.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('test without tag', async ({}, testInfo) => {
       expect(testInfo.tags).toStrictEqual([]);
     });
@@ -165,7 +165,7 @@ test('should be included in testInfo', async ({ runInlineTest }, testInfo) => {
 test('should be included in testInfo if coming from describe', async ({ runInlineTest }, testInfo) => {
   const result = await runInlineTest({
     'a.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test.describe('describe with tag', { tag: '@tag2' }, async ()=>{
       test('test with tag', async ({}, testInfo) => {
         expect(testInfo.tags).toStrictEqual(["@tag2"]);

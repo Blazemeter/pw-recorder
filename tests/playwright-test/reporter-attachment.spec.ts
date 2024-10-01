@@ -20,7 +20,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('render text attachment', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', async ({}, testInfo) => {
         testInfo.attachments.push({
           name: 'attachment',
@@ -41,7 +41,7 @@ test('render text attachment', async ({ runInlineTest }) => {
 test('render screenshot attachment', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', async ({}, testInfo) => {
         testInfo.attachments.push({
           name: 'screenshot',
@@ -62,7 +62,7 @@ test('render screenshot attachment', async ({ runInlineTest }) => {
 test('render trace attachment', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', async ({}, testInfo) => {
         testInfo.attachments.push({
           name: 'trace',
@@ -84,7 +84,7 @@ test('render trace attachment', async ({ runInlineTest }) => {
 test(`testInfo.attach errors`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail1', async ({}, testInfo) => {
         await testInfo.attach('name', { path: 'foo.txt' });
       });
@@ -107,7 +107,7 @@ test(`testInfo.attach errors`, async ({ runInlineTest }) => {
 test(`testInfo.attach errors with empty path`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({}, testInfo) => {
         await testInfo.attach('name', { path: '' });
       });
@@ -120,7 +120,7 @@ test(`testInfo.attach errors with empty path`, async ({ runInlineTest }) => {
 test(`testInfo.attach error in fixture`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use, testInfo) => {
           await use();
@@ -141,7 +141,7 @@ test(`testInfo.attach error in fixture`, async ({ runInlineTest }) => {
 test(`testInfo.attach success in fixture`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use, testInfo) => {
           const filePath = testInfo.outputPath('foo.txt');
@@ -163,7 +163,7 @@ test(`testInfo.attach success in fixture`, async ({ runInlineTest }) => {
 test(`testInfo.attach allow empty string body`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('success', async ({}, testInfo) => {
         await testInfo.attach('name', { body: '', contentType: 'text/plain' });
         expect(0).toBe(1);
@@ -178,7 +178,7 @@ test(`testInfo.attach allow empty string body`, async ({ runInlineTest }) => {
 test(`testInfo.attach allow without options`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('success', async ({}, testInfo) => {
         await testInfo.attach('Full name');
         expect(0).toBe(1);
@@ -193,7 +193,7 @@ test(`testInfo.attach allow without options`, async ({ runInlineTest }) => {
 test(`testInfo.attach allow empty buffer body`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('success', async ({}, testInfo) => {
         await testInfo.attach('name', { body: Buffer.from(''), contentType: 'text/plain' });
         expect(0).toBe(1);
@@ -208,7 +208,7 @@ test(`testInfo.attach allow empty buffer body`, async ({ runInlineTest }) => {
 test(`testInfo.attach use name as prefix`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use, testInfo) => {
           const filePath = testInfo.outputPath('foo.txt');
@@ -232,7 +232,7 @@ test(`testInfo.attach use name as prefix`, async ({ runInlineTest }) => {
 test(`testInfo.attach name should be sanitized`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use, testInfo) => {
           const filePath = testInfo.outputPath('foo.txt');
@@ -256,7 +256,7 @@ test(`testInfo.attach name should be sanitized`, async ({ runInlineTest }) => {
 test(`testInfo.attach name can be empty string`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use, testInfo) => {
           const filePath = testInfo.outputPath('foo.txt');
@@ -280,7 +280,7 @@ test(`testInfo.attach name can be empty string`, async ({ runInlineTest }) => {
 test(`testInfo.attach throw if name is not string`, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use, testInfo) => {
           const filePath = testInfo.outputPath('foo.txt');
@@ -303,7 +303,7 @@ test(`testInfo.attach throw if name is not string`, async ({ runInlineTest }) =>
 test('render text attachment with multiple lines', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('one', async ({}, testInfo) => {
         testInfo.attachments.push({
           name: 'attachment',

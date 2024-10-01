@@ -21,7 +21,7 @@ test.describe.configure({ mode: 'parallel', retries });
 test('should show screenshots', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({ page }) => {
         await page.setContent('<div style="background: red; width: 100%; height: 100%"></div>');
         await expect(page.locator('body')).toBeVisible();

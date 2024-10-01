@@ -21,8 +21,8 @@ import * as path from 'path';
 import type { Source } from '../../../packages/recorder/src/recorderTypes';
 import type { CommonFixtures, TestChildProcess } from '../../config/commonFixtures';
 import { stripAnsi } from '../../config/utils';
-import { expect } from '@pw-recorder/test';
-export { expect } from '@pw-recorder/test';
+import { expect } from '@okep/test';
+export { expect } from '@okep/test';
 
 type CLITestArgs = {
   recorderPageGetter: () => Promise<Page>;

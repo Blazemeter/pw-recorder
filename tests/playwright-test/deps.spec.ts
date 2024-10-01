@@ -27,7 +27,7 @@ test('should run projects with dependencies', async ({ runInlineTest }) => {
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -50,7 +50,7 @@ test('should inherit env changes from dependencies', async ({ runInlineTest }) =
       ] };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         process.env.SET_IN_A = 'valuea';
         delete process.env.SET_OUTSIDE;
@@ -58,26 +58,26 @@ test('should inherit env changes from dependencies', async ({ runInlineTest }) =
       });
     `,
     'b.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         process.env.SET_IN_B = 'valueb';
         console.log('\\n%%B');
       });
     `,
     'c.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         console.log('\\n%%C-' + process.env.SET_IN_A + '-' + process.env.SET_IN_B + '-' + process.env.SET_OUTSIDE);
       });
     `,
     'd.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         console.log('\\n%%D-' + process.env.SET_IN_A + '-' + process.env.SET_IN_B + '-' + process.env.SET_OUTSIDE);
       });
     `,
     'e.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         console.log('\\n%%E-' + process.env.SET_IN_A + '-' + process.env.SET_IN_B + '-' + process.env.SET_OUTSIDE);
       });
@@ -100,7 +100,7 @@ test('should not run projects with dependencies when --no-deps is passed', async
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -122,7 +122,7 @@ test('should not run project if dependency failed', async ({ runInlineTest }) =>
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
         if (testInfo.project.name === 'B')
@@ -152,7 +152,7 @@ test('should not run project if dependency failed (2)', async ({ runInlineTest }
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
         if (testInfo.project.name === 'B1')
@@ -175,7 +175,7 @@ test('should filter by project list, but run deps', async ({ runInlineTest }) =>
       ] };
     `,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -197,11 +197,11 @@ test('should not filter dependency by file name', async ({ runInlineTest }) => {
       ] };
     `,
     'one.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
     'two.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', () => { });
     `,
   }, undefined, undefined, { additionalArgs: ['two.spec.ts'] });
@@ -219,7 +219,7 @@ test('should filter dependency by only', async ({ runInlineTest }) => {
       ] };
     `,
     'setup.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {
         console.log('\\n%% setup in ' + test.info().project.name);
       });
@@ -228,7 +228,7 @@ test('should filter dependency by only', async ({ runInlineTest }) => {
       });
     `,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', () => {
         console.log('\\n%% test in ' + test.info().project.name);
       });
@@ -247,7 +247,7 @@ test('should filter dependency by only when running explicitly', async ({ runInl
       ] };
     `,
     'setup.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {
         console.log('\\n%% setup in ' + test.info().project.name);
       });
@@ -256,7 +256,7 @@ test('should filter dependency by only when running explicitly', async ({ runInl
       });
     `,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', () => {
         console.log('\\n%% test in ' + test.info().project.name);
       });
@@ -275,19 +275,19 @@ test('should not filter dependency by only 3', async ({ runInlineTest }) => {
       ] };
     `,
     'setup-1.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('setup 1', () => {
         console.log('\\n%% setup in ' + test.info().project.name);
       });
     `,
     'setup-2.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('setup 2', () => {
         console.log('\\n%% setup 2 in ' + test.info().project.name);
       });
     `,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', () => {
         console.log('\\n%% test in ' + test.info().project.name);
       });
@@ -306,13 +306,13 @@ test('should not report skipped dependent tests', async ({ runInlineTest }) => {
       ] };
     `,
     'setup.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('setup', () => {
         expect(1).toBe(2);
       });
     `,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', () => {});
     `,
   });
@@ -331,7 +331,7 @@ test('should report circular dependencies', async ({ runInlineTest }) => {
       ] };
     `,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', () => {});
     `,
   });
@@ -350,19 +350,19 @@ test('should run dependency in each shard', async ({ runInlineTest }) => {
       };
     `,
     'setup.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('setup', async ({}) => {
         console.log('\\n%%setup');
       });
     `,
     'test1.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test1', async ({}) => {
         console.log('\\n%%test1');
       });
     `,
     'test2.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test2', async ({}) => {
         console.log('\\n%%test2');
       });
@@ -392,7 +392,7 @@ test('should run setup project with zero tests', async ({ runInlineTest }) => {
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -414,13 +414,13 @@ test('should run setup project with zero tests recursively', async ({ runInlineT
         ],
       };`,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
     `,
     'c.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -441,7 +441,7 @@ test('should run project with teardown', async ({ runInlineTest }) => {
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -465,7 +465,7 @@ test('should run teardown after dependents', async ({ runInlineTest }) => {
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -488,7 +488,7 @@ test('should run teardown after failure', async ({ runInlineTest }) => {
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
         if (testInfo.project.name === 'A')
@@ -514,7 +514,7 @@ test('should complain about teardown being a dependency', async ({ runInlineTest
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', () => {});
     `,
   });
@@ -533,7 +533,7 @@ test('should complain about teardown having a dependency', async ({ runInlineTes
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', () => {});
     `,
   });
@@ -552,7 +552,7 @@ test('should support the same teardown used multiple times', async ({ runInlineT
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -574,7 +574,7 @@ test('should only apply --repeat-each to top-level', async ({ runInlineTest }) =
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -596,7 +596,7 @@ test('should run teardown when all projects are top-level at run point', async (
         ],
       };`,
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -621,19 +621,19 @@ test('should not run deps for projects filtered with grep', async ({ runInlineTe
         ],
       };`,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
     `,
     'hook.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
     `,
     'b.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}, testInfo) => {
         console.log('\\n%%' + testInfo.project.name);
       });
@@ -654,11 +654,11 @@ test('should allow only in dependent', async ({ runInlineTest }) => {
         ],
       };`,
     'setup.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('setup', async ({}) => {});
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.only('test', async ({}) => {
       });
       test('test 2', async ({}) => { expect(1).toBe(2); });
@@ -678,11 +678,11 @@ test('should allow only in dependent (2)', async ({ runInlineTest }) => {
         ],
       };`,
     'setup.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.only('setup', async ({}) => {});
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}) => { expect(1).toBe(2); });
       test('test 2', async ({}) => { expect(1).toBe(2); });
     `,

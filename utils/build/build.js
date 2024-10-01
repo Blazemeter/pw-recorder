@@ -276,7 +276,7 @@ for (const bundle of bundles) {
 }
 
 // Build/watch web packages.
-for (const webPackage of ['html-reporter', 'recorder', 'trace-viewer']) {
+for (const webPackage of ['pw-recorder-html-reporter', 'pw-recorder-recorder', 'pw-recorder-trace-viewer']) {
   steps.push({
     command: 'npx',
     args: [
@@ -302,7 +302,7 @@ steps.push({
     ...(withSourceMaps ? ['--sourcemap'] : []),
   ],
   shell: true,
-  cwd: path.join(__dirname, '..', '..', 'packages', 'trace-viewer'),
+  cwd: path.join(__dirname, '..', '..', 'packages', 'pw-recorder-trace-viewer'),
   concurrent: true,
 });
 
@@ -310,10 +310,10 @@ steps.push({
 // Generate injected.
 onChanges.push({
   inputs: [
-    'packages/playwright-core/src/server/injected/**',
-    'packages/playwright-core/src/third_party/**',
+    'packages/pw-recorder-core/src/server/injected/**',
+    'packages/pw-recorder-core/src/third_party/**',
     'packages/pw-recorder-ct-core/src/injected/**',
-    'packages/playwright-core/src/utils/isomorphic/**',
+    'packages/pw-recorder-core/src/utils/isomorphic/**',
     'utils/generate_injected.js',
   ],
   script: 'utils/generate_injected.js',
@@ -322,7 +322,7 @@ onChanges.push({
 // Generate channels.
 onChanges.push({
   inputs: [
-    'packages/protocol/src/protocol.yml'
+    'packages/pw-recorder-protocol/src/protocol.yml'
   ],
   script: 'utils/generate_channels.js',
 });
@@ -337,37 +337,37 @@ onChanges.push({
     'utils/generate_types/overrides-test.d.ts',
     'utils/generate_types/overrides-testReporter.d.ts',
     'utils/generate_types/exported.json',
-    'packages/playwright-core/src/server/chromium/protocol.d.ts',
+    'packages/pw-recorder-core/src/server/chromium/protocol.d.ts',
   ],
   mustExist: [
-    'packages/playwright-core/lib/server/deviceDescriptorsSource.json',
+    'packages/pw-recorder-core/lib/server/deviceDescriptorsSource.json',
   ],
   script: 'utils/generate_types/index.js',
 });
 
 // The recorder and trace viewer have an app_icon.png that needs to be copied.
 copyFiles.push({
-  files: 'packages/playwright-core/src/server/chromium/*.png',
-  from: 'packages/playwright-core/src',
-  to: 'packages/playwright-core/lib',
+  files: 'packages/pw-recorder-core/src/server/chromium/*.png',
+  from: 'packages/pw-recorder-core/src',
+  to: 'packages/pw-recorder-core/lib',
 });
 
 // Babel doesn't touch JS files, so copy them manually.
 // For example: diff_match_patch.js
 copyFiles.push({
-  files: 'packages/playwright-core/src/**/*.js',
-  from: 'packages/playwright-core/src',
-  to: 'packages/playwright-core/lib',
+  files: 'packages/pw-recorder-core/src/**/*.js',
+  from: 'packages/pw-recorder-core/src',
+  to: 'packages/pw-recorder-core/lib',
   ignored: ['**/.eslintrc.js', '**/injected/**/*']
 });
 
 // Sometimes we require JSON files that babel ignores.
 // For example, deviceDescriptorsSource.json
 copyFiles.push({
-  files: 'packages/playwright-core/src/**/*.json',
+  files: 'packages/pw-recorder-core/src/**/*.json',
   ignored: ['**/injected/**/*'],
-  from: 'packages/playwright-core/src',
-  to: 'packages/playwright-core/lib',
+  from: 'packages/pw-recorder-core/src',
+  to: 'packages/pw-recorder-core/lib',
 });
 
 if (lintMode) {
@@ -378,7 +378,7 @@ if (lintMode) {
     shell: true,
     concurrent: true,
   });
-  for (const webPackage of ['html-reporter', 'recorder', 'trace-viewer']) {
+  for (const webPackage of ['pw-recorder-html-reporter', 'pw-recorder-recorder', 'pw-recorder-trace-viewer']) {
     steps.push({
       command: 'npx',
       args: ['tsc', ...(watchMode ? ['-w'] : []), '-p', quotePath(filePath(`packages/${webPackage}`))],

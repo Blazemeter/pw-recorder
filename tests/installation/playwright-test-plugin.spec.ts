@@ -25,15 +25,15 @@ function patchPackageJsonForPreReleaseIfNeeded(tmpWorkspace: string) {
   //
   // Workaround per https://stackoverflow.com/questions/71479750/npm-install-pre-release-versions-for-peer-dependency.
   const pkg = JSON.parse(fs.readFileSync(path.resolve(tmpWorkspace, 'package.json'), 'utf-8'));
-  if (pkg.dependencies['@playwright/test'].match(/\d+\.\d+-\w+/)) {
+  if (pkg.dependencies['@okep/test'].match(/\d+\.\d+-\w+/)) {
     console.log(`Setting overrides in package.json to make pre-release version of peer dependency work.`);
-    pkg.overrides = { '@playwright/test': '$@playwright/test' };
+    pkg.overrides = { '@okep/test': '$@okep/test' };
     fs.writeFileSync(path.resolve(tmpWorkspace, 'package.json'), JSON.stringify(pkg, null, 2));
   }
 }
 
-test('npm: @playwright/test plugin should work', async ({ exec, tmpWorkspace }) => {
-  await exec('npm i @playwright/test');
+test('npm: @okep/test plugin should work', async ({ exec, tmpWorkspace }) => {
+  await exec('npm i @okep/test');
   patchPackageJsonForPreReleaseIfNeeded(tmpWorkspace);
   await exec('npm i playwright-test-plugin');
   await exec('npx playwright install chromium');
@@ -46,8 +46,8 @@ test('npm: @playwright/test plugin should work', async ({ exec, tmpWorkspace }) 
   await exec('npx tsc playwright-test-plugin-types.ts');
 });
 
-test('pnpm: @playwright/test plugin should work', async ({ exec, tmpWorkspace }) => {
-  await exec('pnpm add @playwright/test');
+test('pnpm: @okep/test plugin should work', async ({ exec, tmpWorkspace }) => {
+  await exec('pnpm add @okep/test');
   patchPackageJsonForPreReleaseIfNeeded(tmpWorkspace);
   await exec('pnpm add playwright-test-plugin');
   await exec('pnpm exec playwright install chromium');
@@ -60,8 +60,8 @@ test('pnpm: @playwright/test plugin should work', async ({ exec, tmpWorkspace })
   await exec('pnpm exec tsc playwright-test-plugin-types.ts');
 });
 
-test('yarn: @playwright/test plugin should work', async ({ exec, tmpWorkspace }) => {
-  await exec('yarn add @playwright/test');
+test('yarn: @okep/test plugin should work', async ({ exec, tmpWorkspace }) => {
+  await exec('yarn add @okep/test');
   patchPackageJsonForPreReleaseIfNeeded(tmpWorkspace);
   await exec('yarn add playwright-test-plugin');
   await exec('yarn playwright install chromium');

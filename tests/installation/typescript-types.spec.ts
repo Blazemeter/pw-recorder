@@ -23,7 +23,7 @@ test('typescript types should work', async ({ exec, tsc, writeFiles }) => {
     'pw-recorder-webkit',
     'pw-recorder-chromium',
   ];
-  await exec('npm i @playwright/test', ...libraryPackages, { env: { PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1' } });
+  await exec('npm i @okep/test', ...libraryPackages, { env: { PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1' } });
 
   for (const libraryPackage of libraryPackages) {
     const filename = libraryPackage + '.ts';

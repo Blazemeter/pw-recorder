@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { defineConfig } from '@pw-recorder/test';
+import { defineConfig } from '@okep/test';
 
 export default defineConfig({
   forbidOnly: !!process.env.CI,

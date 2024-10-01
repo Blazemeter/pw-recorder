@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-vue';
+import { test, expect } from '@okep/experimental-ct-vue';
 import App from '@/App.vue';
 import type { HooksConfig } from '../../playwright';
 

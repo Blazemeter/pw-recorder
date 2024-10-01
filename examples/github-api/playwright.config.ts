@@ -1,6 +1,6 @@
 /* eslint-disable notice/notice */
 
-import { defineConfig } from '@playwright/test';
+import { defineConfig } from '@okep/test';
 
 /**
  * See https://playwright.dev/docs/test-configuration.

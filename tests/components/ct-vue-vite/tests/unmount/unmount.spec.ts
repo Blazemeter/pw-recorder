@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-vue';
+import { test, expect } from '@okep/experimental-ct-vue';
 import Button from '@/components/Button.vue';
 import MultiRoot from '@/components/MultiRoot.vue';
 

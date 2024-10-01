@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should succeed', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'one-success.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       class Foo {
         #logger = 2;
@@ -58,7 +58,7 @@ test('should treat enums equally', async ({ runInlineTest }) => {
       }
     `,
     'example.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       import * as components from './component';
       import * as regular from './regular';
@@ -80,7 +80,7 @@ test('should be able to access |this| inside class properties', async ({ runInli
   test.info().annotations.push({ type: 'issue', description: 'https://github.com/microsoft/playwright/issues/21794' });
   const result = await runInlineTest({
     'example.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       class Foo {
         constructor(private readonly incoming: number) {}
@@ -100,7 +100,7 @@ test('should work with |const| Type Parameters', async ({ runInlineTest }) => {
   test.info().annotations.push({ type: 'issue', description: 'https://github.com/microsoft/playwright/issues/21900' });
   const result = await runInlineTest({
     'example.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('works', () => {
         type HasNames = { names: readonly string[] };
@@ -123,7 +123,7 @@ test('should not read browserslist file', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'package.json': `{ "browserslist": ["some invalid! value :)"] }`,
     'one-success.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('succeeds', () => {});
     `
   });
@@ -135,7 +135,7 @@ test('should not read browserslist file', async ({ runInlineTest }) => {
 test('should not transform external', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         build: {
           external: ['**/a.spec.ts']
@@ -143,7 +143,7 @@ test('should not transform external', async ({ runInlineTest }) => {
       });
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('succeeds', () => {});
     `
   });
@@ -166,7 +166,7 @@ for (const type of ['module', undefined]) {
     `,
       'package.json': JSON.stringify({ foo: 'bar', type }),
       'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('check project name', ({}, testInfo) => {
         expect(1).toBe(1);

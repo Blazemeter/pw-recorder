@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import type { ElementHandle } from '@pw-recorder/test';
+import type { ElementHandle } from '@okep/test';
 import { test as it, expect } from './pageTest';
 
 it('should work with large DOM @smoke', async ({ page, server }) => {

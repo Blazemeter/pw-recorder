@@ -1,4 +1,4 @@
-import { test, expect } from '@pw-recorder/experimental-ct-svelte';
+import { test, expect } from '@okep/experimental-ct-svelte';
 import DefaultSlot from '@/components/DefaultSlot.svelte';
 import NamedSlots from '@/components/NamedSlots.svelte';
 

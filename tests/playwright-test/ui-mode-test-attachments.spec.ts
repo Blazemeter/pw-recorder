@@ -21,7 +21,7 @@ test.describe.configure({ mode: 'parallel', retries });
 test('should contain text attachment', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('attach test', async () => {
         // Attach two files with the same content and different names,
         // to make sure each is downloaded with an intended name.
@@ -61,7 +61,7 @@ test('should contain text attachment', async ({ runUITest }) => {
 test('should contain binary attachment', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('attach test', async () => {
         await test.info().attach('data', { body: Buffer.from([1, 2, 3]), contentType: 'application/octet-stream' });
       });
@@ -81,7 +81,7 @@ test('should contain binary attachment', async ({ runUITest }) => {
 test('should contain string attachment', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('attach test', async () => {
         await test.info().attach('note', { body: 'text42' });
       });
@@ -106,7 +106,7 @@ test('should linkify string attachments', async ({ runUITest, server }) => {
 
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('attach test', async () => {
         await test.info().attach('Inline url: ${server.PREFIX + '/one.html'}');
         await test.info().attach('Second', { body: 'Inline link ${server.PREFIX + '/two.html'} to be highlighted.' });

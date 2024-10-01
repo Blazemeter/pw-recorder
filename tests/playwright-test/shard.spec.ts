@@ -18,7 +18,7 @@ import { test, expect } from './playwright-test-fixtures';
 
 const tests = {
   'a1.spec.ts': `
-    import { test } from '@playwright/test';
+    import { test } from '@okep/test';
     test('test1', async () => {
       console.log('\\n%%a1-test1-done');
     });
@@ -33,7 +33,7 @@ const tests = {
     });
   `,
   'a2.spec.ts': `
-    import { test } from '@playwright/test';
+    import { test } from '@okep/test';
     test.describe.configure({ mode: 'parallel' });
     test('test1', async () => {
       console.log('\\n%%a2-test1-done');
@@ -43,7 +43,7 @@ const tests = {
     });
   `,
   'a3.spec.ts': `
-    import { test } from '@playwright/test';
+    import { test } from '@okep/test';
     test.describe.configure({ mode: 'parallel' });
     test('test1', async () => {
       console.log('\\n%%a3-test1-done');
@@ -53,7 +53,7 @@ const tests = {
     });
   `,
   'a4.spec.ts': `
-    import { test } from '@playwright/test';
+    import { test } from '@okep/test';
     test('test1', async () => {
       console.log('\\n%%a4-test1-done');
     });
@@ -171,14 +171,14 @@ test('should work with workers=1 and --fully-parallel', async ({ runInlineTest }
   test.info().annotations.push({ type: 'issue', description: 'https://github.com/microsoft/playwright/issues/21226' });
   const tests = {
     'a1.spec.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('should pass', async ({ }) => {
       });
       test.skip('should skip', async ({ }) => {
       });
     `,
     'a2.spec.ts': `
-    import { test } from '@playwright/test';
+    import { test } from '@okep/test';
     test('should pass', async ({ }) => {
     });
   `,
@@ -203,13 +203,13 @@ test('should skip dependency when project is sharded out', async ({ runInlineTes
       };
     `,
     'test.spec.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('test', async ({}) => {
         console.log('\\n%%test in ' + test.info().project.name);
       });
     `,
     'setup.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('setup', async ({}) => {
         console.log('\\n%%setup in ' + test.info().project.name);
       });
@@ -231,7 +231,7 @@ test('should not shard mode:default suites', async ({ runInlineTest }) => {
 
   const tests = {
     'a1.spec.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('test0', async ({ }) => {
         console.log('\\n%%test0');
       });
@@ -240,7 +240,7 @@ test('should not shard mode:default suites', async ({ runInlineTest }) => {
       });
     `,
     'a2.spec.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test.describe.configure({ mode: 'parallel' });
 
       test.describe(() => {

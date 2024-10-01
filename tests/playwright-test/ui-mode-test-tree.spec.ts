@@ -20,7 +20,7 @@ test.describe.configure({ mode: 'parallel', retries });
 
 const basicTestTree = {
   'a.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('passes', () => {});
     test('fails', () => {});
     test.describe('suite', () => {
@@ -29,7 +29,7 @@ const basicTestTree = {
     });
   `,
   'b.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('passes', () => {});
     test('fails', () => {});
   `,
@@ -52,7 +52,7 @@ test('should list all tests from projects with clashing names', async ({ runUITe
   test.info().annotations.push({ type: 'issue', description: 'https://github.com/microsoft/playwright/issues/30396' });
   const { page } = await runUITest({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
 
       export default defineConfig({
         projects: [
@@ -76,12 +76,12 @@ test('should list all tests from projects with clashing names', async ({ runUITe
       });
     `,
     'foo/a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', () => {});
       test('two', () => {});
     `,
     'bar/b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('three', () => {});
       test('four', () => {});
     `,
@@ -175,15 +175,15 @@ test('should expand / collapse groups', async ({ runUITest }) => {
 test('should merge folder trees', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a/b/c/inC.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'a/b/in-b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'a/in-a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -200,7 +200,7 @@ test('should merge folder trees', async ({ runUITest }) => {
 test('should list parametrized tests', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test.describe('cookies', () => {
         for (const country of ['FR', 'DE', 'LT']) {
           test.describe(() => {
@@ -229,7 +229,7 @@ test('should list parametrized tests', async ({ runUITest }) => {
 test('should update parametrized tests', async ({ runUITest, writeFiles }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test.describe('cookies', () => {
         for (const country of ['FR', 'DE', 'LT']) {
           test.describe(() => {
@@ -256,7 +256,7 @@ test('should update parametrized tests', async ({ runUITest, writeFiles }) => {
 
   await writeFiles({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test.describe('cookies', () => {
         for (const country of ['FR', 'LT']) {
           test.describe(() => {
@@ -300,7 +300,7 @@ test('should collapse all', async ({ runUITest }) => {
 test('should resolve title conflicts', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
 
       test("foo", () => {});
 

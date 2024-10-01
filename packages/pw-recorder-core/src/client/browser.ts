@@ -38,7 +38,7 @@ export class Browser extends ChannelOwner<channels.BrowserChannel> implements ap
   readonly _name: string;
   private _path: string | undefined;
 
-  // Used from @playwright/test fixtures.
+  // Used from @okep/test fixtures.
   _connectHeaders?: HeadersArray;
   _closeReason: string | undefined;
 

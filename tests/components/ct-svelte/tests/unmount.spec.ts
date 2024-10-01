@@ -1,4 +1,4 @@
-import { test, expect } from '@pw-recorder/experimental-ct-svelte';
+import { test, expect } from '@okep/experimental-ct-svelte';
 import Button from '@/components/Button.svelte';
 import MultiRoot from '@/components/MultiRoot.svelte';
 

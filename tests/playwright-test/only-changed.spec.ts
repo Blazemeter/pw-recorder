@@ -37,11 +37,11 @@ test.slow();
 test('should detect untracked files', async ({ runInlineTest, git, writeFiles }) => {
   await writeFiles({
     'a.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('fails', () => { expect(1).toBe(2); });
   `,
     'b.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('fails', () => { expect(1).toBe(2); });
   `,
   });
@@ -51,7 +51,7 @@ test('should detect untracked files', async ({ runInlineTest, git, writeFiles })
 
   const result = await runInlineTest({
     'c.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `
   }, { 'only-changed': true });
@@ -66,11 +66,11 @@ test('should detect untracked files', async ({ runInlineTest, git, writeFiles })
 test('should detect changed files', async ({ runInlineTest, git, writeFiles }) => {
   await writeFiles({
     'a.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('fails', () => { expect(1).toBe(2); });
   `,
     'b.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('fails', () => { expect(1).toBe(2); });
   `,
   });
@@ -80,7 +80,7 @@ test('should detect changed files', async ({ runInlineTest, git, writeFiles }) =
 
   const result = await runInlineTest({
     'b.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('fails', () => { expect(1).toBe(3); });
       `,
   }, { 'only-changed': true });
@@ -94,11 +94,11 @@ test('should detect changed files', async ({ runInlineTest, git, writeFiles }) =
 test('should diff based on base commit', async ({ runInlineTest, git, writeFiles }) => {
   await writeFiles({
     'a.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('fails', () => { expect(1).toBe(2); });
   `,
     'b.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('fails', () => { expect(1).toBe(2); });
   `,
   });
@@ -108,7 +108,7 @@ test('should diff based on base commit', async ({ runInlineTest, git, writeFiles
 
   await writeFiles({
     'b.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('fails', () => { expect(1).toBe(3); });
       `,
   });
@@ -124,17 +124,17 @@ test('should diff based on base commit', async ({ runInlineTest, git, writeFiles
 test('should understand dependency structure', async ({ runInlineTest, git, writeFiles }) => {
   await writeFiles({
     'a.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     import { answer, question } from './utils';
     test('fails', () => { expect(question).toBe(answer); });
   `,
     'b.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     import { answer, question } from './utils';
     test('fails', () => { expect(question).toBe(answer); });
   `,
     'c.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('fails', () => { expect(1).toBe(2); });
   `,
     'utils.ts': `
@@ -199,7 +199,7 @@ test('should suppport component tests', async ({ runInlineTest, git, writeFiles 
       export { Button } from "./button";
     `,
     'src/button.test.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './helper';
 
       test('pass', async ({ mount }) => {
@@ -208,7 +208,7 @@ test('should suppport component tests', async ({ runInlineTest, git, writeFiles 
       });
     `,
     'src/button2.test.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './helper';
 
       test('pass', async ({ mount }) => {
@@ -217,7 +217,7 @@ test('should suppport component tests', async ({ runInlineTest, git, writeFiles 
       });
     `,
     'src/button3.test.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
 
       test('pass', async ({ mount }) => {
         const component = await mount(<p>Hello World</p>);
@@ -237,7 +237,7 @@ test('should suppport component tests', async ({ runInlineTest, git, writeFiles 
 
   const result2 = await runInlineTest({
     'src/button2.test.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './helper';
 
       test('pass', async ({ mount }) => {
@@ -271,11 +271,11 @@ test.describe('should work the same if being called in subdirectory', () => {
   test('tracked file', async ({ runInlineTest, git, writeFiles }) => {
     await writeFiles({
       'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
       'b.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
     });
@@ -285,7 +285,7 @@ test.describe('should work the same if being called in subdirectory', () => {
 
     await writeFiles({
       'tests/c.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('fails', () => { expect(1).toBe(2); });
       `
     });
@@ -294,7 +294,7 @@ test.describe('should work the same if being called in subdirectory', () => {
 
     const result = await runInlineTest({
       'tests/c.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('fails', () => { expect(1).toBe(3); });
       `
     }, { 'only-changed': true }, {}, { cwd: 'tests' });
@@ -308,11 +308,11 @@ test.describe('should work the same if being called in subdirectory', () => {
   test('untracked file', async ({ runInlineTest, git, writeFiles }) => {
     await writeFiles({
       'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
       'b.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
     });
@@ -322,7 +322,7 @@ test.describe('should work the same if being called in subdirectory', () => {
 
     const result = await runInlineTest({
       'tests/c.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('fails', () => { expect(1).toBe(3); });
       `
     }, { 'only-changed': true }, {}, { cwd: 'tests' });
@@ -356,18 +356,18 @@ test('should run project dependencies of changed tests', {
       };
     `,
     'setup.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
 
     test('setup test', async ({ page }) => {
       console.log('setup test is executed')
     });
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
     'b.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   });
@@ -377,7 +377,7 @@ test('should run project dependencies of changed tests', {
 
   const result = await runInlineTest({
     'c.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `
   }, { 'only-changed': true });
@@ -392,7 +392,7 @@ test('should run project dependencies of changed tests', {
 test('should work with list mode', async ({ runInlineTest, git, writeFiles }) => {
   await writeFiles({
     'a.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('fails', () => { expect(1).toBe(2); });
   `,
   });
@@ -402,7 +402,7 @@ test('should work with list mode', async ({ runInlineTest, git, writeFiles }) =>
 
   const result = await runInlineTest({
     'b.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `
   }, { 'only-changed': true, 'list': true });
@@ -415,7 +415,7 @@ test('should work with list mode', async ({ runInlineTest, git, writeFiles }) =>
 test('exits successfully if there are no changes', async ({ runInlineTest, git, writeFiles }) => {
   await writeFiles({
     'a.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('fails', () => { expect(1).toBe(2); });
   `,
   });

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { devices, defineConfig } from '@playwright/experimental-ct-react';
+import { devices, defineConfig } from '@okep/experimental-ct-react';
 import path from 'path';
 import url from 'url';
 

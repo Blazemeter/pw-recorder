@@ -74,8 +74,8 @@ export class TestTypeImpl {
         `Most common reasons include:`,
         `- You are calling ${title} in a configuration file.`,
         `- You are calling ${title} in a file that is imported by the configuration file.`,
-        `- You have two different versions of @playwright/test. This usually happens`,
-        `  when one of the dependencies in your package.json depends on @playwright/test.`,
+        `- You have two different versions of @okep/test. This usually happens`,
+        `  when one of the dependencies in your package.json depends on @okep/test.`,
       ].join('\n'));
     }
     if (suite._testTypeImpl && suite._testTypeImpl !== this) {

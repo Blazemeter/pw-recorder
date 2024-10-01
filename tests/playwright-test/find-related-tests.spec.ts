@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should list related tests', async ({ runCLICommand }) => {
   const result = await runCLICommand({
     'pw-recorder.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({});
     `,
     'helper.ts': `
@@ -29,13 +29,13 @@ test('should list related tests', async ({ runCLICommand }) => {
       export { value } from './helper';
     `,
     'a.spec.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       import { value } from './helper2';
       if (value) {}
       test('', () => {});
     `,
     'b.spec.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       import { value } from './helper';
       if (value) {}
       test('', () => {});
@@ -55,7 +55,7 @@ test('should list related tests', async ({ runCLICommand }) => {
 test('should list related tests for ct', async ({ runCLICommand }) => {
   const result = await runCLICommand({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/experimental-ct-react';
+      import { defineConfig } from '@okep/experimental-ct-react';
       export default defineConfig({});
     `,
     'playwright/index.html': `<script type="module" src="./index.js"></script>`,
@@ -68,7 +68,7 @@ test('should list related tests for ct', async ({ runCLICommand }) => {
       export const Button = () => <HelperButton>Click me</HelperButton>;
     `,
     'button.spec.tsx': `
-      import { test } from '@playwright/experimental-ct-react';
+      import { test } from '@okep/experimental-ct-react';
       import { Button } from './button';
       test('foo', async ({ mount }) => {
         await mount(<Button />);

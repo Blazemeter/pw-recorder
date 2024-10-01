@@ -15,7 +15,7 @@
  */
 
 import { playwrightTest as test, expect } from '../config/browserTest';
-import type { TestInfo } from '@pw-recorder/test';
+import type { TestInfo } from '@okep/test';
 import path from 'path';
 import fs from 'fs';
 import { start } from '../../packages/pw-recorder-core/lib/outofprocess';

@@ -38,7 +38,7 @@ test('should work with connectOptions', async ({ runInlineTest }) => {
       };
     `,
     'global-setup.ts': `
-      import { chromium } from '@playwright/test';
+      import { chromium } from '@okep/test';
       module.exports = async () => {
         process.env.DEBUG = 'pw:browser';
         process.env.PWTEST_SERVER_WS_HEADERS =
@@ -52,7 +52,7 @@ test('should work with connectOptions', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.use({ locale: 'fr-CH' });
       test('pass', async ({ page }) => {
         await page.setContent('<div>PASS</div>');
@@ -91,7 +91,7 @@ test('should throw with bad connectOptions', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await page.setContent('<div>PASS</div>');
         await expect(page.locator('div')).toHaveText('PASS');
@@ -117,7 +117,7 @@ test('should respect connectOptions.timeout', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
       });
     `,
@@ -140,7 +140,7 @@ test('should print debug log when failed to connect', async ({ runInlineTest }) 
       };
     `,
     'global-setup.ts': `
-      import { chromium } from '@playwright/test';
+      import { chromium } from '@okep/test';
       import ws from 'ws';
       import http from 'http';
       module.exports = async () => {
@@ -156,7 +156,7 @@ test('should print debug log when failed to connect', async ({ runInlineTest }) 
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ page }) => {
         await page.setContent('<div>FAIL</div>');
       });

@@ -20,7 +20,7 @@ test.describe.configure({ mode: 'parallel', retries });
 
 const basicTestTree = {
   'a.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('passes', () => {});
     test('fails', () => { expect(1).toBe(2); });
     test.describe('suite', () => {
@@ -29,12 +29,12 @@ const basicTestTree = {
     });
   `,
   'b.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('passes', () => {});
     test('fails', () => { expect(1).toBe(2); });
   `,
   'c.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('passes', () => {});
     test.skip('skipped', () => {});
   `,
@@ -67,7 +67,7 @@ test('should run visible', async ({ runUITest }) => {
 test('should show running progress', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async () => {});
       test('test 2', async () => new Promise(() => {}));
       test('test 3', async () => {});
@@ -86,7 +86,7 @@ test('should show running progress', async ({ runUITest }) => {
 test('should run on hover', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
       test('fails', () => { expect(1).toBe(2); });
     `,
@@ -105,7 +105,7 @@ test('should run on hover', async ({ runUITest }) => {
 test('should run on double click', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
       test('fails', () => { expect(1).toBe(2); });
     `,
@@ -123,7 +123,7 @@ test('should run on double click', async ({ runUITest }) => {
 test('should run on Enter', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
       test('fails', () => { expect(1).toBe(2); });
     `,
@@ -143,7 +143,7 @@ test('should run by project', async ({ runUITest }) => {
   const { page } = await runUITest({
     ...basicTestTree,
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         projects: [
           { name: 'foo' },
@@ -223,7 +223,7 @@ test('should run by project', async ({ runUITest }) => {
 test('should stop', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 0', () => { test.skip(); });
       test('test 1', () => {});
       test('test 2', async () => { await new Promise(() => {}); });
@@ -261,15 +261,15 @@ test('should stop', async ({ runUITest }) => {
 test('should run folder', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a/folder-b/folder-c/inC.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'a/folder-b/in-b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'a/in-a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -313,7 +313,7 @@ test('should show time', async ({ runUITest }) => {
 test('should show test.fail as passing', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', () => {
         test.fail();
         expect(1).toBe(2);
@@ -337,13 +337,13 @@ test('should show test.fail as passing', async ({ runUITest }) => {
 test('should ignore repeatEach', async ({ runUITest }) => {
   const { page } = await runUITest({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         repeatEach: 3,
       });
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should pass', () => {
         expect(1).toBe(1);
       });
@@ -366,11 +366,11 @@ test('should ignore repeatEach', async ({ runUITest }) => {
 test('should remove output folder before test run', async ({ runUITest }) => {
   const { page } = await runUITest({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
     `,
     'a.test.ts': `
       import fs from 'fs';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should pass', () => {
         const path = test.info().outputPath('a.txt');
         expect(fs.existsSync(path)).toBe(false);
@@ -400,7 +400,7 @@ test('should remove output folder before test run', async ({ runUITest }) => {
 test('should show proper total when using deps', async ({ runUITest }) => {
   const { page } = await runUITest({
     'playwright.config.ts': `
-      import { defineConfig } from "@playwright/test";
+      import { defineConfig } from "@okep/test";
       export default defineConfig({
         projects: [
           { name: "setup", grep: /@setup/, },
@@ -409,7 +409,7 @@ test('should show proper total when using deps', async ({ runUITest }) => {
       });
     `,
     'a.test.ts': `
-      import { expect, test } from "@playwright/test";
+      import { expect, test } from "@okep/test";
       test("run @setup", async ({ page }) => {
         console.log("Test setup executed");
       });
@@ -484,7 +484,7 @@ test('should respect --tsconfig option', {
     }`,
     'tests42/a.test.ts': `
       import { foo } from '~/foo';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}) => {
         expect(foo).toBe(42);
       });
@@ -509,7 +509,7 @@ test('should respect --ignore-snapshots option', {
 }, async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('snapshot', () => {
         expect('foo').toMatchSnapshot(); // fails because no snapshot is present
       });

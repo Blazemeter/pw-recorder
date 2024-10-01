@@ -42,13 +42,13 @@ test('should respect viewport option', async ({ runInlineTest }) => {
       module.exports = { use: { viewport: { width: 800, height: 800 } } };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         expect(page.viewportSize()).toEqual({ width: 800, height: 800 });
       });
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.use({ viewport: { width: 600, height: 600 } });
       test('pass', async ({ page }) => {
         expect(page.viewportSize()).toEqual({ width: 600, height: 600 });
@@ -66,7 +66,7 @@ test('should run in three browsers with --browser', async ({ runInlineTest }) =>
       module.exports = { use: { viewport: { width: 800, height: 800 } } };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ browserName }) => {
         console.log('\\n%%browser=' + browserName);
       });
@@ -88,7 +88,7 @@ test('should run in one browser with --browser', async ({ runInlineTest }) => {
       module.exports = { use: { viewport: { width: 800, height: 800 } } };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ browserName }) => {
         console.log('\\n%%browser=' + browserName);
       });
@@ -108,7 +108,7 @@ test('should complain with projects and --browser', async ({ runInlineTest }) =>
       module.exports = { projects: [ {} ] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
       });
     `,
@@ -127,7 +127,7 @@ test('should override any headless option with --headed', async ({ runInlineTest
       ] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('example', async ({ page }) => {
         expect(await page.evaluate(() => navigator.userAgent)).not.toContain('Headless');
       });
@@ -144,7 +144,7 @@ test('should not override use:browserName without projects', async ({ runInlineT
       module.exports = { use: { browserName: 'webkit' } };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ browserName }) => {
         console.log('\\n%%browser=' + browserName);
       });
@@ -164,7 +164,7 @@ test('should override use:browserName with --browser', async ({ runInlineTest })
       module.exports = { use: { browserName: 'webkit' } };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ browserName }) => {
         console.log('\\n%%browser=' + browserName);
       });
@@ -188,7 +188,7 @@ test('should respect context options in various contexts', async ({ runInlineTes
       import os from 'os';
       import path from 'path';
 
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.use({ locale: 'fr-FR' });
 
       let context;
@@ -255,7 +255,7 @@ test('should respect headless in launchPersistent', async ({ runInlineTest }) =>
       import os from 'os';
       import path from 'path';
 
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('persistent context', async ({ playwright, browserName }) => {
         const dir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'user-data-dir-'));
@@ -278,7 +278,7 @@ test('should respect headless in modifiers that run before tests', async ({ runI
       module.exports = { use: { headless: false } };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test.skip(({ browser }) => false);
 
@@ -295,7 +295,7 @@ test('should respect headless in modifiers that run before tests', async ({ runI
 test('should call logger from launchOptions config', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const log = [];
       test.use({
         launchOptions: {
@@ -323,7 +323,7 @@ test('should call logger from launchOptions config', async ({ runInlineTest }) =
 test('should report error and pending operations on timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('timedout', async ({ page }) => {
         await page.setContent('<div>Click me</div>');
         await page.getByText('Missing').click();
@@ -341,7 +341,7 @@ test('should report error and pending operations on timeout', async ({ runInline
 test('should report error on timeout with shared page', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       let page;
       test.beforeAll(async ({ browser }) => {
         page = await browser.newPage();
@@ -365,7 +365,7 @@ test('should report error on timeout with shared page', async ({ runInlineTest }
 test('should report error from beforeAll timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeAll(async ({ browser }) => {
         const page = await browser.newPage();
         await page.setContent('<div>Click me</div>');
@@ -389,7 +389,7 @@ test('should report error from beforeAll timeout', async ({ runInlineTest }) => 
 test('should not report waitForEventInfo as pending', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('timedout', async ({ page }) => {
         await page.setContent('<div>Click me</div>');
         await page.waitForLoadState('networkidle');
@@ -409,7 +409,7 @@ test('should not report waitForEventInfo as pending', async ({ runInlineTest }) 
 test('should throw when using page in beforeAll', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeAll(() => {});
       test.beforeAll(async ({ page }) => {
       });
@@ -428,7 +428,7 @@ test('should report click error on sigint', async ({ interactWithTestRunner }) =
 
   const testProcess = await interactWithTestRunner({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('timedout', async ({ page }) => {
         await page.setContent('<div>Click me</div>');
         const promise = page.click('text=Missing');
@@ -456,7 +456,7 @@ test('should work with video: retain-on-failure', async ({ runInlineTest }) => {
       module.exports = { use: { video: 'retain-on-failure' }, name: 'chromium' };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await page.setContent('<div>PASS</div>');
         await page.waitForTimeout(3000);
@@ -488,7 +488,7 @@ test('should work with video: on-first-retry', async ({ runInlineTest }) => {
       module.exports = { use: { video: 'on-first-retry' }, retries: 1, name: 'chromium' };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await page.setContent('<div>PASS</div>');
         await page.waitForTimeout(3000);
@@ -534,7 +534,7 @@ test('should work with video size', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await page.setContent('<div>PASS</div>');
         await page.waitForTimeout(3000);
@@ -562,7 +562,7 @@ test('should work with video.path() throwing', async ({ runInlineTest }, testInf
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         page.video().path = () => { throw new Error('No-no!'); };
         await page.setContent('<div>PASS</div>');
@@ -583,7 +583,7 @@ test('should pass fixture defaults to tests', async ({ runInlineTest }) => {
       module.exports = {};
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ acceptDownloads, actionTimeout, headless, javaScriptEnabled, navigationTimeout }) => {
         expect(acceptDownloads).toBe(true);
         expect(actionTimeout).toBe(0);
@@ -637,7 +637,7 @@ test('should not throw with many fixtures set to undefined', async ({ runInlineT
       } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.use({
         browserName: undefined,
         headless: undefined,
@@ -686,7 +686,7 @@ test('should not throw with many fixtures set to undefined', async ({ runInlineT
 test('should have strict types for options but allow use(undefined)', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.use({
         headless: undefined,
         acceptDownloads: undefined,
@@ -724,7 +724,7 @@ test('should have strict types for options but allow use(undefined)', async ({ r
 test('should skip on mobile', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test.describe(() => {
         test.use({ isMobile: true });
@@ -757,7 +757,7 @@ test('should use actionTimeout for APIRequestContext', async ({ runInlineTest, s
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('default APIRequestContext fixture', async ({ request }) => {
         await expect(request.get('/stall')).rejects.toThrow('apiRequestContext.get: Request timed out after 1111ms');
       });
@@ -786,7 +786,7 @@ test('should save trace in two APIRequestContexts', async ({ runInlineTest, serv
       };
     `,
     'a.test.ts': `
-      import { test, request, BrowserContext, Page, APIRequestContext } from '@playwright/test';
+      import { test, request, BrowserContext, Page, APIRequestContext } from '@okep/test';
 
       test.describe('Example', () => {
         let firstContext: APIRequestContext;
@@ -831,7 +831,7 @@ test('should save trace in two APIRequestContexts', async ({ runInlineTest, serv
 test('should explain a failure when using a dispose APIRequestContext', async ({ runInlineTest, server }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
 
       let context;
 
@@ -857,7 +857,7 @@ test('should allow dynamic import in evaluate', async ({ runInlineTest, server }
   });
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('test', async ({ page }) => {
         await page.goto("${server.EMPTY_PAGE}");
@@ -876,7 +876,7 @@ test('should allow dynamic import in evaluate', async ({ runInlineTest, server }
 test('page.pause() should disable test timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('test', async ({ page }) => {
         test.setTimeout(2000);

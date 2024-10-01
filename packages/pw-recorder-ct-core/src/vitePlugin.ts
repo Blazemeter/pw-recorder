@@ -20,8 +20,8 @@ import type { AddressInfo } from 'net';
 import path from 'path';
 import { assert, calculateSha1, getPlaywrightVersion, isURLAvailable } from 'pw-recorder-core/lib/utils';
 import { debug } from 'pw-recorder-core/lib/utilsBundle';
-import { setExternalDependencies } from 'playwright/lib/transform/compilationCache';
-import { stoppable } from 'playwright/lib/utilsBundle';
+import { setExternalDependencies } from 'pw-recorder/lib/transform/compilationCache';
+import { stoppable } from 'pw-recorder/lib/utilsBundle';
 import type { FullConfig, Suite } from 'playwright/types/testReporter';
 import type { PluginContext } from 'rollup';
 import type { Plugin, ResolveFn, ResolvedConfig } from 'vite';
@@ -30,9 +30,9 @@ import { source as injectedSource } from './generated/indexSource';
 import type { ImportInfo } from './tsxTransform';
 import type { ComponentRegistry } from './viteUtils';
 import { createConfig, frameworkConfig, hasJSComponents, populateComponentsFromTests, resolveDirs, resolveEndpoint, transformIndexFile } from './viteUtils';
-import { resolveHook } from 'playwright/lib/transform/transform';
+import { resolveHook } from 'pw-recorder/lib/transform/transform';
 import { runDevServer } from './devServer';
-import { removeDirAndLogToConsole } from 'playwright/lib/util';
+import { removeDirAndLogToConsole } from 'pw-recorder/lib/util';
 
 const log = debug('pw:vite');
 

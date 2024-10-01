@@ -16,11 +16,11 @@
 
 import { baseTest } from '../config/baseTest';
 import * as path from 'path';
-import type { ElectronApplication, Page, Electron } from '@pw-recorder/test';
+import type { ElectronApplication, Page, Electron } from '@okep/test';
 import type { PageTestFixtures, PageWorkerFixtures } from '../page/pageTestApi';
 import type { TraceViewerFixtures } from '../config/traceViewerFixtures';
 import { traceViewerFixtures } from '../config/traceViewerFixtures';
-export { expect } from '@pw-recorder/test';
+export { expect } from '@okep/test';
 
 type ElectronTestFixtures = PageTestFixtures & {
   electronApp: ElectronApplication;

@@ -1,4 +1,4 @@
-import { test as test1, expect as expect1, mergeTests, mergeExpects } from '@playwright/test';
+import { test as test1, expect as expect1, mergeTests, mergeExpects } from '@okep/test';
 import { test as test2, expect as expect2 } from 'pw-recorder-test-plugin';
 
 const test = mergeTests(test1, test2);

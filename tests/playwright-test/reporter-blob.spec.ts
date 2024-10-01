@@ -15,11 +15,11 @@
  */
 
 import * as fs from 'fs';
-import type { PlaywrightTestConfig } from '@playwright/test';
+import type { PlaywrightTestConfig } from '@okep/test';
 import path from 'path';
 import url from 'url';
 import type { HttpServer } from '../../packages/pw-recorder-core/src/utils';
-import { startHtmlReportServer } from '../../packages/playwright/lib/reporters/html';
+import { startHtmlReportServer } from '../../packages/pw-recorder/lib/reporters/html';
 import { expect as baseExpect, test as baseTest, stripAnsi } from './playwright-test-fixtures';
 import extractZip from '../../packages/pw-recorder-core/bundles/zip/node_modules/extract-zip';
 import * as yazl from '../../packages/pw-recorder-core/bundles/zip/node_modules/yazl';
@@ -97,7 +97,7 @@ test('should call methods in right order', async ({ runInlineTest, mergeReports 
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -110,7 +110,7 @@ test('should call methods in right order', async ({ runInlineTest, mergeReports 
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -120,7 +120,7 @@ test('should call methods in right order', async ({ runInlineTest, mergeReports 
       test.skip('skipped 2', async ({}) => {});
     `,
     'c.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 3', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -164,13 +164,13 @@ test('should merge into html with dependencies', async ({ runInlineTest, mergeRe
       };
     `,
     'setup.js': `
-      import { test as setup } from '@playwright/test';
+      import { test as setup } from '@okep/test';
       setup('login once', async ({}) => {
         await setup.step('login step', async () => {});
       });
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -183,7 +183,7 @@ test('should merge into html with dependencies', async ({ runInlineTest, mergeRe
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -193,7 +193,7 @@ test('should merge into html with dependencies', async ({ runInlineTest, mergeRe
       test.skip('skipped 2', async ({}) => {});
     `,
     'c.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 3', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -246,7 +246,7 @@ test('should merge blob into blob', async ({ runInlineTest, mergeReports, showRe
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -259,7 +259,7 @@ test('should merge blob into blob', async ({ runInlineTest, mergeReports, showRe
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -306,7 +306,7 @@ test('should produce consistent step ids', {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -334,7 +334,7 @@ test('be able to merge incomplete shards', async ({ runInlineTest, mergeReports,
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
       });
       test('failing 1', async ({}) => {
@@ -343,7 +343,7 @@ test('be able to merge incomplete shards', async ({ runInlineTest, mergeReports,
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
       test('failing 2', async ({}) => {
         expect(1).toBe(2);
@@ -351,7 +351,7 @@ test('be able to merge incomplete shards', async ({ runInlineTest, mergeReports,
       test.skip('skipped 2', async ({}) => {});
     `,
     'c.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 3', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -389,14 +389,14 @@ test('total time is from test run not from merge', async ({ runInlineTest, merge
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('slow 1', async ({}) => {
         await new Promise(f => setTimeout(f, 2000));
         expect(1 + 1).toBe(2);
       });
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('slow 1', async ({}) => {
         await new Promise(f => setTimeout(f, 1000));
         expect(1 + 1).toBe(2);
@@ -433,7 +433,7 @@ test('merge into list report by default', async ({ runInlineTest, mergeReports }
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -446,7 +446,7 @@ test('merge into list report by default', async ({ runInlineTest, mergeReports }
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -456,7 +456,7 @@ test('merge into list report by default', async ({ runInlineTest, mergeReports }
       test.skip('skipped 2', async ({}) => {});
     `,
     'c.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 3', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -521,7 +521,7 @@ test('should print progress', async ({ runInlineTest, mergeReports }) => {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -534,7 +534,7 @@ test('should print progress', async ({ runInlineTest, mergeReports }) => {
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -544,7 +544,7 @@ test('should print progress', async ({ runInlineTest, mergeReports }) => {
       test.skip('skipped 2', async ({}) => {});
     `,
     'c.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 3', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -580,7 +580,7 @@ test('preserve attachments', async ({ runInlineTest, mergeReports, showReport, p
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import fs from 'fs';
 
       test('first', async ({}) => {
@@ -598,7 +598,7 @@ test('preserve attachments', async ({ runInlineTest, mergeReports, showReport, p
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
       test('failing 2', async ({}) => {
         expect(1).toBe(2);
@@ -643,7 +643,7 @@ test('generate html with attachment urls', async ({ runInlineTest, mergeReports,
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import fs from 'fs';
 
       test('first', async ({}) => {
@@ -661,7 +661,7 @@ test('generate html with attachment urls', async ({ runInlineTest, mergeReports,
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
       test('failing 2', async ({}) => {
         expect(1).toBe(2);
@@ -720,7 +720,7 @@ test('resource names should not clash between runs', async ({ runInlineTest, sho
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import fs from 'fs';
       import path from 'path';
 
@@ -731,7 +731,7 @@ test('resource names should not clash between runs', async ({ runInlineTest, sho
       });
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import fs from 'fs';
       import path from 'path';
 
@@ -790,7 +790,7 @@ test('multiple output reports', async ({ runInlineTest, mergeReports, showReport
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import fs from 'fs';
 
       test('first', async ({}) => {
@@ -808,7 +808,7 @@ test('multiple output reports', async ({ runInlineTest, mergeReports, showReport
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
       test('failing 2', async ({}) => {
         expect(1).toBe(2);
@@ -850,7 +850,7 @@ test('multiple output reports based on config', async ({ runInlineTest, mergeRep
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import fs from 'fs';
 
       test('first', async ({}) => {
@@ -868,7 +868,7 @@ test('multiple output reports based on config', async ({ runInlineTest, mergeRep
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
       test('failing 2', async ({}) => {
         expect(1).toBe(2);
@@ -909,7 +909,7 @@ test('onError in the report', async ({ runInlineTest, mergeReports, showReport, 
       };
     `,
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
 
       const test = base.extend<{}, { errorInTearDown: string }>({
         errorInTearDown: [async ({ }, use) => {
@@ -925,7 +925,7 @@ test('onError in the report', async ({ runInlineTest, mergeReports, showReport, 
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
       test('failing 2', async ({}) => {
         expect(1).toBe(2);
@@ -933,7 +933,7 @@ test('onError in the report', async ({ runInlineTest, mergeReports, showReport, 
       test.skip('skipped 2', async ({}) => {});
     `,
     'c.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('math 3', async ({}) => {
         expect(1 + 1).toBe(2);
@@ -995,19 +995,19 @@ test('preserve config fields', async ({ runInlineTest, mergeReports }) => {
       module.exports = ${JSON.stringify(config, null, 2)};
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => {
         expect(1 + 1).toBe(2);
       });
     `,
     'c.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 3', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -1079,7 +1079,7 @@ test('preserve stdout and stderr', async ({ runInlineTest, mergeReports }) => {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('a test', async ({}) => {
         expect(1 + 1).toBe(2);
         console.log('stdout text');
@@ -1129,7 +1129,7 @@ test('encode inline attachments', async ({ runInlineTest, mergeReports }) => {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('a test', async ({}) => {
         expect(1 + 1).toBe(2);
         test.info().attachments.push({
@@ -1170,7 +1170,7 @@ test('preserve steps in html report', async ({ runInlineTest, mergeReports, show
       };
     `,
     'tests/a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeAll(() => {
         expect(1).toBe(1);
       })
@@ -1225,7 +1225,7 @@ test('support fileName option', async ({ runInlineTest, mergeReports }) => {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1 @smoke', async ({}) => {});
     `,
   });
@@ -1250,7 +1250,7 @@ test('support PLAYWRIGHT_BLOB_OUTPUT_DIR env variable', async ({ runInlineTest, 
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1 @smoke', async ({}) => {});
     `,
   };
@@ -1274,7 +1274,7 @@ test('support PLAYWRIGHT_BLOB_OUTPUT_NAME env variable', async ({ runInlineTest,
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1 @smoke', async ({}) => {});
     `,
   };
@@ -1299,7 +1299,7 @@ test('support outputFile option', async ({ runInlineTest, mergeReports }) => {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1 @smoke', async ({}) => {});
     `,
   });
@@ -1324,11 +1324,11 @@ test('support PLAYWRIGHT_BLOB_OUTPUT_FILE environment variable', async ({ runInl
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1 @smoke', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1 @smoke', async ({}) => {});
     `,
   };
@@ -1357,7 +1357,7 @@ test('keep projects with same name different bot name separate', async ({ runInl
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({}) => { expect('${reportName}').toBe('second'); });
     `,
   });
@@ -1395,7 +1395,7 @@ test('blob-report should be next to package.json', async ({ runInlineTest }, tes
       module.exports = { projects: [ {} ] };
     `,
     'foo/bar/baz/tests/a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const fs = require('fs');
       test('pass', ({}, testInfo) => {
       });
@@ -1418,7 +1418,7 @@ test('blob report should include version', async ({ runInlineTest }) => {
       };
     `,
     'tests/a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({}) => {});
     `,
   };
@@ -1466,11 +1466,11 @@ test('merge-reports should throw if report version is from the future', async ({
       };
     `,
     'tests/a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({}) => {});
     `,
     'tests/b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({}) => {});
     `,
   };
@@ -1507,7 +1507,7 @@ test('should merge blob reports with same name', async ({ runInlineTest, mergeRe
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -1520,7 +1520,7 @@ test('should merge blob reports with same name', async ({ runInlineTest, mergeRe
       test.skip('skipped 1', async ({}) => {});
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -1562,7 +1562,7 @@ test('reporter list in the custom config', async ({ runInlineTest, mergeReports 
       module.exports = { reporter: 'blob' };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('first', async ({}) => {
       });
@@ -1615,7 +1615,7 @@ test('merge reports with different rootDirs', async ({ runInlineTest, mergeRepor
       reporter: [['blob', { outputDir: 'blob-report' }]]
     };`,
     'dir1/tests1/a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => { });
     `,
   };
@@ -1626,7 +1626,7 @@ test('merge reports with different rootDirs', async ({ runInlineTest, mergeRepor
       reporter: [['blob', { outputDir: 'blob-report' }]]
     };`,
     'dir2/tests2/b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
     `,
   };
@@ -1669,11 +1669,11 @@ test('merge reports same rootDirs', async ({ runInlineTest, mergeReports }) => {
       reporter: [['blob', { outputDir: 'blob-report' }]]
     };`,
     'tests/dir1/a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => { });
     `,
     'tests/dir2/b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
     `,
   };
@@ -1728,7 +1728,7 @@ test('merge reports with different rootDirs and path separators', async ({ runIn
       reporter: [['blob', { outputDir: 'blob-report' }]]
     };`,
     'dir1/tests1/a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => { });
     `,
   };
@@ -1739,7 +1739,7 @@ test('merge reports with different rootDirs and path separators', async ({ runIn
       reporter: [['blob', { outputDir: 'blob-report' }]]
     };`,
     'dir2/tests2/b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
     `,
   };
@@ -1789,11 +1789,11 @@ test('merge reports without --config preserves path separators', async ({ runInl
       reporter: [['blob', { outputDir: 'blob-report' }]]
     };`,
     'dir1/tests1/a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => { });
     `,
     'dir1/tests2/b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => { });
     `,
   };
@@ -1857,7 +1857,7 @@ test('merge reports must not change test ids when there is no need to', async ({
       ]
     };`,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({}) => { });
       test('test 2', async ({}) => { });
       test('test 3', async ({}) => { });
@@ -1912,7 +1912,7 @@ test('TestSuite.project() should return owning project', async ({ runInlineTest,
       projects: [{name: 'my-project'}]
     };`,
     'tests/a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => { });
     `,
   };
@@ -1986,13 +1986,13 @@ test('preserve static annotations when tests did not run', async ({ runInlineTes
       };
     `,
     'setup.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('setup', { annotation: [{ type: "sample", description: "uno" }] }, async ({}) => {
         expect(1).toBe(2);
       });
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('first', { annotation: [{ type: "sample", description: "uno" }] }, async ({}) => {});
       test.skip('second', { annotation: [{ type: "sample", description: "dos" }] }, async ({}) => {});
     `
@@ -2032,7 +2032,7 @@ test('project filter in report name', async ({ runInlineTest }) => {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1 @smoke', async ({}) => {});
     `,
   };

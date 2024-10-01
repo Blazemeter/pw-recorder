@@ -21,7 +21,7 @@ test('should filter network requests by resource type', async ({ runUITest, serv
 
   const { page } = await runUITest({
     'network-tab.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('network tab test', async ({ page }) => {
         await page.goto('${server.PREFIX}/network-tab/network.html');
       });
@@ -61,7 +61,7 @@ test('should filter network requests by resource type', async ({ runUITest, serv
 test('should filter network requests by url', async ({ runUITest, server }) => {
   const { page } = await runUITest({
     'network-tab.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('network tab test', async ({ page }) => {
         await page.goto('${server.PREFIX}/network-tab/network.html');
       });
@@ -97,7 +97,7 @@ test('should filter network requests by url', async ({ runUITest, server }) => {
 test('should format JSON request body', async ({ runUITest, server }) => {
   const { page } = await runUITest({
     'network-tab.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('network tab test', async ({ page }) => {
         await page.goto('${server.PREFIX}/network-tab/network.html');
       });
@@ -139,7 +139,7 @@ test('should format JSON request body', async ({ runUITest, server }) => {
 test('should display list of query parameters (only if present)', async ({ runUITest, server }) => {
   const { page } = await runUITest({
     'network-tab.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('network tab test', async ({ page }) => {
         await page.goto('${server.PREFIX}/network-tab/network.html');
       });

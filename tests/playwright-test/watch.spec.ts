@@ -23,7 +23,7 @@ test.describe.configure({ mode: 'parallel' });
 test('should print dependencies in CJS mode', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         globalTeardown: './globalTeardown.ts',
       });
@@ -32,16 +32,16 @@ test('should print dependencies in CJS mode', async ({ runInlineTest }) => {
     'helperB.ts': `import './helperA';`,
     'a.test.ts': `
       import './helperA';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
       import './helperB';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'globalTeardown.ts': `
-      import { fileDependencies } from 'playwright/lib/internalsForTest';
+      import { fileDependencies } from 'pw-recorder/lib/internalsForTest';
       export default () => {
         console.log('###' + JSON.stringify(fileDependencies()) + '###');
       };
@@ -62,7 +62,7 @@ test('should print dependencies in ESM mode', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         globalTeardown: './globalTeardown.ts',
       });
@@ -71,16 +71,16 @@ test('should print dependencies in ESM mode', async ({ runInlineTest }) => {
     'helperB.ts': `import './helperA.js';`,
     'a.test.ts': `
       import './helperA.js';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
       import './helperB.js';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'globalTeardown.ts': `
-      import { fileDependencies } from 'playwright/lib/internalsForTest';
+      import { fileDependencies } from 'pw-recorder/lib/internalsForTest';
       export default () => {
         console.log('###' + JSON.stringify(fileDependencies()) + '###');
       };
@@ -101,7 +101,7 @@ test('should print dependencies in mixed CJS/ESM mode 1', async ({ runInlineTest
   const result = await runInlineTest({
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         globalTeardown: './globalTeardown.ts',
       });
@@ -110,16 +110,16 @@ test('should print dependencies in mixed CJS/ESM mode 1', async ({ runInlineTest
     'helperB.cjs': `require('./helperA');`,
     'a.test.ts': `
       import './helperA';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.cjs': `
       require('./helperB');
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('passes', () => {});
     `,
     'globalTeardown.ts': `
-      import { fileDependencies } from 'playwright/lib/internalsForTest';
+      import { fileDependencies } from 'pw-recorder/lib/internalsForTest';
       export default () => {
         console.log('###' + JSON.stringify(fileDependencies()) + '###');
       };
@@ -139,7 +139,7 @@ test('should print dependencies in mixed CJS/ESM mode 1', async ({ runInlineTest
 test('should print dependencies in mixed CJS/ESM mode 2', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'playwright.config.mts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         globalTeardown: './globalTeardown.ts',
       });
@@ -148,16 +148,16 @@ test('should print dependencies in mixed CJS/ESM mode 2', async ({ runInlineTest
     'helperB.cts': `import './helperA';`,
     'a.test.mts': `
       import './helperA';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
       import './helperB';
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('passes', () => {});
     `,
     'globalTeardown.ts': `
-      import { fileDependencies } from 'playwright/lib/internalsForTest';
+      import { fileDependencies } from 'pw-recorder/lib/internalsForTest';
       export default () => {
         console.log('###' + JSON.stringify(fileDependencies()) + '###');
       };
@@ -177,7 +177,7 @@ test('should print dependencies in mixed CJS/ESM mode 2', async ({ runInlineTest
 test('should not perform initial run', async ({ runWatchTest }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -203,7 +203,7 @@ test('should print help on H', async ({ runWatchTest }) => {
 test('should run tests on Enter', async ({ runWatchTest }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -218,11 +218,11 @@ test('should run tests on Enter', async ({ runWatchTest }) => {
 test('should not print show-report command of HTML reporter', async ({ runWatchTest }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({ reporter: 'html' });
     `,
   });
@@ -236,7 +236,7 @@ test('should not print show-report command of HTML reporter', async ({ runWatchT
 test('should run tests on R', async ({ runWatchTest }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -251,15 +251,15 @@ test('should run tests on R', async ({ runWatchTest }) => {
 test('should run failed tests on F', async ({ runWatchTest }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'c.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   });
@@ -282,11 +282,11 @@ test('should run failed tests on F', async ({ runWatchTest }) => {
 test('should respect file filter P', async ({ runWatchTest }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -304,11 +304,11 @@ test('should respect file filter P', async ({ runWatchTest }) => {
 test('should respect project filter C', async ({ runWatchTest, writeFiles }) => {
   const files = {
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({ projects: [{name: 'foo'}, {name: 'bar'}] });
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   };
@@ -350,11 +350,11 @@ test('should respect project filter C', async ({ runWatchTest, writeFiles }) => 
 test('should respect file filter P and split files', async ({ runWatchTest }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -372,11 +372,11 @@ test('should respect file filter P and split files', async ({ runWatchTest }) =>
 test('should respect title filter T', async ({ runWatchTest }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('title 1', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('title 2', () => {});
     `,
   });
@@ -394,15 +394,15 @@ test('should respect title filter T', async ({ runWatchTest }) => {
 test('should re-run failed tests on F > R', async ({ runWatchTest }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'c.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   });
@@ -431,15 +431,15 @@ test('should re-run failed tests on F > R', async ({ runWatchTest }) => {
 test('should run on changed files', async ({ runWatchTest, writeFiles }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'c.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   });
@@ -447,7 +447,7 @@ test('should run on changed files', async ({ runWatchTest, writeFiles }) => {
   testProcess.clearOutput();
   await writeFiles({
     'c.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -459,7 +459,7 @@ test('should run on changed files', async ({ runWatchTest, writeFiles }) => {
   testProcess.clearOutput();
   await writeFiles({
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -471,12 +471,12 @@ test('should run on changed files', async ({ runWatchTest, writeFiles }) => {
 test('should run on changed deps', async ({ runWatchTest, writeFiles }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
       import './helper';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'helper.ts': `
@@ -501,12 +501,12 @@ test('should run on changed deps in ESM', async ({ runWatchTest, writeFiles }) =
     'playwright.config.ts': `export default {};`,
     'package.json': `{ "type": "module" }`,
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
       import './helper.js';
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('passes', () => {});
     `,
     'helper.ts': `
@@ -529,15 +529,15 @@ test('should run on changed deps in ESM', async ({ runWatchTest, writeFiles }) =
 test('should re-run changed files on R', async ({ runWatchTest, writeFiles }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'c.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   });
@@ -545,7 +545,7 @@ test('should re-run changed files on R', async ({ runWatchTest, writeFiles }) =>
   testProcess.clearOutput();
   await writeFiles({
     'c.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -564,11 +564,11 @@ test('should re-run changed files on R', async ({ runWatchTest, writeFiles }) =>
 test('should not trigger on changes to non-tests', async ({ runWatchTest, writeFiles }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -588,11 +588,11 @@ test('should not trigger on changes to non-tests', async ({ runWatchTest, writeF
 test('should only watch selected projects', async ({ runWatchTest, writeFiles }) => {
   const testProcess = await runWatchTest({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({ projects: [{name: 'foo'}, {name: 'bar'}] });
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   }, undefined, undefined, { additionalArgs: ['--project=foo'] });
@@ -608,7 +608,7 @@ test('should only watch selected projects', async ({ runWatchTest, writeFiles })
   testProcess.clearOutput();
   await writeFiles({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -622,11 +622,11 @@ test('should only watch selected projects', async ({ runWatchTest, writeFiles })
 test('should watch filtered files', async ({ runWatchTest, writeFiles }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   }, undefined, undefined, { additionalArgs: ['a.test.ts'] });
@@ -642,7 +642,7 @@ test('should watch filtered files', async ({ runWatchTest, writeFiles }) => {
   testProcess.clearOutput();
   await writeFiles({
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -654,11 +654,11 @@ test('should watch filtered files', async ({ runWatchTest, writeFiles }) => {
 test('should not watch unfiltered files', async ({ runWatchTest, writeFiles }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   }, undefined, undefined, { additionalArgs: ['a.test.ts'] });
@@ -674,7 +674,7 @@ test('should not watch unfiltered files', async ({ runWatchTest, writeFiles }) =
   testProcess.clearOutput();
   await writeFiles({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -695,7 +695,7 @@ test('should run CT on changed deps', async ({ runWatchTest, writeFiles }) => {
       export const Button = () => <button>Button</button>;
     `,
     'src/button.spec.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './button';
       test('pass', async ({ mount }) => {
         const component = await mount(<Button></Button>);
@@ -703,7 +703,7 @@ test('should run CT on changed deps', async ({ runWatchTest, writeFiles }) => {
       });
     `,
     'src/link.spec.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       test('pass', async ({ mount }) => {
         const component = await mount(<a>hello</a>);
         await expect(component).toHaveText('hello');
@@ -740,7 +740,7 @@ test('should run CT on indirect deps change', async ({ runWatchTest, writeFiles 
       export const buttonInstance = <Button></Button>
     `,
     'src/button.spec.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { buttonInstance } from './helper';
       test('pass', async ({ mount }) => {
         const component = await mount(buttonInstance);
@@ -748,7 +748,7 @@ test('should run CT on indirect deps change', async ({ runWatchTest, writeFiles 
       });
     `,
     'src/link.spec.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       test('pass', async ({ mount }) => {
         const component = await mount(<a>hello</a>);
         await expect(component).toHaveText('hello');
@@ -781,7 +781,7 @@ test('should run CT on indirect deps change ESM mode', async ({ runWatchTest, wr
       export const Button = () => <button>Button</button>;
     `,
     'src/button.spec.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './button.jsx';
       test('pass', async ({ mount }) => {
         const component = await mount(<Button></Button>);
@@ -789,7 +789,7 @@ test('should run CT on indirect deps change ESM mode', async ({ runWatchTest, wr
       });
     `,
     'src/link.spec.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       test('pass', async ({ mount }) => {
         const component = await mount(<a>hello</a>);
         await expect(component).toHaveText('hello');
@@ -821,7 +821,7 @@ test('should run global teardown before exiting', async ({ runWatchTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', async () => {
       });
     `,
@@ -839,11 +839,11 @@ test('should run global teardown before exiting', async ({ runWatchTest }) => {
 test('buffer mode', async ({ runWatchTest, writeFiles }) => {
   const testProcess = await runWatchTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes in b', () => {});
     `,
   });
@@ -856,7 +856,7 @@ test('buffer mode', async ({ runWatchTest, writeFiles }) => {
   testProcess.clearOutput();
   await writeFiles({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes again', () => {});
     `,
   });
@@ -867,7 +867,7 @@ test('buffer mode', async ({ runWatchTest, writeFiles }) => {
   testProcess.clearOutput();
   await writeFiles({
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes in b again', () => {});
     `,
   });

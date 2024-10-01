@@ -29,7 +29,7 @@ import type { Metadata } from '../../types/test';
 import type { ZipFile } from 'pw-recorder-core/lib/zipBundle';
 import { yazl } from 'pw-recorder-core/lib/zipBundle';
 import { mime } from 'pw-recorder-core/lib/utilsBundle';
-import type { HTMLReport, Stats, TestAttachment, TestCase, TestCaseSummary, TestFile, TestFileSummary, TestResult, TestStep } from '@pw-recorder-html-reporter/types';
+import type { HTMLReport, Stats, TestAttachment, TestCase, TestCaseSummary, TestFile, TestFileSummary, TestResult, TestStep } from '@okep-html-reporter/types';
 import type { ReporterV2 } from './reporterV2';
 
 type TestEntry = {

@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should decorate', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {
         new POM().greet();
       });

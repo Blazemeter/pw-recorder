@@ -35,8 +35,8 @@ for (const browser of ['chromium', 'firefox', 'webkit']) {
 }
 
 for (const browser of ['chromium', 'firefox', 'webkit']) {
-  test(`@playwright/browser-${browser} should work`, async ({ exec, installedSoftwareOnDisk }) => {
-    const pkg = `@playwright/browser-${browser}`;
+  test(`@okep/browser-${browser} should work`, async ({ exec, installedSoftwareOnDisk }) => {
+    const pkg = `@okep/browser-${browser}`;
     const expectedSoftware = [browser];
     if (browser === 'chromium')
       expectedSoftware.push('ffmpeg');
@@ -60,7 +60,7 @@ test(`pw-recorder-core should work`, async ({ exec, installedSoftwareOnDisk }) =
   expect(result1).toHaveLoggedSoftwareDownload([]);
   expect(await installedSoftwareOnDisk()).toEqual([]);
   const stdio = await exec('npx pw-recorder-core', 'test', '-c', '.', { expectToExitWithError: true });
-  expect(stdio).toContain(`Please install @playwright/test package`);
+  expect(stdio).toContain(`Please install @okep/test package`);
 });
 
 test(`playwright should work`, async ({ exec, installedSoftwareOnDisk }) => {
@@ -76,8 +76,8 @@ test(`playwright should work`, async ({ exec, installedSoftwareOnDisk }) => {
   await exec('node esm-playwright.mjs');
 });
 
-test('@playwright/test should work', async ({ exec, installedSoftwareOnDisk }) => {
-  const result1 = await exec('npm i --foreground-scripts @playwright/test');
+test('@okep/test should work', async ({ exec, installedSoftwareOnDisk }) => {
+  const result1 = await exec('npm i --foreground-scripts @okep/test');
   expect(result1).toHaveLoggedSoftwareDownload([]);
   expect(await installedSoftwareOnDisk()).toEqual([]);
 
@@ -87,7 +87,7 @@ test('@playwright/test should work', async ({ exec, installedSoftwareOnDisk }) =
   expect(result2).toHaveLoggedSoftwareDownload(['chromium', 'ffmpeg', 'firefox', 'webkit']);
   expect(await installedSoftwareOnDisk()).toEqual(['chromium', 'ffmpeg', 'firefox', 'webkit']);
 
-  await exec('node sanity.js @playwright/test chromium firefox webkit');
+  await exec('node sanity.js @okep/test chromium firefox webkit');
   await exec('node', 'esm-playwright-test.mjs');
 
   const result3 = await exec('npx playwright test -c . --browser=all --reporter=list sample.spec.js');

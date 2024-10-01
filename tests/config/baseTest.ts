@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { mergeTests } from '@pw-recorder/test';
-import { test } from '@pw-recorder/test';
+import { mergeTests } from '@okep/test';
+import { test } from '@okep/test';
 import type { CommonFixtures, CommonWorkerFixtures } from './commonFixtures';
 import { commonFixtures } from './commonFixtures';
 import type { ServerFixtures, ServerWorkerOptions } from './serverFixtures';

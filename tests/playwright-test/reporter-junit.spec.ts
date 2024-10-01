@@ -26,13 +26,13 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should render expected', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(1);
           });
         `,
         'b.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('two', async ({}) => {
             expect(1).toBe(1);
           });
@@ -53,7 +53,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should render unexpected', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(0);
           });
@@ -73,7 +73,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should render unexpected after retry', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(0);
           });
@@ -91,7 +91,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should render flaky', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}, testInfo) => {
             expect(testInfo.retry).toBe(3);
           });
@@ -105,7 +105,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
       const result = await runInlineTest({
         'a.test.ts': `
           import colors from 'colors/safe';
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             console.log(colors.yellow('Hello world'));
             console.log('Hello again');
@@ -135,7 +135,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
         `,
         'a.test.ts': `
           import colors from 'colors/safe';
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             console.log(colors.yellow('Hello world'));
           });
@@ -156,7 +156,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             process.stdout.write('Hello world &"\\'<>]]>');
           });
@@ -173,7 +173,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should render skipped', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async () => {
             console.log('Hello world');
           });
@@ -193,7 +193,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should report skipped due to sharding', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async () => {
           });
           test('two', async () => {
@@ -201,7 +201,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           });
         `,
         'b.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('three', async () => {
           });
           test('four', async () => {
@@ -225,7 +225,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           module.exports = { };
         `,
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(1);
           });
@@ -251,7 +251,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           module.exports = { projects: [ { name: 'project1' }, { name: 'project2' } ] };
         `,
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(1);
           });
@@ -289,7 +289,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             expect(1).toBe(1);
           });
@@ -311,7 +311,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
       test.skip(useIntermediateMergeReport, 'Blob report hashes attachment paths');
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test.use({ screenshot: 'on' });
           test('one', async ({ page }, testInfo) => {
             await page.setContent('hello');
@@ -341,7 +341,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
             module.exports = { reporter: [['junit', { outputFile: '../my-report/junit/a.xml' }]] };
         `,
         'project/a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test.use({ screenshot: 'on' });
           test('one', async ({ page }, testInfo) => {
             await page.setContent('hello');
@@ -376,7 +376,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
       const result = await runInlineTest({
         'playwright.config.ts': `module.exports = { reporter: 'junit' };`,
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}, testInfo) => {
             testInfo.annotations.push({ type: 'test_description', description: 'sample description' });
           });
@@ -395,7 +395,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
       const result = await runInlineTest({
         'playwright.config.ts': `module.exports = { reporter: 'junit' };`,
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}, testInfo) => {
             test.slow();
           });
@@ -421,7 +421,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}, testInfo) => {
             testInfo.annotations.push({ type: 'test_id', description: '1234' });
             testInfo.annotations.push({ type: 'test_key', description: 'CALC-2' });
@@ -448,7 +448,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should not embed attachments to a custom testcase property, if not explicitly requested', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}, testInfo) => {
             const file = testInfo.outputPath('evidence1.txt');
             require('fs').writeFileSync(file, 'hello', 'utf8');
@@ -474,7 +474,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
             module.exports = { reporter: [['junit', { outputFile: '../my-report/a.xml' }]] };
           `,
           'nested/project/a.test.js': `
-            import { test, expect } from '@playwright/test';
+            import { test, expect } from '@okep/test';
             test('one', async ({}) => {
               expect(1).toBe(1);
             });
@@ -488,7 +488,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
         const result = await runInlineTest({
           'foo/package.json': `{ "name": "foo" }`,
           'foo/bar/baz/tests/a.spec.js': `
-            import { test, expect } from '@playwright/test';
+            import { test, expect } from '@okep/test';
             const fs = require('fs');
             test('pass', ({}, testInfo) => {
             });
@@ -505,7 +505,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
         const result = await runInlineTest({
           'foo/package.json': `{ "name": "foo" }`,
           'foo/bar/baz/tests/a.spec.js': `
-            import { test, expect } from '@playwright/test';
+            import { test, expect } from '@okep/test';
             const fs = require('fs');
             test('pass', ({}, testInfo) => {
             });
@@ -528,7 +528,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
             };
           `,
           'bar/baz/tests/a.spec.js': `
-            import { test, expect } from '@playwright/test';
+            import { test, expect } from '@okep/test';
             const fs = require('fs');
             test('pass', ({}, testInfo) => {
             });
@@ -545,7 +545,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
             module.exports = { projects: [ {} ] };
           `,
           'tests/a.spec.js': `
-            import { test, expect } from '@playwright/test';
+            import { test, expect } from '@okep/test';
             const fs = require('fs');
             test('pass', ({}, testInfo) => {
             });
@@ -566,7 +566,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
             };
           `,
           'bar/baz/tests/a.spec.js': `
-            import { test, expect } from '@playwright/test';
+            import { test, expect } from '@okep/test';
             const fs = require('fs');
             test('pass', ({}, testInfo) => {
             });
@@ -582,7 +582,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
       test.info().annotations.push({ type: 'issue', description: 'https://github.com/microsoft/playwright/issues/30518' });
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}) => {
             await new Promise(f => setTimeout(f, 1000));
           });

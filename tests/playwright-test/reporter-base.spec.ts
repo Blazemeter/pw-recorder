@@ -25,7 +25,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
       const title = 'title'.repeat(30);
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('${title}', async ({}) => {
             expect(1).toBe(0);
           });
@@ -38,7 +38,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('print the error name', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('foobar', async ({}) => {
           const error = new Error('my-message');
           error.name = 'FooBarError';
@@ -54,7 +54,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('print should print the error name without a message', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('foobar', async ({}) => {
           const error = new Error();
           error.name = 'FooBarError';
@@ -70,7 +70,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should print an error in a codeframe', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('foobar', async ({}) => {
             const error = new Error('my-message');
             error.name = 'FooBarError';
@@ -84,7 +84,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
       expect(result.failed).toBe(1);
       expect(result.output).toContain('FooBarError: my-message');
       expect(result.output).not.toContain('at a.spec.ts:5');
-      expect(result.output).toContain(`  2 |           import { test, expect } from '@playwright/test';`);
+      expect(result.output).toContain(`  2 |           import { test, expect } from '@okep/test';`);
       expect(result.output).toContain(`  3 |           test('foobar', async ({}) => {`);
       expect(result.output).toContain(`> 4 |             const error = new Error('my-message');`);
     });
@@ -99,7 +99,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           module.exports = { assert };
         `,
         'a.spec.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           const { assert } = require('utils/utils.js');
           test('fail', async ({}) => {
             assert(false);
@@ -127,7 +127,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
         `,
         'a.spec.ts': `
           import { ohMy } from './helper';
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('foobar', async ({}) => {
             ohMy();
           });
@@ -157,13 +157,13 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'dir/a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('slow test', async ({}) => {
             await new Promise(f => setTimeout(f, 2500));
           });
         `,
         'dir/b.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('fast test', async ({}) => {
             await new Promise(f => setTimeout(f, 1));
           });
@@ -190,7 +190,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'dir/a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('failing1', async ({}) => {
             expect(1).toBe(2);
           });
@@ -218,7 +218,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'dir/a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('first', async ({}) => {
           });
           test('second (hanging)', async ({}) => {
@@ -244,7 +244,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'dir/a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test.describe.parallel('suite', () => {
             test('inner slow test', async ({}) => {
               await new Promise(f => setTimeout(f, 1000));
@@ -272,7 +272,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'dir/a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('slow test', async ({}) => {
             await new Promise(f => setTimeout(f, 1000));
           });
@@ -289,7 +289,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should print flaky failures', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('foobar', async ({}, testInfo) => {
             expect(testInfo.retry).toBe(1);
           });
@@ -303,7 +303,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should print flaky timeouts', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('foobar', async ({}, testInfo) => {
             if (!testInfo.retry)
               await new Promise(f => setTimeout(f, 2000));
@@ -318,7 +318,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should print stack-less errors', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('foobar', async ({}) => {
             const e = new Error('Hello');
             delete e.stack;
@@ -334,7 +334,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should print errors with inconsistent message/stack', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('foobar', async function myTest({}) {
             const e = new Error('Hello');
             // Force stack to contain "Hello".
@@ -361,7 +361,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should not crash on undefined body with manual attachments', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}, testInfo) => {
             testInfo.attachments.push({
               name: 'foo.txt',
@@ -380,7 +380,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should report fatal errors at the end', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-          import { test as base, expect } from '@playwright/test';
+          import { test as base, expect } from '@okep/test';
           const test = base.extend({
             fixture: [async ({ }, use) => {
               await use();
@@ -391,7 +391,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           });
         `,
         'b.spec.ts': `
-          import { test as base, expect } from '@playwright/test';
+          import { test as base, expect } from '@okep/test';
           const test = base.extend({
             fixture: [async ({ }, use) => {
               await use();
@@ -410,7 +410,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should contain at most 1 decimal for humanized timing', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('should work', () => {});
         `
       });

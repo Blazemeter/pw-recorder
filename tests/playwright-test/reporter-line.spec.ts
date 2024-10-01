@@ -23,7 +23,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render unexpected after retry', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          const { test, expect } = require('@playwright/test');
+          const { test, expect } = require('@okep/test');
           test('one', async ({}) => {
             expect(1).toBe(0);
           });
@@ -46,7 +46,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render flaky', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('one', async ({}, testInfo) => {
             expect(testInfo.retry).toBe(3);
           });
@@ -60,7 +60,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should print flaky failures', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('foobar', async ({}, testInfo) => {
             expect(testInfo.retry).toBe(1);
           });
@@ -74,7 +74,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should work on CI', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          const { test, expect } = require('@playwright/test');
+          const { test, expect } = require('@okep/test');
           test('one', async ({}) => {
             expect(1).toBe(0);
           });
@@ -90,7 +90,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should print output', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('foobar', async ({}, testInfo) => {
             process.stdout.write('one');
             process.stdout.write('two');
@@ -114,7 +114,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     }, async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('passes', async ({}) => {
             await test.step(\`outer
                              1.0\`, async () => {
@@ -134,7 +134,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should render failed test steps', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('passes', async ({}) => {
             await test.step('outer 1.0', async () => {
               await test.step('inner 1.1', async () => {
@@ -152,7 +152,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should not render more than one failed test steps in header', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('passes', async ({}) => {
             await test.step('outer 1.0', async () => {
               await test.step('inner 1.1', async () => {
@@ -173,7 +173,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('should not render more than one failed test steps in header (2)', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('passes', async ({}) => {
             await test.step('outer 1.0', async () => {
               await test.step('inner 1.1', async () => {

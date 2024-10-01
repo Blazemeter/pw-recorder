@@ -21,7 +21,7 @@ const { spawnAsync } = require('../../packages/pw-recorder-core/lib/utils');
 test('should not expand huge arrays', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'expect-test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('numeric ranges', () => {
         const a1 = Array(100000).fill(1);
         const a2 = Array(100000).fill(1);
@@ -38,7 +38,7 @@ test('should not expand huge arrays', async ({ runInlineTest }) => {
 test('should include custom expect message', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'expect-test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('custom expect message', () => {
         test.expect(1+1, 'one plus one should be two!').toEqual(3);
       });
@@ -57,7 +57,7 @@ test('should include custom expect message', async ({ runInlineTest }) => {
 test('should include custom expect message with web-first assertions', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'expect-test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('custom expect message', async ({page}) => {
         await expect(page.locator('x-foo'), { message: 'x-foo must be visible' }).toBeVisible({timeout: 1});
       });
@@ -74,7 +74,7 @@ test('should include custom expect message with web-first assertions', async ({ 
 test('should work with generic matchers', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { expect } from '@playwright/test';
+      import { expect } from '@okep/test';
       expect(42).toBe(42);
       expect(0.1 + 0.2).toBeCloseTo(0.3, 5);
       expect(null).toBeDefined();
@@ -125,7 +125,7 @@ test('should work with generic matchers', async ({ runTSC }) => {
 test('should compile generic matchers', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { expect } from '@playwright/test';
+      import { expect } from '@okep/test';
       expect(42).toBe(42);
       expect(42).toBeCloseTo(42);
       expect(42).toBeCloseTo(42, 5);
@@ -192,7 +192,7 @@ test('should compile generic matchers', async ({ runTSC }) => {
 test('should work when passing a ReadonlyArray', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('example', async ({ page }) => {
         const readonlyArray: ReadonlyArray<string> = ['1', '2', '3'];
         expect(page.locator('.foo')).toHaveText(readonlyArray);
@@ -206,7 +206,7 @@ test('should work when passing a ReadonlyArray', async ({ runTSC }) => {
 test('should work with expect message', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.expect(42, 'this is expect message').toBe(42);
     `
   });
@@ -216,7 +216,7 @@ test('should work with expect message', async ({ runTSC }) => {
 test('should work with default expect matchers and esModuleInterop=false', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.expect(42).toBe(42);
     `,
     'tsconfig.json': JSON.stringify({
@@ -251,7 +251,7 @@ test('should work with custom PlaywrightTest namespace', async ({ runTSC }) => {
       }
     `,
     'a.spec.ts': `
-      import { test, expect, type Page, type APIResponse } from '@playwright/test';
+      import { test, expect, type Page, type APIResponse } from '@okep/test';
       test.expect.extend({
         toBeWithinRange() {
           return {
@@ -286,7 +286,7 @@ test('should work with custom PlaywrightTest namespace', async ({ runTSC }) => {
 test('should propose only the relevant matchers when custom expect matcher classes were passed', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('custom matchers', async ({ page }) => {
       // Page-specific assertions apply to Page.
       await test.expect(page).toHaveURL('https://example.com');
@@ -370,7 +370,7 @@ test('should propose only the relevant matchers when custom expect matcher class
 test('should return void/Promise when appropriate', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       type AssertType<T, S> = S extends T ? AssertNotAny<S> : false;
       type AssertNotAny<S> = {notRealProperty: number} extends S ? false : true;
 
@@ -414,7 +414,7 @@ test.describe('helpful expect errors', () => {
   test('top-level', async ({ runInlineTest }) => {
     const result = await runInlineTest({
       'a.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('explodes', () => {
           expect(1).nope();
         });
@@ -427,7 +427,7 @@ test.describe('helpful expect errors', () => {
   test('soft', async ({ runInlineTest }) => {
     const result = await runInlineTest({
       'a.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('explodes', () => {
           expect.soft(1).nope();
         });
@@ -440,7 +440,7 @@ test.describe('helpful expect errors', () => {
   test('poll', async ({ runInlineTest }) => {
     const result = await runInlineTest({
       'a.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('explodes', () => {
           expect.poll(() => {}).nope();
         });
@@ -453,7 +453,7 @@ test.describe('helpful expect errors', () => {
   test('not', async ({ runInlineTest }) => {
     const result = await runInlineTest({
       'a.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('explodes', () => {
           expect(1).not.nope();
         });
@@ -466,7 +466,7 @@ test.describe('helpful expect errors', () => {
   test('bare', async ({ runInlineTest }) => {
     const result = await runInlineTest({
       'a.spec.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('explodes', () => {
           expect('');
         });
@@ -484,7 +484,7 @@ test('should reasonably work in global setup', async ({ runInlineTest }) => {
       export default { globalSetup: './global-setup' };
     `,
     'global-setup.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       export default async () => {
         expect(1).toBe(1);
         await expect.poll(async () => {
@@ -495,7 +495,7 @@ test('should reasonably work in global setup', async ({ runInlineTest }) => {
       };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('skipped', () => {});
     `,
   });
@@ -508,7 +508,7 @@ test('should support toHaveURL with baseURL from webServer', async ({ runInlineT
   const port = testInfo.workerIndex + 10500;
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('pass', async ({ page }) => {
         await page.goto('/foobar');
@@ -542,7 +542,7 @@ test('should respect expect.timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'playwright.config.js': `module.exports = { expect: { timeout: 1000 } }`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('timeout', async ({ page }) => {
         await page.goto('data:text/html,<div>A</div>');
@@ -559,7 +559,7 @@ test('should respect expect.timeout', async ({ runInlineTest }) => {
 test('should log scale the time', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('pass', async ({ page }) => {
         await page.setContent('<div id=div>Wrong</div>');
@@ -580,7 +580,7 @@ test('should log scale the time', async ({ runInlineTest }) => {
 test('should print expected/received before timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('times out waiting for text', async ({ page }) => {
         await page.setContent('<div id=node>Text content</div>');
@@ -599,7 +599,7 @@ test('should print expected/received before timeout', async ({ runInlineTest }) 
 test('should print pending operations for toHaveText', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('fail', async ({ page }) => {
         await page.setContent('<div id=node>Text content</div>');
@@ -621,7 +621,7 @@ test('should print expected/received on Ctrl+C', async ({ interactWithTestRunner
 
   const testProcess = await interactWithTestRunner({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('times out waiting for text', async ({ page }) => {
         await page.setContent('<div id=node>Text content</div>');
@@ -647,7 +647,7 @@ test('should print expected/received on Ctrl+C', async ({ interactWithTestRunner
 test('should not print timed out error message when test times out', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('fail', async ({ page }) => {
         await page.setContent('<div id=node>Text content</div>');
@@ -666,7 +666,7 @@ test('should not print timed out error message when test times out', async ({ ru
 test('should not leak long expect message strings', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       let logs: string = 'Ab';
       const consoleLogWatcher = (msg: ConsoleMessage) => {
@@ -692,8 +692,8 @@ test('should not leak long expect message strings', async ({ runInlineTest }) =>
 test('should chain expect matchers and expose matcher utils (TSC)', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-    import { test, expect as baseExpect } from '@playwright/test';
-    import type { Page, Locator, ExpectMatcherState, Expect } from '@playwright/test';
+    import { test, expect as baseExpect } from '@okep/test';
+    import type { Page, Locator, ExpectMatcherState, Expect } from '@okep/test';
 
     function callLogText(log: string[] | undefined): string {
       if (!log)
@@ -779,8 +779,8 @@ test('should chain expect matchers and expose matcher utils (TSC)', async ({ run
 test('should chain expect matchers and expose matcher utils', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-    import { test, expect as baseExpect } from '@playwright/test';
-    import type { Page, Locator } from '@playwright/test';
+    import { test, expect as baseExpect } from '@okep/test';
+    import type { Page, Locator } from '@okep/test';
 
     function callLogText(log: string[] | undefined): string {
       if (!log)
@@ -849,7 +849,7 @@ test('should chain expect matchers and expose matcher utils', async ({ runInline
 test('should support toHaveAttribute without optional value', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-    import { test, expect as baseExpect } from '@playwright/test';
+    import { test, expect as baseExpect } from '@okep/test';
     test('custom matchers', async ({ page }) => {
       const locator = page.locator('#node');
       await test.expect(locator).toHaveAttribute('name', 'value');
@@ -869,8 +869,8 @@ test('should support toHaveAttribute without optional value', async ({ runTSC })
 test('should support mergeExpects (TSC)', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { test, mergeExpects, expect as baseExpect } from '@playwright/test';
-      import type { Page } from '@playwright/test';
+      import { test, mergeExpects, expect as baseExpect } from '@okep/test';
+      import type { Page } from '@okep/test';
 
       const expect1 = baseExpect.extend({
         async toBeAGoodPage(page: Page, x: number) {
@@ -904,8 +904,8 @@ test('should support mergeExpects (TSC)', async ({ runTSC }) => {
 test('should support mergeExpects', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, mergeExpects, expect as baseExpect } from '@playwright/test';
-      import type { Page } from '@playwright/test';
+      import { test, mergeExpects, expect as baseExpect } from '@okep/test';
+      import type { Page } from '@okep/test';
 
       const expect1 = baseExpect.extend({
         async toBeAGoodPage(page: Page, x: number) {
@@ -935,7 +935,7 @@ test('should respect timeout from configured expect when used outside of the tes
 
   const files = {
     'script.mjs': `
-      import { test, expect as baseExpect, chromium } from '@playwright/test';
+      import { test, expect as baseExpect, chromium } from '@okep/test';
 
       const configuredExpect = baseExpect.configure({
         timeout: 10,
@@ -974,8 +974,8 @@ test('should expose timeout to custom matchers', async ({ runInlineTest, runTSC 
       };
     `,
     'a.test.ts': `
-      import type { ExpectMatcherState, MatcherReturnType } from '@playwright/test';
-      import { test, expect as base } from '@playwright/test';
+      import type { ExpectMatcherState, MatcherReturnType } from '@okep/test';
+      import { test, expect as base } from '@okep/test';
 
       const expect = base.extend({
         assertTimeout(page: any, value: number) {
@@ -1008,7 +1008,7 @@ test('should expose timeout to custom matchers', async ({ runInlineTest, runTSC 
 test('should throw error when using .equals()', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'helper.ts': `
-      import { test as base, expect as baseExpect } from '@playwright/test';
+      import { test as base, expect as baseExpect } from '@okep/test';
       export const expect = baseExpect.extend({
         toBeWithinRange(received, floor, ceiling) {
           this.equals(1, 2);
@@ -1032,7 +1032,7 @@ test('should throw error when using .equals()', async ({ runInlineTest }) => {
 test('expect.extend should be immutable', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'expect-test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const expectFoo = expect.extend({
         toFoo() {
           console.log('%%foo');
@@ -1073,7 +1073,7 @@ test('expect.extend should be immutable', async ({ runInlineTest }) => {
 test('expect.extend should fall back to legacy behavior', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'expect-test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       expect.extend({
         toFoo() {
           console.log('%%foo');
@@ -1107,7 +1107,7 @@ test('expect.extend should fall back to legacy behavior', async ({ runInlineTest
 test('custom asymmetric matchers should work with expect.extend', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'expect-test.spec.ts': `
-      import { test, expect as baseExpect, mergeExpects } from '@playwright/test';
+      import { test, expect as baseExpect, mergeExpects } from '@okep/test';
       const expect1 = baseExpect.extend({
         isFoo(received: unknown, expected: string) {
           return { pass: received === 'foo', message: () => '' };

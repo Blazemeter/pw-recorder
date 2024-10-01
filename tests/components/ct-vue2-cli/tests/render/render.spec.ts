@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-vue2';
+import { test, expect } from '@okep/experimental-ct-vue2';
 import Button from '@/components/Button.vue';
 import Component from '@/components/Component.vue';
 import EmptyTemplate from '@/components/EmptyTemplate.vue';

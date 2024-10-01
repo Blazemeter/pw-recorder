@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { defineConfig, devices } from '@playwright/experimental-ct-vue2';
+import { defineConfig, devices } from '@okep/experimental-ct-vue2';
 import { resolve } from 'path';
 
 export default defineConfig({

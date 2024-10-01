@@ -30,7 +30,7 @@ test('should override exit code', async ({ runInlineTest }) => {
     'reporter.ts': reporter,
     'playwright.config.ts': `module.exports = { reporter: './reporter' };`,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({}) => {
         expect(1 + 1).toBe(3);
       });

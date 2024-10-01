@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should check types of fixtures', async ({ runTSC }) => {
   const result = await runTSC({
     'helper.ts': `
-      import { test as base, expect, Page } from '@playwright/test';
+      import { test as base, expect, Page } from '@okep/test';
       export type MyOptions = { foo: string, bar: number };
       export const test = base.extend<{ foo: string }, { bar: number }>({
         foo: 'foo',
@@ -118,7 +118,7 @@ test('should check types of fixtures', async ({ runTSC }) => {
     `,
     'playwright.config.ts': `
       import { MyOptions } from './helper';
-      import { Config } from '@playwright/test';
+      import { Config } from '@okep/test';
       const configs1: Config[] = [];
       configs1.push({ use: { foo: '42', bar: 42 } });
       configs1.push({ use: { foo: '42', bar: 42 }, timeout: 100 });
@@ -182,7 +182,7 @@ test('should check types of fixtures', async ({ runTSC }) => {
       test.afterAll(() => {});
     `,
     'playwright-props.config.ts': `
-      import { PlaywrightTestConfig } from '@playwright/test';
+      import { PlaywrightTestConfig } from '@okep/test';
       const config0: PlaywrightTestConfig = {
         use: {
           ignoreHTTPSErrors: undefined,
@@ -233,7 +233,7 @@ test('should check types of fixtures', async ({ runTSC }) => {
     `,
 
     'playwright-define.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       const config0 = defineConfig({
         use: {
           ignoreHTTPSErrors: undefined,
@@ -283,7 +283,7 @@ test('should check types of fixtures', async ({ runTSC }) => {
       });
     `,
     'playwright-define-merge.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       const config0 = defineConfig({
         timeout: 1,
         // @ts-expect-error
@@ -293,7 +293,7 @@ test('should check types of fixtures', async ({ runTSC }) => {
       });
     `,
     'playwright-define-merge-ct.config.ts': `
-      import { defineConfig } from '@playwright/experimental-ct-vue';
+      import { defineConfig } from '@okep/experimental-ct-vue';
       const config0 = defineConfig({
         timeout: 1,
         // @ts-expect-error
@@ -309,7 +309,7 @@ test('should check types of fixtures', async ({ runTSC }) => {
 test('config should allow void/empty options', async ({ runTSC }) => {
   const result = await runTSC({
     'playwright.config.ts': `
-      import { Config } from '@playwright/test';
+      import { Config } from '@okep/test';
       const configs: Config[] = [];
       configs.push({});
       configs.push({ timeout: 100 });
@@ -317,7 +317,7 @@ test('config should allow void/empty options', async ({ runTSC }) => {
       configs.push({ use: { foo: 42 }});
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('my test', async () => {
       });
     `

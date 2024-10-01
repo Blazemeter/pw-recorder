@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should run fixture teardown on timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'helper.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       export const test = base.extend({
         foo: async ({}, run, testInfo) => {
           await run();
@@ -42,7 +42,7 @@ test('should run fixture teardown on timeout', async ({ runInlineTest }) => {
 test('should respect test.setTimeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', async ({}) => {
         await new Promise(f => setTimeout(f, 1500));
       });
@@ -72,7 +72,7 @@ test('should respect test.setTimeout', async ({ runInlineTest }) => {
 test('should respect test.setTimeout outside of the test', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test.setTimeout(1000);
       test('fails', async ({}) => {
@@ -102,7 +102,7 @@ test('should respect test.setTimeout outside of the test', async ({ runInlineTes
 test('should timeout when calling test.setTimeout too late', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', async ({}) => {
         await new Promise(f => setTimeout(f, 500));
         test.setTimeout(100);
@@ -119,7 +119,7 @@ test('should timeout when calling test.setTimeout too late', async ({ runInlineT
 test('should respect test.slow', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', async ({}) => {
         await new Promise(f => setTimeout(f, 1500));
       });
@@ -146,7 +146,7 @@ test('should respect test.slow', async ({ runInlineTest }) => {
 test('should ignore test.setTimeout when debugging', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use) => {
           test.setTimeout(100);
@@ -167,7 +167,7 @@ test('should ignore test.setTimeout when debugging', async ({ runInlineTest }) =
 test('should respect fixture timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: [async ({}, use) => {
           await new Promise(f => setTimeout(f, 300));
@@ -208,7 +208,7 @@ test('should respect fixture timeout', async ({ runInlineTest }) => {
 test('should respect test.setTimeout in the worker fixture', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: [async ({}, use) => {
           await new Promise(f => setTimeout(f, 300));
@@ -248,7 +248,7 @@ test('should respect test.setTimeout in the worker fixture', async ({ runInlineT
 test('fixture time in beforeAll hook should not affect test', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use) => {
           await new Promise(f => setTimeout(f, 2000));
@@ -270,7 +270,7 @@ test('fixture time in beforeAll hook should not affect test', async ({ runInline
 test('fixture timeout in beforeAll hook should not affect test', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: [async ({}, use) => {
           await new Promise(f => setTimeout(f, 1000));
@@ -293,7 +293,7 @@ test('fixture timeout in beforeAll hook should not affect test', async ({ runInl
 test('fixture time in beforeEach hook should affect test', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use) => {
           await new Promise(f => setTimeout(f, 500));
@@ -317,7 +317,7 @@ test('fixture time in beforeEach hook should affect test', async ({ runInlineTes
 test('test timeout should still run hooks before fixtures teardown', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         auto: [async ({}, use) => {
           console.log('\\n%%before-auto');
@@ -356,7 +356,7 @@ test('test timeout should still run hooks before fixtures teardown', async ({ ru
 test('should not include fixtures with own timeout and beforeAll in test duration', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'c.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [async ({}, use) => {
           await new Promise(f => setTimeout(f, 1000));
@@ -395,7 +395,7 @@ test('should not include fixtures with own timeout and beforeAll in test duratio
 test('should run fixture teardowns after timeout with soft expect error', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'helper.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       export const test = base.extend({
         foo: async ({}, run, testInfo) => {
           await run();
@@ -435,7 +435,7 @@ test('should run fixture teardowns after timeout with soft expect error', async 
 test('should respect test.describe.configure', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.describe.configure({ timeout: 1000 });
       test('test1', async ({}) => {
         console.log('test1-' + test.info().timeout);
@@ -459,7 +459,7 @@ test('should respect test.describe.configure', async ({ runInlineTest }) => {
 test('beforeEach timeout should prevent others from running', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeEach(async () => {
         console.log('\\n%%beforeEach1');
         await new Promise(f => setTimeout(f, 2500));
@@ -483,7 +483,7 @@ test('beforeEach timeout should prevent others from running', async ({ runInline
 test('should report up to 3 timeout errors', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base } from '@playwright/test';
+      import { test as base } from '@okep/test';
 
       const test = base.extend<{}, { autoWorker: void }>({
         autoWorker: [
@@ -518,7 +518,7 @@ test('should report up to 3 timeout errors', async ({ runInlineTest }) => {
 test('should complain when worker fixture times out during worker cleanup', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         slowTeardown: [async ({}, use) => {
           await use('hey');
@@ -538,7 +538,7 @@ test('should complain when worker fixture times out during worker cleanup', asyn
 test('should allow custom worker fixture timeout longer than force exit cap', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         slowTeardown: [async ({}, use) => {
           await use('hey');
@@ -564,7 +564,7 @@ test('should run fixture teardown with custom timeout after test timeout', {
 }, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [async ({}, use) => {
           console.log('\\n%%foo setup');
@@ -591,7 +591,7 @@ test('should run fixture teardown with custom timeout after test timeout', {
 test('should run fixture teardown with custom timeout after afterEach timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       let counter = 0;
       const test = base.extend({
         foo: [async ({}, use) => {
@@ -630,7 +630,7 @@ test('should run fixture teardown with custom timeout after afterEach timeout', 
 test('test.setTimeout should be able to change custom fixture timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [async ({}, use) => {
           console.log('\\n%%foo setup');

@@ -24,7 +24,7 @@ test('should load nested as esm when package.json has type module', async ({ run
     `,
     'package.json': JSON.stringify({ type: 'module' }),
     'nested/folder/a.esm.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('check project name', ({}, testInfo) => {
         expect(testInfo.project.name).toBe('foo');
       });
@@ -46,7 +46,7 @@ test('should support import attributes', async ({ runInlineTest }) => {
     'a.test.ts': `
       import config from './package.json' with { type: 'json' };
       console.log('imported value (test): ' + config.foo);
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async () => {});
     `
   });
@@ -67,7 +67,7 @@ test('should import esm from ts when package.json has type module in experimenta
       import { foo } from './b.ts';
       import { bar } from './c.js';
       import { qux } from './d.js';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('check project name', ({}, testInfo) => {
         expect(testInfo.project.name).toBe('foo');
         expect(bar).toBe('bar');
@@ -92,7 +92,7 @@ test('should propagate subprocess exit code in experimental mode', async ({ runI
   const result = await runInlineTest({
     'package.json': JSON.stringify({ type: 'module' }),
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('failing test', ({}, testInfo) => {
         expect(1).toBe(2);
       });
@@ -125,7 +125,7 @@ test('should respect path resolver in experimental mode', async ({ runInlineTest
     }`,
     'a.test.ts': `
       import { foo } from 'util/b.js';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('check project name', ({}, testInfo) => {
         expect(testInfo.project.name).toBe('foo');
         expect(foo).toBe('foo');
@@ -147,7 +147,7 @@ test('should use source maps', async ({ runInlineTest }) => {
       export default { projects: [{name: 'foo'}] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('check project name', ({}, testInfo) => {
         expect(testInfo.project.name).toBe('foo');
@@ -170,7 +170,7 @@ test('should use source maps when importing a file throws an error', async ({ ru
       export default {};
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       throw new Error('Oh my!');
     `
@@ -180,7 +180,7 @@ test('should use source maps when importing a file throws an error', async ({ ru
 
    at a.test.ts:4
 
-  2 |       import { test, expect } from '@playwright/test';
+  2 |       import { test, expect } from '@okep/test';
   3 |
 > 4 |       throw new Error('Oh my!');
     |             ^
@@ -194,7 +194,7 @@ test('should show the codeframe in errors', async ({ runInlineTest }) => {
       export default { projects: [{name: 'foo'}] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('check project name', ({}, testInfo) => {
         expect(1).toBe(2);
@@ -235,13 +235,13 @@ test('should filter by line', async ({ runInlineTest }) => {
       export default { projects: [{name: 'foo'}] };
     `,
     'foo/x.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', () => { expect(1).toBe(2); });
       test('two', () => { expect(1).toBe(2); });
       test('three', () => { expect(1).toBe(2); });
     `,
     'foo/y.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   }, undefined, undefined, { additionalArgs: ['x.spec.ts:4'] });
@@ -255,7 +255,7 @@ test('should resolve directory import to index.js file in ESM mode', async ({ ru
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -276,7 +276,7 @@ test('should resolve directory import to index.ts file in ESM mode', async ({ ru
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -297,7 +297,7 @@ test('should resolve directory import to index.tsx file in ESM mode', async ({ r
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -318,7 +318,7 @@ test('should resolve directory import to index.mjs file in ESM mode', async ({ r
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -339,7 +339,7 @@ test('should resolve directory import to index.jsx file in ESM mode', async ({ r
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -360,7 +360,7 @@ test('should resolve file import before directory import in ESM mode', async ({ 
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -387,7 +387,7 @@ test('should resolve .js import to .ts file in ESM mode', async ({ runInlineTest
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils.js';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -408,7 +408,7 @@ test('should resolve .js import to .tsx file in ESM mode', async ({ runInlineTes
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils.js';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -429,7 +429,7 @@ test('should resolve .js import to .jsx file in ESM mode', async ({ runInlineTes
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils.js';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -450,7 +450,7 @@ test('should resolve no-extension import to .ts file in ESM mode', async ({ runI
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -471,7 +471,7 @@ test('should resolve no-extension import to .tsx file in ESM mode', async ({ run
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -492,7 +492,7 @@ test('should resolve no-extension import to .jsx file in ESM mode', async ({ run
     'package.json': `{ "type": "module" }`,
     'playwright.config.ts': `export default { projects: [{name: 'foo'}] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { gimmeAOne } from './playwright-utils';
       test('pass', ({}) => {
         expect(gimmeAOne()).toBe(1);
@@ -520,7 +520,7 @@ test('should resolve .js import to .tsx file in ESM mode for components', async 
     `,
 
     'src/test.spec.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './button.js';
       test('pass', async ({ mount }) => {
         await mount(<Button></Button>);
@@ -539,13 +539,13 @@ test('should load cjs config and test in non-ESM mode', async ({ runInlineTest }
       module.exports = { projects: [{name: 'foo'}] };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('check project name', ({}, testInfo) => {
         expect(testInfo.project.name).toBe('foo');
       });
     `,
     'b.spec.cjs': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('check project name', ({}, testInfo) => {
         expect(testInfo.project.name).toBe('foo');
       });
@@ -566,7 +566,7 @@ test('should allow ESM when config is cjs', async ({ runInlineTest, nodeVersion 
       module.exports = { projects: [{name: 'foo'}] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('check project name', ({}, testInfo) => {
         expect(testInfo.project.name).toBe('foo');
       });
@@ -582,7 +582,7 @@ test('should load mts without config', async ({ runInlineTest, nodeVersion }) =>
 
   const result = await runInlineTest({
     'a.test.mts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('check project name', ({}, testInfo) => {
         expect(true).toBe(true);
       });
@@ -603,7 +603,7 @@ test('should load type module without config', async ({ runInlineTest, nodeVersi
       export default foo;
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import foo from './helper.js';
       test('check project name', ({}, testInfo) => {
         expect(foo).toBe(42);
@@ -655,7 +655,7 @@ test('should be able to use use execSync with a Node.js file inside a spec', asy
     'hello.js': `console.log('hello from hello.js');`,
     'hellofork.js': `process.send('hello from hellofork.js');`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { execSync, spawnSync, fork } from 'child_process';
       console.log('%%inside test file');
       console.log('%%execSync: ' + execSync('node hello.js').toString());
@@ -703,7 +703,7 @@ test('should be able to use use execSync with a Node.js file inside a spec', asy
 test('should be able to use mergeTests/mergeExpect', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.mjs': `
-      import { test as base, expect as baseExpect, mergeTests, mergeExpects } from '@playwright/test';
+      import { test as base, expect as baseExpect, mergeTests, mergeExpects } from '@okep/test';
       const test = mergeTests(
         base.extend({
           myFixture1: '1',
@@ -748,7 +748,7 @@ test('should exit after merge-reports', async ({ runInlineTest, mergeReports }) 
     `,
     'package.json': JSON.stringify({ type: 'module' }),
     'nested/folder/a.esm.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', ({}, testInfo) => {});
     `
   }, undefined, undefined, { additionalArgs: ['--reporter', 'blob'] });

@@ -16,7 +16,7 @@
  */
 
 import { contextTest as it, expect } from '../config/browserTest';
-import type { JSHandle } from '@pw-recorder/test';
+import type { JSHandle } from '@okep/test';
 
 it('expose binding should work', async ({ context }) => {
   let bindingSource: any;

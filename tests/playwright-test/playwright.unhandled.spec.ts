@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should produce uncaughtException when page.route raises', async ({ runInlineTest, server }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ page }) => {
         await page.route('**/empty.html', route => {
           throw new Error('foobar');
@@ -35,7 +35,7 @@ test('should produce uncaughtException when page.route raises', async ({ runInli
 test('should produce unhandledRejection when page.route raises', async ({ runInlineTest, server }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ page }) => {
         await page.route('**/empty.html', async route => {
           throw new Error('foobar');
@@ -51,7 +51,7 @@ test('should produce unhandledRejection when page.route raises', async ({ runInl
 test('should produce uncaughtException when context.route raises', async ({ runInlineTest, server }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ context, page }) => {
         await context.route('**/empty.html', route => {
           throw new Error('foobar');
@@ -67,7 +67,7 @@ test('should produce uncaughtException when context.route raises', async ({ runI
 test('should produce unhandledRejection when context.route raises', async ({ runInlineTest, server }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ context, page }) => {
         await context.route('**/empty.html', async route => {
           throw new Error('foobar');

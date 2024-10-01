@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-vue2';
+import { test, expect } from '@okep/experimental-ct-vue2';
 import App from '@/App.vue';
 
 test('navigate to a page by clicking a link', async ({ page, mount }) => {

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { test as baseTest, expect as expectBase } from '@playwright/test';
-import type { Page } from '@playwright/test';
+import { test as baseTest, expect as expectBase } from '@okep/test';
+import type { Page } from '@okep/test';
 
 export const test = baseTest.extend<{ plugin: string }>({
   plugin: async ({}, use) => {

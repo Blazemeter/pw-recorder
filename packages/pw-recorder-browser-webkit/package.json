@@ -1,12 +1,12 @@
 {
-  "name": "@pw-recorder/browser-webkit",
-  "version": "1.49.0-next",
+  "name": "@okep/browser-webkit",
+  "version": "1.49.3-alpha",
   "description": "Playwright package that automatically installs WebKit",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microsoft/playwright.git"
+    "url": "git+https://github.com/microsoft/pw-recorder.git"
   },
-  "homepage": "https://playwright.dev",
+  "homepage": "https://pw-recorder.dev",
   "engines": {
     "node": ">=18"
   },
@@ -27,6 +27,6 @@
     "install": "node install.js"
   },
   "dependencies": {
-    "playwright-core": "1.49.0-next"
+    "pw-recorder-core": "1.49.3-alpha"
   }
 }

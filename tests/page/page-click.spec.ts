@@ -17,7 +17,7 @@
 
 import { test as it, expect, rafraf } from './pageTest';
 import { attachFrame, detachFrame } from '../config/utils';
-import type { Page } from '@pw-recorder/test';
+import type { Page } from '@okep/test';
 
 const giveItAChanceToClick = (page: Page) => rafraf(page, 5);
 

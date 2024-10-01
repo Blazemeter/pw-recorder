@@ -25,7 +25,7 @@ async function getSnapshotPaths(runInlineTest, testInfo, playwrightConfig, pathA
       module.exports = ${JSON.stringify(playwrightConfig, null, 2)}
     `,
     'a/b/c/d.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.describe('suite', () => {
         test('test should work', async ({ page }, testInfo) => {
           console.log([
@@ -124,7 +124,7 @@ test('arg should receive default arg', async ({ runInlineTest }, testInfo) => {
       }
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('is a test', async ({ page }) => {
         await expect(page).toHaveScreenshot();
       });

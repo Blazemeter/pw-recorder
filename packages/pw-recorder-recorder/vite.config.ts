@@ -26,8 +26,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@isomorphic': path.resolve(__dirname, '../pw-recorder-core/src/utils/isomorphic'),
-      '@protocol': path.resolve(__dirname, '../protocol/src'),
-      '@web': path.resolve(__dirname, '../web/src'),
+      '@protocol': path.resolve(__dirname, '../pw-recorder-protocol/src'),
+      '@web': path.resolve(__dirname, '../pw-recorder-web/src'),
     },
   },
   build: {

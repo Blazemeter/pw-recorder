@@ -15,8 +15,8 @@
  */
 
 import type { Page, ViewportSize } from 'pw-recorder-core';
-import type { PageScreenshotOptions, ScreenshotMode, VideoMode } from '@pw-recorder/test';
-export { expect } from '@pw-recorder/test';
+import type { PageScreenshotOptions, ScreenshotMode, VideoMode } from '@okep/test';
+export { expect } from '@okep/test';
 
 // Page test does not guarantee an isolated context, just a new page (because Android).
 export type PageTestFixtures = {

@@ -15,7 +15,7 @@
  */
 
 import { test as baseTest, expect } from './ui-mode-fixtures';
-import { TestServerConnection } from '../../packages/playwright/lib/isomorphic/testServerConnection';
+import { TestServerConnection } from '../../packages/pw-recorder/lib/isomorphic/testServerConnection';
 import { playwrightCtConfigText } from './playwright-test-fixtures';
 import ws from 'ws';
 import type { TestChildProcess } from '../config/commonFixtures';
@@ -78,7 +78,7 @@ const ctFiles = {
     export const Button = () => <button>Button</button>;
   `,
   'src/button.test.tsx': `
-    import { test, expect } from '@playwright/experimental-ct-react';
+    import { test, expect } from '@okep/experimental-ct-react';
     import { Button } from './button';
 
     test('pass', async ({ mount }) => {
@@ -94,7 +94,7 @@ test('file watching', async ({ startTestServer, writeFiles }, testInfo) => {
       export const expected = 42;
       `,
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       import { expected } from "./utils";
       test('foo', () => {
         expect(123).toBe(expected);
@@ -125,7 +125,7 @@ test('stdio interception', async ({ startTestServer, writeFiles }) => {
   await testServerConnection.initialize({ interceptStdio: true });
   await writeFiles({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('foo', () => {
         console.log("this goes to stdout");
         console.error("this goes to stderr");

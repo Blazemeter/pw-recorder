@@ -16,7 +16,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import { Watcher } from 'playwright/lib/fsWatcher';
+import { Watcher } from 'pw-recorder/lib/fsWatcher';
 import type { PluginContext } from 'rollup';
 import { source as injectedSource } from './generated/indexSource';
 import { createConfig, populateComponentsFromTests, resolveDirs, transformIndexFile, frameworkConfig } from './viteUtils';

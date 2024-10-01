@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('test.extend should work', async ({ runInlineTest }) => {
   const { output, passed } = await runInlineTest({
     'helper.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       global.logs = [];
 
       function createDerivedFixtures(suffix) {
@@ -130,7 +130,7 @@ test('config should override options but not fixtures', async ({ runInlineTest }
       };
     `,
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({ param: [ 'default', { option: true } ] });
       test1('default', async ({ param }) => {
         console.log('default-' + param);
@@ -168,7 +168,7 @@ test('mergeTests should be able to merge', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect, mergeTests } from '@playwright/test';
+      import { test, expect, mergeTests } from '@okep/test';
       const base = test.extend({
         myFixture: 'abc',
       });
@@ -205,7 +205,7 @@ test('mergeTests should be able to merge', async ({ runInlineTest }) => {
 test('test.extend should print nice message when used as mergeTests', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({});
       const test2 = base.extend({});
       const test3 = test1.extend(test2);
@@ -221,7 +221,7 @@ test('test.extend should print nice message when used as mergeTests', async ({ r
 test('mergeTests should print nice message when used as extend', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect, mergeTests } from '@playwright/test';
+      import { test as base, expect, mergeTests } from '@okep/test';
       const test3 = mergeTests(base, {});
       test3('test', () => {});
     `,
@@ -239,7 +239,7 @@ test('test.use() with undefined should not be ignored', async ({ runInlineTest }
       };
     `,
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         option1: [ 'default', { option: true } ],
         option2: [ 'default', { option: true } ],
@@ -291,7 +291,7 @@ test('undefined values in config and test.use should be reverted to default', as
       };
     `,
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         option1: [ 'default1', { option: true } ],
         option2: [ 'default2', { option: true } ],

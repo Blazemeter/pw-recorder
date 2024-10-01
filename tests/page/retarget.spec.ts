@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import type { Page } from '@pw-recorder/test';
+import type { Page } from '@okep/test';
 import { test as it, expect, rafraf } from './pageTest';
 
 const giveItAChanceToResolve = (page: Page) => rafraf(page, 5);

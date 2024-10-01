@@ -19,11 +19,11 @@ import { test, expect } from './playwright-test-fixtures';
 test('should filter by file name', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
     'b.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   }, undefined, undefined, { additionalArgs: ['a.spec.ts'] });
@@ -35,19 +35,19 @@ test('should filter by file name', async ({ runInlineTest }) => {
 test('should filter by folder', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'foo/x.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
     'foo/y.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
     'bar/x.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
     'bar/y.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   }, undefined, undefined, { additionalArgs: ['bar'] });
@@ -60,13 +60,13 @@ test('should filter by folder', async ({ runInlineTest }) => {
 test('should filter by line', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'foo/x.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', () => { expect(1).toBe(2); });
       test('two', () => { expect(1).toBe(2); });
       test('three', () => { expect(1).toBe(2); });
     `,
     'foo/y.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   }, undefined, undefined, { additionalArgs: ['x.spec.ts:4'] });
@@ -78,7 +78,7 @@ test('should filter by line', async ({ runInlineTest }) => {
 test('should filter by line and column', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'foo/x.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('yes-full-match', () => { expect(1).toBe(1); });
           test('no-wrong-column', () => { expect(1).toBe(2); });
   test('yes-no-column-specified', () => { expect(1).toBe(1); });
@@ -95,13 +95,13 @@ test('should filter by line and column', async ({ runInlineTest }) => {
 test('line should override focused test', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'foo/x.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.only('one', () => { expect(1).toBe(2); });
       test('two', () => { expect(1).toBe(2); });
       test.only('three', () => { expect(1).toBe(2); });
     `,
     'foo/y.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   }, undefined, undefined, { additionalArgs: ['x.spec.ts:4'] });
@@ -113,13 +113,13 @@ test('line should override focused test', async ({ runInlineTest }) => {
 test('should merge filtered line and filtered file', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'foo/x.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', () => { expect(1).toBe(2); });
       test('two', () => { expect(1).toBe(2); });
       test('three', () => { expect(1).toBe(2); });
     `,
     'foo/y.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   }, undefined, undefined, { additionalArgs: ['x.spec.ts:4', 'x.spec.ts'] });
@@ -130,13 +130,13 @@ test('should merge filtered line and filtered file', async ({ runInlineTest }) =
 test('should run nothing for missing line', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'foo/x.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', () => { expect(1).toBe(2); });
       test('two', () => { expect(1).toBe(2); });
       test('three', () => { expect(1).toBe(2); });
     `,
     'foo/y.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => { expect(1).toBe(2); });
     `,
   }, undefined, undefined, { additionalArgs: ['x.spec.ts:8', 'y.spec.ts'] });
@@ -147,7 +147,7 @@ test('should run nothing for missing line', async ({ runInlineTest }) => {
 test('should focus a single nested test spec', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'foo.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass1', ({}) => {});
       test.describe('suite-1', () => {
         test.describe('suite-2', () => {
@@ -157,11 +157,11 @@ test('should focus a single nested test spec', async ({ runInlineTest }) => {
       test('pass3', ({}) => {});
     `,
     'bar.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass3', ({}) => {});
     `,
     'noooo.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('no-pass1', ({}) => {});
     `,
   }, {}, {}, { additionalArgs: ['foo.test.ts:6', 'bar.test.ts'] });
@@ -175,7 +175,7 @@ test('should focus a single nested test spec', async ({ runInlineTest }) => {
 test('should focus a single test suite', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'foo.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass1', ({}) => {});
       test.describe('suite-1', () => {
         test.describe('suite-2', () => {
@@ -186,7 +186,7 @@ test('should focus a single test suite', async ({ runInlineTest }) => {
       test('pass4', ({}) => {});
     `,
     'bar.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('no-pass1', ({}) => {});
     `,
   }, {}, {}, { additionalArgs: ['foo.test.ts:5'] });

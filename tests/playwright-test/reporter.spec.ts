@@ -139,7 +139,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('not run', async ({}) => {
           });
           test.only('is run', async ({}) => {
@@ -172,7 +172,7 @@ onExit
           };
         `,
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('pass', async ({}) => {
           });
         `
@@ -204,7 +204,7 @@ onExit
           };
         `,
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('pass', async ({}) => {
           });
         `
@@ -231,7 +231,7 @@ onExit
           };
         `,
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('pass', async ({}) => {
           });
         `
@@ -250,7 +250,7 @@ onExit
     test('should not have internal error when steps are finished after timeout', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test as base, expect } from '@playwright/test';
+          import { test as base, expect } from '@okep/test';
           const test = base.extend({
             page: async ({ page }, use) => {
               await use(page);
@@ -279,7 +279,7 @@ onExit
           };
         `,
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test.only('pass', () => {});
         `
       }, { 'reporter': '', 'forbid-only': true });
@@ -350,7 +350,7 @@ onExit
           };
         `,
         'a.spec.js': `
-          const { test, expect } = require('@playwright/test');
+          const { test, expect } = require('@okep/test');
           test('test', () => {});
         `,
       }, { 'reporter': '' });
@@ -367,7 +367,7 @@ onExit
     test('should report correct tests/suites when using grep', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.spec.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
 
           test.describe('@foo', () => {
             test('test1', async ({ }) => {
@@ -429,7 +429,7 @@ var __reExport = (target, module2, desc) => {
 var __toModule = (module2) => {
   return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
 };
-var import_test = __toModule(require("@playwright/test"));
+var import_test = __toModule(require("@okep/test"));
 (0, import_test.test)("pass", async () => {
 });
 //# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiLi4vc3JjL2Euc3BlYy50cyJdLAogICJzb3VyY2VzQ29udGVudCI6IFsiaW1wb3J0IHsgdGVzdCB9IGZyb20gXCJAcGxheXdyaWdodC90ZXN0XCI7XG5cbnRlc3QoJ3Bhc3MnLCBhc3luYyAoKSA9PiB7fSk7Il0sCiAgIm1hcHBpbmdzIjogIjs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0JBQXFCO0FBRXJCLHNCQUFLLFFBQVEsWUFBWTtBQUFBOyIsCiAgIm5hbWVzIjogW10KfQo=`,
@@ -454,7 +454,7 @@ var import_test = __toModule(require("@playwright/test"));
           };
         `,
         'a.spec.js': `
-          const { test, expect } = require('@playwright/test');
+          const { test, expect } = require('@okep/test');
           test('test', () => {});
         `,
       }, { 'reporter': '', 'workers': 1 });
@@ -467,7 +467,7 @@ var import_test = __toModule(require("@playwright/test"));
         'reporter.ts': smallReporterJS,
         'playwright.config.ts': `module.exports = { reporter: [['./reporter', { printSteps: true, printErrorSnippet: true }]] };`,
         'a.spec.js': `
-          const { test, expect } = require('@playwright/test');
+          const { test, expect } = require('@okep/test');
           test('test', async () => {
             await test.step('step', async () => {
               expect(1).toBe(2);
@@ -524,7 +524,7 @@ onExit
         'reporter.ts': smallReporterJS,
         'playwright.config.ts': `module.exports = { reporter: [['./reporter', { printSteps: true, printErrorSnippet: true }]] };`,
         'a.spec.js': `
-          const { test, expect } = require('@playwright/test');
+          const { test, expect } = require('@okep/test');
           throw new Error('test');
         `,
       }, { 'reporter': '', 'workers': 1 });
@@ -536,7 +536,7 @@ onError: Error: test @ a.spec.js:3
      at a.spec.js:3
 
     1 |
-    2 |           const { test, expect } = require('@playwright/test');
+    2 |           const { test, expect } = require('@okep/test');
   > 3 |           throw new Error('test');
       |                 ^
     4 |
@@ -563,7 +563,7 @@ test('should report a stable test.id', async ({ runInlineTest }) => {
       module.exports = { reporter: [[ './reporter.ts' ]] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('example test', async ({}) => {
       });
     `
@@ -603,7 +603,7 @@ test('should report annotations from test declaration', async ({ runInlineTest }
       };
     `,
     'stdio.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('none', () => {
         expect(test.info().annotations).toEqual([]);
       });
@@ -675,7 +675,7 @@ test('tests skipped in serial mode receive onTestBegin/onTestEnd', async ({ runI
     'reporter.ts': smallReporterJS,
     'playwright.config.ts': `module.exports = { reporter: [['./reporter', { printTestStatus: true }]] };`,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test.describe.configure({ mode: 'serial', retries: 1 });
 

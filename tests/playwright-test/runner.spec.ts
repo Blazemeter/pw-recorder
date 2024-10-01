@@ -21,7 +21,7 @@ import { test, expect, parseTestRunnerOutput, countTimes } from './playwright-te
 test('it should not allow multiple tests with the same name per suite', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'tests/example.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.describe('suite', () => {
         test('i-am-a-duplicate', async () => {});
       });
@@ -40,12 +40,12 @@ test('it should not allow multiple tests with the same name per suite', async ({
 test('it should not allow multiple tests with the same name in multiple files', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'tests/example1.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('i-am-a-duplicate', async () => {});
       test('i-am-a-duplicate', async () => {});
     `,
     'tests/example2.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('i-am-a-duplicate', async () => {});
       test('i-am-a-duplicate', async () => {});
     `,
@@ -67,7 +67,7 @@ test('it should not allow a focused test when forbid-only is used', async ({ run
       };
     `,
     'tests/focused-test.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.only('i-am-focused', async () => {});
     `
   });
@@ -80,7 +80,7 @@ test('it should not allow a focused test when forbid-only is used', async ({ run
 test('should continue with other tests after worker process suddenly exits', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passed1', () => {});
       test('passed2', () => {});
       test('failed1', () => { process.exit(0); });
@@ -101,7 +101,7 @@ test('should report subprocess creation error', async ({ runInlineTest }, testIn
       process.exit(42);
     `,
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => {});
       test('does not run', () => {});
       // Infect subprocesses to immediately exit when spawning a worker.
@@ -132,7 +132,7 @@ test('should ignore subprocess creation error because of SIGINT', async ({ inter
       );
     `,
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', () => {});
       test('skipped', () => {});
       // Infect subprocesses to immediately hang when spawning a worker.
@@ -159,7 +159,7 @@ test('sigint should stop workers', async ({ interactWithTestRunner }) => {
 
   const testProcess = await interactWithTestRunner({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('interrupted1', async () => {
         console.log('\\n%%SEND-SIGINT%%1');
         await new Promise(f => setTimeout(f, 3000));
@@ -169,7 +169,7 @@ test('sigint should stop workers', async ({ interactWithTestRunner }) => {
       });
     `,
     'b.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('interrupted2', async () => {
         console.log('\\n%%SEND-SIGINT%%2');
         await new Promise(f => setTimeout(f, 3000));
@@ -179,7 +179,7 @@ test('sigint should stop workers', async ({ interactWithTestRunner }) => {
       });
     `,
   }, { 'workers': 2, 'reporter': 'line,json' }, {
-    PW_TEST_REPORTER: path.join(__dirname, '../../packages/playwright/lib/reporters/json.js'),
+    PW_TEST_REPORTER: path.join(__dirname, '../../packages/pw-recorder/lib/reporters/json.js'),
     PLAYWRIGHT_JSON_OUTPUT_NAME: 'report.json',
   });
   await testProcess.waitForOutput('%%SEND-SIGINT%%', 2);
@@ -212,7 +212,7 @@ test('sigint should stop workers', async ({ interactWithTestRunner }) => {
 test('should use the first occurring error when an unhandled exception was thrown', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'unhandled-exception.spec.js': `
-      const { test: base, expect } = require('@playwright/test');
+      const { test: base, expect } = require('@okep/test');
       const test = base.extend({
         context: async ({}, test) => {
           await test(123)
@@ -244,7 +244,7 @@ test('worker interrupt should report errors', async ({ interactWithTestRunner })
 
   const testProcess = await interactWithTestRunner({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         throwOnTeardown: async ({}, use) => {
           let reject;
@@ -274,7 +274,7 @@ test('worker interrupt should report errors', async ({ interactWithTestRunner })
 test('should not stall when workers are available', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const { writeFile, waitForFile } = require('./utils.js');
       test('fails-1', async ({}, testInfo) => {
         await waitForFile(testInfo, 'lockA');
@@ -289,7 +289,7 @@ test('should not stall when workers are available', async ({ runInlineTest }) =>
       });
     `,
     'b.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const { writeFile, waitForFile } = require('./utils.js');
       test('passes-2', async ({}, testInfo) => {
         console.log('\\n%%passes-2-started');
@@ -340,7 +340,7 @@ test('should not stall when workers are available', async ({ runInlineTest }) =>
 test('should teardown workers that are redundant', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'helper.js': `
-      const { test: base, expect } = require('@playwright/test');
+      const { test: base, expect } = require('@okep/test');
       module.exports = base.extend({
         w: [async ({}, use) => {
           console.log('\\n%%worker setup');
@@ -390,7 +390,7 @@ test('should not hang if test suites in worker are inconsistent with runner', as
     };
     `,
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const { getNames } = require('./names');
       const names = getNames();
       for (const index in names) {
@@ -430,7 +430,7 @@ test('sigint should stop global setup', async ({ interactWithTestRunner }) => {
       };
     `,
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async () => { });
     `,
   }, { 'workers': 1 });
@@ -471,11 +471,11 @@ test('sigint should stop plugins', async ({ interactWithTestRunner }) => {
         }
       }));
       module.exports = {
-        '@playwright/test': { plugins }
+        '@okep/test': { plugins }
       };
     `,
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async () => {
         console.log('testing!');
       });
@@ -520,10 +520,10 @@ test('sigint should stop plugins 2', async ({ interactWithTestRunner }) => {
           console.log('Plugin2 teardown');
         }
       }));
-      module.exports = { '@playwright/test': { plugins } };
+      module.exports = { '@okep/test': { plugins } };
     `,
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async () => {
         console.log('testing!');
       });
@@ -546,7 +546,7 @@ test('sigint should stop plugins 2', async ({ interactWithTestRunner }) => {
 test('should not crash with duplicate titles and .only', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'example.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('non unique title', () => { console.log('do not run me'); });
       test.skip('non unique title', () => { console.log('do not run me'); });
       test.only('non unique title', () => { console.log('do run me'); });
@@ -565,7 +565,7 @@ test('should not crash with duplicate titles and .only', async ({ runInlineTest 
 test('should not crash with duplicate titles and line filter', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'example.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('non unique title', () => { console.log('do not run me'); });
       test.skip('non unique title', () => { console.log('do not run me'); });
       test('non unique title', () => { console.log('do run me'); });
@@ -582,12 +582,12 @@ test('should not crash with duplicate titles and line filter', async ({ runInlin
 test('should not load tests not matching filter', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       console.log('in a.spec.ts');
       test('test1', () => {});
     `,
     'example.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       console.log('in example.spec.ts');
       test('test2', () => {});
   `
@@ -602,7 +602,7 @@ test('should filter by sourcemapped file names', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'gherkin.spec.js': `
 
-import { test } from '@playwright/test';
+import { test } from '@okep/test';
 test('should run', () => {});
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdoZXJraW4uZmVhdHVyZSJdLCJuYW1lcyI6WyJOb25lIl0sIm1hcHBpbmdzIjoiQUFBQUE7QUFBQUE7QUFBQUE7QUFBQUE7QUFBQUE7QUFBQUEiLCJmaWxlIjoiZ2hlcmtpbi5mZWF0dXJlIiwic291cmNlc0NvbnRlbnQiOlsiVGVzdCJdfQ==`,
 
@@ -626,7 +626,7 @@ throw new Error('should not load nomap.spec.js');`,
 test('should not hang on worker error in test file', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'example.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       if (process.env.TEST_WORKER_INDEX)
         process.exit(1);
       test('test 1', async () => {});
@@ -654,7 +654,7 @@ test('fast double SIGINT should be ignored', async ({ interactWithTestRunner }) 
       }
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('interrupted', async ({ }) => {
         console.log('\\n%%SEND-SIGINT%%');
         await new Promise(() => {});
@@ -688,7 +688,7 @@ test('slow double SIGINT should be respected', async ({ interactWithTestRunner }
       }
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('interrupted', async ({ }) => {
         console.log('\\n%%SEND-SIGINT%%');
         await new Promise(() => {});
@@ -729,7 +729,7 @@ test('slow double SIGINT should be respected in reporter.onExit', async ({ inter
       }
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('interrupted', async ({ }) => {
         console.log('\\n%%SEND-SIGINT%%');
         await new Promise(() => {});
@@ -753,7 +753,7 @@ test('slow double SIGINT should be respected in reporter.onExit', async ({ inter
 test('unhandled exception in test.fail should restart worker and continue', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('bad', async () => {
         test.fail();
@@ -800,7 +800,7 @@ test('wait for workers to finish before reporter.onEnd', async ({ runInlineTest 
       }
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('first', async ({ }) => {
         await new Promise(() => {});
       });
@@ -824,7 +824,7 @@ test('wait for workers to finish before reporter.onEnd', async ({ runInlineTest 
 test('should run last failed tests', async ({ runInlineTest }) => {
   const workspace = {
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async () => {});
       test('fail', async () => {
         expect(1).toBe(2);

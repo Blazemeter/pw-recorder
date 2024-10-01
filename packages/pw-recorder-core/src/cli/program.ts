@@ -131,10 +131,10 @@ program
           `    npx playwright install`,
           ``,
           `If your project does not yet depend on Playwright, first install the`,
-          `applicable npm package (most commonly @playwright/test), and`,
+          `applicable npm package (most commonly @okep/test), and`,
           `then run Playwright's install command to download the browsers:`,
           ``,
-          `    npm install @playwright/test`,
+          `    npm install @okep/test`,
           `    npx playwright install`,
           ``,
         ].join('\n'), 1));

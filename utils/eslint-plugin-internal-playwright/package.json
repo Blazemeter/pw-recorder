@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-internal-playwright",
+  "name": "eslint-plugin-internal-pw-recorder",
   "version": "0.0.1",
   "main": "index.js"
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { test } from '@pw-recorder/test';
+import { test } from '@okep/test';
 import os from 'os';
 
 export type PlatformWorkerFixtures = {

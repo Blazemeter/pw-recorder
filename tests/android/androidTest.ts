@@ -17,7 +17,7 @@
 import { baseTest } from '../config/baseTest';
 import type { PageTestFixtures, PageWorkerFixtures } from '../page/pageTestApi';
 import type { AndroidDevice, BrowserContext } from 'pw-recorder-core';
-export { expect } from '@pw-recorder/test';
+export { expect } from '@okep/test';
 
 type AndroidWorkerFixtures = PageWorkerFixtures & {
   androidDevice: AndroidDevice;

@@ -21,7 +21,7 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import { EventEmitter } from '../../../packages/pw-recorder-core/lib/client/eventEmitter';
-import { test, expect } from '@pw-recorder/test';
+import { test, expect } from '@okep/test';
 
 test('emit maxListeners on e', () => {
   const e = new EventEmitter();

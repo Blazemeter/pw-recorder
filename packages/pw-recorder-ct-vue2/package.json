@@ -1,12 +1,12 @@
 {
-  "name": "@pw-recorder/experimental-ct-vue2",
-  "version": "1.49.0-next",
+  "name": "@okep/experimental-ct-vue2",
+  "version": "1.49.3-alpha",
   "description": "Playwright Component Testing for Vue2",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microsoft/playwright.git"
+    "url": "git+https://github.com/microsoft/pw-recorder.git"
   },
-  "homepage": "https://playwright.dev",
+  "homepage": "https://pw-recorder.dev",
   "engines": {
     "node": ">=18"
   },
@@ -30,13 +30,13 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@playwright/experimental-ct-core": "1.49.0-next",
+    "@okep/experimental-ct-core": "1.49.3-alpha",
     "@vitejs/plugin-vue2": "^2.2.0"
   },
   "devDependencies": {
     "vue": "^2.7.14"
   },
   "bin": {
-    "playwright": "cli.js"
+    "pw-recorder": "cli.js"
   }
 }

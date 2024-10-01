@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should configure timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const fastExpect = expect.configure({ timeout: 1 });
       test('pass', async ({ page }) => {
         const time = performance.now();
@@ -38,7 +38,7 @@ test('should configure timeout', async ({ runInlineTest }) => {
 test('should configure message', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'expect-test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const namedExpect = expect.configure({ message: 'x-foo must be visible' });
       test('custom expect message', async ({page}) => {
         await namedExpect(page.locator('x-foo')).toBeVisible({timeout: 1});
@@ -55,7 +55,7 @@ test('should configure message', async ({ runInlineTest }) => {
 test('should prefer local message', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'expect-test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const namedExpect = expect.configure({ message: 'x-foo must be visible' });
       test('custom expect message', async ({page}) => {
         await namedExpect(page.locator('x-foo'), { message: 'overridden' }).toBeVisible({timeout: 1});
@@ -73,7 +73,7 @@ test('should prefer local message', async ({ runInlineTest }) => {
 test('should configure soft', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const softExpect = expect.configure({ soft: true });
       test('should work', () => {
         softExpect(1+1).toBe(3);
@@ -88,7 +88,7 @@ test('should configure soft', async ({ runInlineTest }) => {
 test('should chain configure', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'expect-test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const slowExpect = expect.configure({ timeout: 1 });
       const slowAndSoftExpect = slowExpect.configure({ soft: true });
       test('custom expect message', async ({page}) => {
@@ -105,7 +105,7 @@ test('should chain configure', async ({ runInlineTest }) => {
 test('should cancel effect', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const softExpect = expect.configure({ soft: true });
       const normalExpect = expect.configure({ soft: false });
       test('should work', () => {
@@ -121,7 +121,7 @@ test('should cancel effect', async ({ runInlineTest }) => {
 test('should configure soft poll', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const softExpect = expect.configure({ soft: true });
       test('should fail', async () => {
         let probes = 0;
@@ -141,7 +141,7 @@ test('should configure soft poll', async ({ runInlineTest }) => {
 test('should configure soft after poll', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should pass', async () => {
         await expect.poll(() => true).toBe(true);
         expect.soft(1).toBe(1);

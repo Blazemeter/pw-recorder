@@ -485,7 +485,7 @@ await page1.GotoAsync("about:blank?foo");`);
     const storageFileName = testInfo.outputPath('auth.json');
     const harFileName = testInfo.outputPath('har.har');
     const cli = runCLI([`--save-trace=${traceFileName}`, `--save-storage=${storageFileName}`, `--save-har=${harFileName}`]);
-    await cli.waitFor(`import { test, expect } from '@pw-recorder/test'`);
+    await cli.waitFor(`import { test, expect } from '@okep/test'`);
     await cli.process.kill('SIGINT');
     const { exitCode } = await cli.process.exited;
     expect(exitCode).toBe(130);

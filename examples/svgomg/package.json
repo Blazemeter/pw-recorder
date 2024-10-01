@@ -2,15 +2,15 @@
   "name": "svgomg-tests",
   "version": "0.0.1",
   "scripts": {
-    "test": "playwright test",
-    "ctest": "playwright test --project=chromium",
-    "ftest": "playwright test --project=firefox",
-    "wtest": "playwright test --project=webkit"
+    "test": "pw-recorder test",
+    "ctest": "pw-recorder test --project=chromium",
+    "ftest": "pw-recorder test --project=firefox",
+    "wtest": "pw-recorder test --project=webkit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.17.1"
+    "@okep/test": "^1.17.1"
   }
 }

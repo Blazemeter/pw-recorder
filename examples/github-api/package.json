@@ -2,12 +2,12 @@
   "name": "github-api",
   "version": "0.0.1",
   "scripts": {
-    "test": "playwright test"
+    "test": "pw-recorder test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.17.1"
+    "@okep/test": "^1.17.1"
   }
 }

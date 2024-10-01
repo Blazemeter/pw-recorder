@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { TestType, Locator } from '@playwright/experimental-ct-core';
+import type { TestType, Locator } from '@okep/experimental-ct-core';
 
 type Slot = string | string[];
 type ComponentSlots = Record<string, Slot> & { default?: Slot };
@@ -63,4 +63,4 @@ export const test: TestType<{
   ): Promise<MountResult<Component>>;
 }>;
 
-export { defineConfig, PlaywrightTestConfig, expect, devices } from '@playwright/experimental-ct-core';
+export { defineConfig, PlaywrightTestConfig, expect, devices } from '@okep/experimental-ct-core';

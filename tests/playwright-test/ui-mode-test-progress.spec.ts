@@ -35,7 +35,7 @@ test('should update trace live', async ({ runUITest, server }) => {
 
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('live test', async ({ page }) => {
         await page.goto('${server.PREFIX}/one.html');
         await page.goto('${server.PREFIX}/two.html');
@@ -117,7 +117,7 @@ test('should preserve action list selection upon live trace update', async ({ ru
 
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('live test', async ({ page }) => {
         await page.goto('about:blank');
         await page.setContent('hello');
@@ -180,7 +180,7 @@ test('should update tracing network live', async ({ runUITest, server }) => {
 
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('live test', async ({ page }) => {
         await page.goto('${server.PREFIX}/one.html');
         await page.setContent('hello');
@@ -218,7 +218,7 @@ test('should show trace w/ multiple contexts', async ({ runUITest, server, creat
 
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeEach(async ({ request }) => {
         await request.get('${server.EMPTY_PAGE}');
       });
@@ -250,7 +250,7 @@ test('should show live trace for serial', async ({ runUITest, server, createLatc
 
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       let page;
       test.describe.configure({ mode: 'serial' });
       test.beforeAll(async ({ browser }) => {
@@ -295,7 +295,7 @@ test('should show live trace from hooks', async ({ runUITest, createLatch }) => 
 
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeAll(async ({ browser }) => {
         const page = await browser.newPage();
         ${latch1.blockingCode}

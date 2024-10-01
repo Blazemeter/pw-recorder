@@ -18,7 +18,7 @@ import { test, expect } from './playwright-test-fixtures';
 
 const files = {
   'match-grep/b.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('test AA', () => {
       expect(1 + 1).toBe(2);
     });
@@ -32,7 +32,7 @@ const files = {
     });
   `,
   'match-grep/fdir/c.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('test AA', () => {
       expect(1 + 1).toBe(2);
     });
@@ -46,7 +46,7 @@ const files = {
     });
   `,
   'match-grep/adir/a.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('test AA', () => {
       expect(1 + 1).toBe(2);
     });

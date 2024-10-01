@@ -26,7 +26,7 @@ test('should stop tracing with trace: on-first-retry, when not retrying', async 
       module.exports = { use: { trace: 'on-first-retry' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test.describe('shared', () => {
         let page;
@@ -62,7 +62,7 @@ test('should record api trace', async ({ runInlineTest, server }, testInfo) => {
       module.exports = { use: { trace: 'on' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('pass', async ({request, page}, testInfo) => {
         await page.goto('about:blank');
@@ -154,8 +154,8 @@ test('should not throw with trace: on-first-retry and two retries in the same wo
       module.exports = { use: { trace: 'on-first-retry' } };
     `,
     'helper.ts': `
-      import { test as base } from '@playwright/test';
-      export * from '@playwright/test';
+      import { test as base } from '@okep/test';
+      export * from '@okep/test';
       export const test = base.extend({
         myContext: [async ({ browser }, use) => {
           const c = await browser.newContext();
@@ -180,7 +180,7 @@ test('should not mixup network files between contexts', async ({ runInlineTest, 
       export default { use: { trace: 'on' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       let page1, page2;
 
@@ -217,7 +217,7 @@ test('should save sources when requested', async ({ runInlineTest }, testInfo) =
       };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await page.evaluate(2 + 2);
       });
@@ -241,7 +241,7 @@ test('should not save sources when not requested', async ({ runInlineTest }, tes
       };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await page.evaluate(2 + 2);
       });
@@ -258,7 +258,7 @@ test('should work in serial mode', async ({ runInlineTest }, testInfo) => {
       module.exports = { use: { trace: 'retain-on-failure' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test.describe.serial('serial', () => {
         let page;
@@ -293,7 +293,7 @@ test('should not override trace file in afterAll', async ({ runInlineTest, serve
       module.exports = { use: { trace: 'retain-on-failure' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('test 1', async ({ page }) => {
         await page.goto('about:blank');
@@ -348,14 +348,14 @@ test('should retain traces for interrupted tests', async ({ runInlineTest }, tes
       module.exports = { use: { trace: 'retain-on-failure' }, maxFailures: 1 };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({ page }) => {
         await page.waitForTimeout(2000);
         expect(1).toBe(2);
       });
     `,
     'b.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 2', async ({ page }) => {
         await page.goto('about:blank');
         await page.waitForTimeout(5000);
@@ -373,7 +373,7 @@ test('should retain traces for interrupted tests', async ({ runInlineTest }, tes
 test('should respect --trace', async ({ runInlineTest }, testInfo) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({ page }) => {
         await page.goto('about:blank');
       });
@@ -391,7 +391,7 @@ test('should respect PW_TEST_DISABLE_TRACING', async ({ runInlineTest }, testInf
       export default { use: { trace: 'on' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({ page }) => {
         await page.goto('about:blank');
       });
@@ -407,7 +407,7 @@ for (const mode of ['off', 'retain-on-failure', 'on-first-retry', 'on-all-retrie
   test(`trace:${mode} should not create trace zip artifact if page test passed`, async ({ runInlineTest }) => {
     const result = await runInlineTest({
       'a.spec.ts': `
-        import { test as base, expect } from '@playwright/test';
+        import { test as base, expect } from '@okep/test';
         import fs from 'fs';
         let artifactsDir;
         const test = base.extend({
@@ -430,7 +430,7 @@ for (const mode of ['off', 'retain-on-failure', 'on-first-retry', 'on-all-retrie
   test(`trace:${mode} should not create trace zip artifact if APIRequestContext test passed`, async ({ runInlineTest, server }) => {
     const result = await runInlineTest({
       'a.spec.ts': `
-        import { test as base, expect } from '@playwright/test';
+        import { test as base, expect } from '@okep/test';
         import fs from 'fs';
         let artifactsDir;
         const test = base.extend({
@@ -457,7 +457,7 @@ test(`trace:retain-on-failure should create trace if context is closed before fa
       module.exports = { use: { trace: 'retain-on-failure' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passing test', async ({ page, context }) => {
         await page.goto('about:blank');
         await context.close();
@@ -477,7 +477,7 @@ test(`trace:retain-on-failure should create trace if context is closed before fa
       module.exports = { use: { trace: 'retain-on-failure' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passing test', async ({ page, context }) => {
       });
       test.afterEach(async ({ page, context }) => {
@@ -499,7 +499,7 @@ test(`trace:retain-on-failure should create trace if request context is disposed
       module.exports = { use: { trace: 'retain-on-failure' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passing test', async ({ request }) => {
         expect(await request.get('${server.EMPTY_PAGE}')).toBeOK();
         await request.dispose();
@@ -519,7 +519,7 @@ test('should include attachments by default', async ({ runInlineTest, server }, 
       module.exports = { use: { trace: 'on' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('pass', async ({}, testInfo) => {
         testInfo.attach('foo', { body: 'bar' });
@@ -549,7 +549,7 @@ test('should opt out of attachments', async ({ runInlineTest, server }, testInfo
       module.exports = { use: { trace: { mode: 'on', attachments: false } } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('pass', async ({}, testInfo) => {
         testInfo.attach('foo', { body: 'bar' });
@@ -572,7 +572,7 @@ test('should opt out of attachments', async ({ runInlineTest, server }, testInfo
 test('should record with custom page fixture', async ({ runInlineTest }, testInfo) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
 
       const test = base.extend({
         myPage: async ({ browser }, use) => {
@@ -604,7 +604,7 @@ test('should expand expect.toPass', async ({ runInlineTest }, testInfo) => {
       module.exports = { use: { trace: { mode: 'on' } } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         let i = 0;
         await expect(async () => {
@@ -645,7 +645,7 @@ test('should show non-expect error in trace', async ({ runInlineTest }, testInfo
       module.exports = { use: { trace: { mode: 'on' } } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ page }) => {
         expect(1).toBe(1);
         undefinedVariable1 = 'this throws an exception';
@@ -681,7 +681,7 @@ test('should show error from beforeAll in trace', async ({ runInlineTest }, test
       module.exports = { use: { trace: { mode: 'on' } } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeAll(async () => {
         throw new Error('Oh my!');
       })
@@ -699,7 +699,7 @@ test('should show error from beforeAll in trace', async ({ runInlineTest }, test
 test('should throw when trace fixture is a function', async ({ runInlineTest }, testInfo) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.use({
         trace: async ({}, use) => {
           await use('on');
@@ -721,7 +721,7 @@ test('should not throw when attachment is missing', async ({ runInlineTest }, te
       module.exports = { use: { trace: 'on' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', async ({}) => {
         test.info().attachments.push({ name: 'screenshot', path: 'nothing-to-see-here', contentType: 'image/png' });
       });
@@ -740,7 +740,7 @@ test('should not throw when screenshot on failure fails', async ({ runInlineTest
       module.exports = { use: { trace: 'on', screenshot: 'on' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('has pdf page', async ({ page }) => {
         await page.goto("${server.EMPTY_PAGE}");
         await page.setContent('<a href="/empty.pdf" target="blank">open me!</a>');
@@ -766,7 +766,7 @@ test('should use custom expect message in trace', async ({ runInlineTest }, test
       module.exports = { use: { trace: { mode: 'on' } } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ page }) => {
         await expect(
             page.getByRole('button', { name: 'Find a hotel' }),
@@ -802,7 +802,7 @@ test('should not throw when merging traces multiple times', async ({ runInlineTe
       module.exports = { use: { trace: 'on' } };
     `,
     'a.spec.ts': `
-      import { BrowserContext, expect, Page, test as baseTest } from '@playwright/test';
+      import { BrowserContext, expect, Page, test as baseTest } from '@okep/test';
 
       let pg: Page;
       let ctx: BrowserContext;
@@ -849,7 +849,7 @@ test('should record nested steps, even after timeout', async ({ runInlineTest },
       };
     `,
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fooPage: async ({ page }, use) => {
           expect(1, 'fooPage setup').toBe(1);
@@ -1001,7 +1001,7 @@ test('should attribute worker fixture teardown to the right test', async ({ runI
       };
     `,
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [async ({}, use) => {
           expect(1, 'step in foo setup').toBe(1);
@@ -1042,7 +1042,7 @@ test('should attribute worker fixture teardown to the right test', async ({ runI
 test('trace:retain-on-first-failure should create trace but only on first failure', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ page }) => {
         await page.goto('about:blank');
         expect(true).toBe(false);
@@ -1063,7 +1063,7 @@ test('trace:retain-on-first-failure should create trace but only on first failur
 test('trace:retain-on-first-failure should create trace if context is closed before failure in the test', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ page, context }) => {
         await page.goto('about:blank');
         await context.close();
@@ -1080,7 +1080,7 @@ test('trace:retain-on-first-failure should create trace if context is closed bef
 test('trace:retain-on-first-failure should create trace if context is closed before failure in afterEach', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ page, context }) => {
       });
       test.afterEach(async ({ page, context }) => {
@@ -1099,7 +1099,7 @@ test('trace:retain-on-first-failure should create trace if context is closed bef
 test('trace:retain-on-first-failure should create trace if request context is disposed before failure', async ({ runInlineTest, server }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ request }) => {
         expect(await request.get('${server.EMPTY_PAGE}')).toBeOK();
         await request.dispose();
@@ -1116,7 +1116,7 @@ test('trace:retain-on-first-failure should create trace if request context is di
 test('should not corrupt actions when no library trace is present', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: async ({}, use) => {
           expect(1).toBe(1);
@@ -1151,7 +1151,7 @@ test('should record trace for manually created context in a failed test', async 
 
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ browser }) => {
         const page = await browser.newPage();
         await page.setContent('<script>console.log("from the page");</script>');
@@ -1189,7 +1189,7 @@ test('should not nest top level expect into unfinished api calls ', {
   server.setRoute('/hang', () => {});
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await page.route('**/api', async route => {
           const response = await route.fetch({ url: '${server.PREFIX}/hang' });
@@ -1229,7 +1229,7 @@ test('should record trace after fixture teardown timeout', {
 }, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({}, use) => {
           await use('foo');

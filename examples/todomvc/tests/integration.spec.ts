@@ -1,7 +1,7 @@
 /* eslint-disable notice/notice */
 
-import { test, expect } from '@playwright/test';
-import type { Page } from '@playwright/test';
+import { test, expect } from '@okep/test';
+import type { Page } from '@okep/test';
 
 test.describe.configure({ mode: 'parallel' });
 

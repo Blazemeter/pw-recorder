@@ -19,7 +19,7 @@ import { test, expect } from './ui-mode-fixtures';
 test('should display annotations', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test.describe('suite', {
         annotation: { type: 'suite annotation', description: 'Some content' }
       }, () => {

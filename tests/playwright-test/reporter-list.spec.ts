@@ -33,7 +33,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           ] };
         `,
         'a.test.ts': `
-          const { test, expect } = require('@playwright/test');
+          const { test, expect } = require('@okep/test');
           test('fails', async ({}) => {
             expect(1).toBe(0);
           });
@@ -58,7 +58,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render steps', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('passes', async ({}) => {
             await test.step('outer 1.0', async () => {
               await test.step('inner 1.1', async () => {});
@@ -94,7 +94,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render steps inline', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', async ({}) => {
         await test.step('outer 1.0', async () => {
           await test.step('inner 1.1', async () => {});
@@ -129,7 +129,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render steps in non-TTY mode', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('passes', async ({}) => {
             await test.step('outer 1.0', async () => {
               await test.step('inner 1.1', async () => {});
@@ -159,7 +159,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
       const TTY_WIDTH = 80;
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('passes', async ({}) => {
             console.log('a'.repeat(80) + 'b'.repeat(20));
           });
@@ -178,7 +178,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render retries', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('flaky', async ({}, testInfo) => {
             expect(testInfo.retry).toBe(1);
           });
@@ -203,7 +203,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           ] };
         `,
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('failure in very long name', async ({}) => {
             expect(1).toBe(0);
           });
@@ -244,7 +244,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('render failed test steps', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('passes', async ({}) => {
             await test.step('outer 1.0', async () => {
               await test.step('inner 1.1', async () => {

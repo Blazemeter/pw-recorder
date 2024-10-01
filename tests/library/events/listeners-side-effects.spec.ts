@@ -20,7 +20,7 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import { test, expect } from '@pw-recorder/test';
+import { test, expect } from '@okep/test';
 import { EventEmitter } from '../../../packages/pw-recorder-core/lib/client/eventEmitter';
 
 test('listeners empty check', () => {

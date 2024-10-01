@@ -24,7 +24,7 @@ test('should be able to define config', async ({ runInlineTest }) => {
       module.exports = { timeout: 12345 };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         expect(testInfo.timeout).toBe(12345);
       });
@@ -41,7 +41,7 @@ test('should prioritize project timeout', async ({ runInlineTest }) => {
       module.exports = { timeout: 500, projects: [{ timeout: 10000}, {}] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         await new Promise(f => setTimeout(f, 1500));
       });
@@ -60,7 +60,7 @@ test('should prioritize command line timeout over project timeout', async ({ run
       module.exports = { projects: [{ timeout: 10000}] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         await new Promise(f => setTimeout(f, 1500));
       });
@@ -81,12 +81,12 @@ test('should read config from --config, resolve relative testDir', async ({ runI
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('ignored', async ({}) => {
       });
     `,
     'dir/b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('run', async ({}) => {
       });
     `,
@@ -104,12 +104,12 @@ test('should default testDir to the config file', async ({ runInlineTest }) => {
       module.exports = {};
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('ignored', async ({}) => {
       });
     `,
     'dir/b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('run', async ({}) => {
       });
     `,
@@ -133,7 +133,7 @@ test('should be able to set reporters', async ({ runInlineTest }, testInfo) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async () => {
       });
     `
@@ -154,12 +154,12 @@ test('should support different testDirs', async ({ runInlineTest }) => {
       ] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('runs once', async ({}) => {
       });
     `,
     'dir/b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('runs twice', async ({}) => {
       });
     `,
@@ -186,13 +186,13 @@ test('should allow root testDir and use it for relative paths', async ({ runInli
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', async ({}, testInfo) => {
         expect(1 + 1).toBe(3);
       });
     `,
     'dir/a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fails', async ({}, testInfo) => {
         expect(1 + 1).toBe(3);
       });
@@ -209,12 +209,12 @@ test('should allow root testDir and use it for relative paths', async ({ runInli
 test('should throw when test() is called in config file', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'playwright.config.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('hey', () => {});
       module.exports = {};
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', async ({}) => {
       });
     `,
@@ -231,7 +231,7 @@ test('should filter by project, case-insensitive', async ({ runInlineTest }) => 
       ] };
     `,
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         console.log('%%' + test.info().project.name);
       });
@@ -256,7 +256,7 @@ test('should filter by project wildcard', async ({ runInlineTest }) => {
       };
     `,
     'a.test.js': `
-      const { test } = require('@playwright/test');
+      const { test } = require('@okep/test');
       test('one', async ({}) => {
         console.log('%%' + test.info().project.name);
       });    `
@@ -277,7 +277,7 @@ test('should print nice error when the project wildcard does not match anything'
       ] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         console.log(testInfo.project.name);
       });
@@ -301,7 +301,7 @@ test('should filter by project wildcard and exact name', async ({ runInlineTest 
       };
     `,
     'a.test.js': `
-      const { test } = require('@playwright/test');
+      const { test } = require('@okep/test');
       test('one', async ({}) => {
         console.log('%%' + test.info().project.name);
       });    `
@@ -319,7 +319,7 @@ test('should print nice error when project is unknown', async ({ runInlineTest }
       ] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {});
     `
   }, { project: 'suite3' });
@@ -338,7 +338,7 @@ test('should filter by project list, case-insensitive', async ({ runInlineTest }
       ] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         console.log('%%' + test.info().project.name);
       });
@@ -361,7 +361,7 @@ test('should filter when duplicate project names exist', async ({ runInlineTest 
       ] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         console.log('%%' + test.info().project.name);
       });
@@ -382,7 +382,7 @@ test('should print nice error when some of the projects are unknown', async ({ r
       ] };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         console.log(testInfo.project.name);
       });
@@ -398,7 +398,7 @@ test('should work without config file', async ({ runInlineTest }) => {
       throw new Error('This file should not be required');
     `,
     'dir/a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}) => {
         test.expect(1 + 1).toBe(2);
       });
@@ -421,7 +421,7 @@ test('should inherit use options in projects', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({ foo: ['', {option:true}], bar: ['', {option: true}] });
       test('pass', async ({ foo, bar  }, testInfo) => {
         test.expect(foo).toBe('config');
@@ -446,7 +446,7 @@ test('should support ignoreSnapshots config option', async ({ runInlineTest }) =
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         testInfo.snapshotSuffix = '';
         expect(testInfo.project.name).toMatchSnapshot();
@@ -469,7 +469,7 @@ test('should validate workers option set to percent', async ({ runInlineTest }, 
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async () => {
       });
     `
@@ -486,7 +486,7 @@ test('should throw when workers option is invalid', async ({ runInlineTest }) =>
         };
       `,
     'a.test.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('pass', async () => {
         });
       `
@@ -504,7 +504,7 @@ test('should work with undefined values and base', async ({ runInlineTest }) => 
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}, testInfo) => {
         expect(testInfo.config.updateSnapshots).toBe('missing');
       });
@@ -518,7 +518,7 @@ test('should work with undefined values and base', async ({ runInlineTest }) => 
 test('should have correct types for the config', async ({ runTSC }) => {
   const result = await runTSC({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
 
       export default defineConfig({
         webServer: [
@@ -550,7 +550,7 @@ test('should have correct types for the config', async ({ runTSC }) => {
 test('should not allow tracesDir in launchOptions', async ({ runTSC }) => {
   const result = await runTSC({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
 
       export default defineConfig({
         use: {
@@ -567,7 +567,7 @@ test('should not allow tracesDir in launchOptions', async ({ runTSC }) => {
 test('should merge configs', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'playwright.config.ts': `
-      import { defineConfig, expect } from '@playwright/test';
+      import { defineConfig, expect } from '@okep/test';
       const baseConfig = defineConfig({
         timeout: 10,
         use: {
@@ -617,7 +617,7 @@ test('should merge configs', async ({ runInlineTest }) => {
       expect(defineConfig({}, {}).projects).toBeUndefined();
     `,
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('pass', async ({}) => {});
     `
   });
@@ -627,7 +627,7 @@ test('should merge configs', async ({ runInlineTest }) => {
 test('should merge ct configs', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'playwright.config.ts': `
-      import { defineConfig, expect } from '@playwright/experimental-ct-react';
+      import { defineConfig, expect } from '@okep/experimental-ct-react';
       const baseConfig = defineConfig({
         timeout: 10,
         use: {
@@ -646,16 +646,16 @@ test('should merge ct configs', async ({ runInlineTest }) => {
       expect(derivedConfig).toEqual(expect.objectContaining({
         use: { foo: 1, bar: 2 },
         grep: 'hi',
-        '@playwright/test': expect.objectContaining({
+        '@okep/test': expect.objectContaining({
           babelPlugins: [[expect.stringContaining('tsxTransform.js')]]
         }),
-        '@playwright/experimental-ct-core': expect.objectContaining({
+        '@okep/experimental-ct-core': expect.objectContaining({
           registerSourceFile: expect.stringContaining('registerSource'),
         }),
       }));
     `,
     'a.test.ts': `
-      import { test } from '@playwright/experimental-ct-react';
+      import { test } from '@okep/experimental-ct-react';
       test('pass', async ({}) => {});
     `
   });

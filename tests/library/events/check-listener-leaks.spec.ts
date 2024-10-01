@@ -23,7 +23,7 @@
 import events from 'events';
 import { EventEmitter } from '../../../packages/pw-recorder-core/lib/client/eventEmitter';
 import { setUnderTest } from '../../../packages/pw-recorder-core/lib/utils/debug';
-import { test, expect } from '@pw-recorder/test';
+import { test, expect } from '@okep/test';
 import * as common from './utils';
 
 setUnderTest();

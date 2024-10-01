@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Metadata } from '@playwright/test';
+import type { Metadata } from '@okep/test';
 
 export type Stats = {
   total: number;

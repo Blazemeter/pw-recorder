@@ -27,7 +27,7 @@ test('simple report', async ({ runInlineTest }) => {
       };
     `,
     'dir1/a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -40,7 +40,7 @@ test('simple report', async ({ runInlineTest }) => {
       test.skip('skipped 1', async ({}) => {});
     `,
     'dir2/b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 2', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -50,7 +50,7 @@ test('simple report', async ({ runInlineTest }) => {
       test.skip('skipped 2', async ({}) => {});
     `,
     'c.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 3', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -87,7 +87,7 @@ test('custom report file', async ({ runInlineTest }) => {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -111,7 +111,7 @@ test('report error without snippet', async ({ runInlineTest }) => {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math 1', async ({}) => {
         const e = new Error('My error');
         e.stack = null;
@@ -139,11 +139,11 @@ test('report with worker error', async ({ runInlineTest }) => {
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       throw new Error('My error 1');
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       throw new Error('My error 2');
     `,
   };

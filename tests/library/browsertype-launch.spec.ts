@@ -16,7 +16,7 @@
  */
 
 import { playwrightTest as it, expect } from '../config/browserTest';
-import type { Browser, BrowserContext, Page } from '@pw-recorder/test';
+import type { Browser, BrowserContext, Page } from '@okep/test';
 import { kTargetClosedErrorMessage } from '../config/errors';
 
 it('should reject all promises when browser is closed', async ({ browserType }) => {

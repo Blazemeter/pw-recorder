@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('max-failures should work', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       for (let i = 0; i < 10; ++i) {
         test('fail_' + i, () => {
           expect(true).toBe(false);
@@ -27,7 +27,7 @@ test('max-failures should work', async ({ runInlineTest }) => {
       }
     `,
     'b.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       for (let i = 0; i < 10; ++i) {
         test('fail_' + i, () => {
           expect(true).toBe(false);
@@ -43,7 +43,7 @@ test('max-failures should work', async ({ runInlineTest }) => {
 test('-x should work', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       for (let i = 0; i < 10; ++i) {
         test('fail_' + i, () => {
           expect(true).toBe(false);
@@ -51,7 +51,7 @@ test('-x should work', async ({ runInlineTest }) => {
       }
     `,
     'b.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       for (let i = 0; i < 10; ++i) {
         test('fail_' + i, () => {
           expect(true).toBe(false);
@@ -67,7 +67,7 @@ test('-x should work', async ({ runInlineTest }) => {
 test('max-failures should work with retries', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       for (let i = 0; i < 10; ++i) {
         test('fail_' + i, () => {
           expect(true).toBe(false);
@@ -83,7 +83,7 @@ test('max-failures should work with retries', async ({ runInlineTest }) => {
 test('max-failures should stop workers', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passed', async () => {
         await new Promise(f => setTimeout(f, 2000));
       });
@@ -92,7 +92,7 @@ test('max-failures should stop workers', async ({ runInlineTest }) => {
       });
     `,
     'b.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passed short', async () => {
         await new Promise(f => setTimeout(f, 1));
       });
@@ -124,7 +124,7 @@ test('max-failures should properly shutdown', async ({ runInlineTest }) => {
       export default config;
     `,
     'test1.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.describe('spec 1', () => {
         test('test 1', async () => {
           expect(false).toBeTruthy()
@@ -132,7 +132,7 @@ test('max-failures should properly shutdown', async ({ runInlineTest }) => {
       });
     `,
     'test2.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.describe('spec 2', () => {
         test('test 2', () => {
           expect(true).toBeTruthy()
@@ -163,7 +163,7 @@ test('max-failures should work across phases', async ({ runInlineTest }) => {
       export default config;
     `,
     'example.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', () => {
         const project = test.info().project.name;
         console.log('running ' + project);
@@ -191,7 +191,7 @@ test('max-failures should not consider retries as failures', async ({ runInlineT
       };
     `,
     'example.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test('I fail 9 times 1', () => {
         if (test.info().retry < 9)

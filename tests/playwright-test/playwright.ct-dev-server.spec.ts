@@ -27,7 +27,7 @@ test('should run dev-server and use it for tests', async ({ writeFiles, runInlin
       export const Button = () => <button>Button</button>;
     `,
     'src/button.test.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './button';
 
       test('pass', async ({ mount }) => {

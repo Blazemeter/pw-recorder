@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should get top level stdio', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       console.log('\\n%% top level stdout');
       console.error('\\n%% top level stderr');
       test('is a test', () => {
@@ -42,7 +42,7 @@ test('should get top level stdio', async ({ runInlineTest }) => {
 test('should get stdio from worker fixture teardown', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'helper.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       export const test = base.extend({
         fixture: [ async ({}, run) => {
           console.log('\\n%% worker setup');
@@ -68,7 +68,7 @@ test('should ignore stdio when quiet', async ({ runInlineTest }) => {
       module.exports = { quiet: true };
     `,
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('is a test', () => {
         console.log('\\n%% stdout in a test');
         console.error('\\n%% stderr in a test');
@@ -88,7 +88,7 @@ test('should support console colors but not tty', {
 
   const result = await runInlineTest({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('console log', () => {
         console.log('process.stdout.isTTY = ' + process.stdout.isTTY);
         console.log('process.stderr.isTTY = ' + process.stderr.isTTY);
@@ -107,7 +107,7 @@ test('should support console colors but not tty', {
 test('should not throw type error when using assert', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const assert = require('assert');
       test('assert no type error', () => {
         assert.strictEqual(1, 2);
@@ -121,7 +121,7 @@ test('should not throw type error when using assert', async ({ runInlineTest }) 
 test('should have debug colors by default, but respect DEBUG_COLORS=0', async ({ runInlineTest }) => {
   const files = {
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import debug from 'debug';
       test('passes', () => {
         const dbg = debug('example');

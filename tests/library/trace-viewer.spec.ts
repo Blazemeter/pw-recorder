@@ -20,7 +20,7 @@ import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
 import { expect, playwrightTest } from '../config/browserTest';
-import type { FrameLocator } from '@pw-recorder/test';
+import type { FrameLocator } from '@okep/test';
 
 const test = playwrightTest.extend<TraceViewerFixtures>(traceViewerFixtures);
 

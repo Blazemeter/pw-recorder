@@ -20,12 +20,12 @@ test.describe.configure({ mode: 'parallel', retries });
 
 const basicTestTree = {
   'a.test.ts': `
-    import { test } from '@playwright/test';
+    import { test } from '@okep/test';
     test('first', () => {});
     test('second', () => {});
   `,
   'b.test.ts': `
-    import { test } from '@playwright/test';
+    import { test } from '@okep/test';
     test('third', () => {});
   `,
 };
@@ -68,14 +68,14 @@ test('should show selected test in sources', async ({ runUITest }) => {
 test('should show top-level errors in file', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       const a = 1;
       a = 2;
       test('first', () => {});
       test('second', () => {});
     `,
     'b.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('third', () => {});
     `,
   });
@@ -104,7 +104,7 @@ test('should show top-level errors in file', async ({ runUITest }) => {
 test('should show syntax errors in file', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test'&
+      import { test } from '@okep/test'&
       test('first', () => {});
       test('second', () => {});
     `,
@@ -119,7 +119,7 @@ test('should show syntax errors in file', async ({ runUITest }) => {
   ).toHaveText('a.test.ts');
   await expect(
       page.locator('.CodeMirror .source-line-running'),
-  ).toHaveText(`2      import { test } from '@playwright/test'&`);
+  ).toHaveText(`2      import { test } from '@okep/test'&`);
 
   await expect(
       page.locator('.CodeMirror-linewidget')
@@ -132,7 +132,7 @@ test('should show syntax errors in file', async ({ runUITest }) => {
 test('should load error (dupe tests) indicator on sources', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('first', () => {});
       test('first', () => {});
     `,

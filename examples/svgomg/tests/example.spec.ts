@@ -1,6 +1,6 @@
 /* eslint-disable notice/notice */
 
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@okep/test';
 import fs from 'fs';
 
 test.describe.configure({ mode: 'parallel' });

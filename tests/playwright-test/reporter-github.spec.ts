@@ -30,7 +30,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('print GitHub annotations for success', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('example1', async ({}) => {
             expect(1 + 1).toBe(2);
           });
@@ -45,7 +45,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('print GitHub annotations for failed tests', async ({ runInlineTest }, testInfo) => {
       const result = await runInlineTest({
         'a.test.js': `
-          const { test, expect } = require('@playwright/test');
+          const { test, expect } = require('@okep/test');
           test('example', async ({}) => {
             expect(1 + 1).toBe(3);
           });
@@ -67,7 +67,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
           };
         `,
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('slow test', async ({}) => {
             await new Promise(f => setTimeout(f, 200));
           });
@@ -82,7 +82,7 @@ for (const useIntermediateMergeReport of [false, true] as const) {
     test('print GitHub annotations for global error', async ({ runInlineTest }) => {
       const result = await runInlineTest({
         'a.test.ts': `
-          import { test as base, expect } from '@playwright/test';
+          import { test as base, expect } from '@okep/test';
           const test = base.extend({
             w: [async ({}, use) => {
               await use();

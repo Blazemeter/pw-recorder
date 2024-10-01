@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { defineConfig, devices } from '@pw-recorder/experimental-ct-solid';
+import { defineConfig, devices } from '@okep/experimental-ct-solid';
 import { resolve } from 'path';
 
 export default defineConfig({

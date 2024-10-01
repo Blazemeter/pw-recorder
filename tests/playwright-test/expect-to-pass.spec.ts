@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should retry predicate', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should toPass sync predicate', async () => {
         let i = 0;
         await test.expect(() => {
@@ -44,7 +44,7 @@ test('should retry predicate', async ({ runInlineTest }) => {
 test('should respect timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await test.expect(() => {
           expect(1).toBe(2);
@@ -63,7 +63,7 @@ test('should respect timeout', async ({ runInlineTest }) => {
 test('should not fail when used with web-first assertion', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async ({ page }) => {
         let i = 0;
         await test.expect(async () => {
@@ -80,7 +80,7 @@ test('should not fail when used with web-first assertion', async ({ runInlineTes
 test('should support .not predicate', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should pass', async ({ page }) => {
         let i = 0;
         await test.expect(() => {
@@ -97,7 +97,7 @@ test('should support .not predicate', async ({ runInlineTest }) => {
 test('should respect interval', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         let probes = 0;
         const startTime = Date.now();
@@ -117,7 +117,7 @@ test('should respect interval', async ({ runInlineTest }) => {
 test('should compile', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should poll sync predicate', async ({ page }) => {
         let i = 0;
         test.expect(() => ++i).toPass();
@@ -139,7 +139,7 @@ test('should compile', async ({ runTSC }) => {
 test('should use custom message', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail with custom message', async () => {
         await test.expect(() => {
           expect(1).toBe(3);
@@ -155,7 +155,7 @@ test('should use custom message', async ({ runInlineTest }) => {
 test('should work with soft', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should respect soft', async () => {
         await expect.soft(() => {
           expect(1).toBe(3);
@@ -173,7 +173,7 @@ test('should work with soft', async ({ runInlineTest }) => {
 test('should not accept TimeoutError', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await test.expect(() => {}).not.toPass({ timeout: 1 });
       });
@@ -186,7 +186,7 @@ test('should not accept TimeoutError', async ({ runInlineTest }) => {
 test('should not spin forever', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       let log;
       test('spill toPass', async () => {
         expect(() => {
@@ -208,7 +208,7 @@ test('should not spin forever', async ({ runInlineTest }) => {
 test('should show intermediate result for toPass that spills over test time', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await expect(() => {
           expect(3).toBe(2);
@@ -225,7 +225,7 @@ test('should respect timeout in config file when timeout parameter is not passed
   const result = await runInlineTest({
     'playwright.config.js': `module.exports = { expect: { toPass: { timeout: 100 } } }`,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await test.expect(() => {
           expect(1).toBe(2);
@@ -245,7 +245,7 @@ test('should give priority to timeout parameter over timeout in config file', as
   const result = await runInlineTest({
     'playwright.config.js': `module.exports = { expect: { toPass: { timeout: 100 } } }`,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await test.expect(() => {
           expect(1).toBe(2);
@@ -265,7 +265,7 @@ test('should respect intervals in config file when intervals parameter is not pa
   const result = await runInlineTest({
     'playwright.config.js': `module.exports = { expect: { toPass: { timeout: 2000, intervals: [100, 1000] } } }`,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         let attempt = 0;
         await test.expect(() => {
@@ -284,7 +284,7 @@ test('should give priority to intervals parameter over intervals in config file'
   const result = await runInlineTest({
     'playwright.config.js': `module.exports = { expect: { toPass: { timeout: 2000, intervals: [100] } } }`,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         let attempt = 0;
         await test.expect(() => {

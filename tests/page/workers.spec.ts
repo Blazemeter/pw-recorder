@@ -16,7 +16,7 @@
  */
 
 import { test as it, expect } from './pageTest';
-import type { Worker as PwWorker } from '@pw-recorder/test';
+import type { Worker as PwWorker } from '@okep/test';
 import { attachFrame } from '../config/utils';
 import type { ConsoleMessage } from 'pw-recorder-core';
 import fs from 'fs';

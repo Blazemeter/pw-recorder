@@ -46,16 +46,16 @@ async function globalSetup() {
 
     const builds = await Promise.all([
       build('pw-recorder-core'),
-      build('pw-recorder-test', '@playwright/test'),
+      build('pw-recorder-test', '@okep/test'),
       build('pw-recorder'),
       build('pw-recorder-chromium'),
       build('pw-recorder-firefox'),
       build('pw-recorder-webkit'),
-      build('pw-recorder-browser-chromium', '@playwright/browser-chromium'),
-      build('pw-recorder-browser-firefox', '@playwright/browser-firefox'),
-      build('pw-recorder-browser-webkit', '@playwright/browser-webkit'),
-      build('pw-recorder-ct-react', '@playwright/experimental-ct-react'),
-      build('pw-recorder-ct-core', '@playwright/experimental-ct-core'),
+      build('pw-recorder-browser-chromium', '@okep/browser-chromium'),
+      build('pw-recorder-browser-firefox', '@okep/browser-firefox'),
+      build('pw-recorder-browser-webkit', '@okep/browser-webkit'),
+      build('pw-recorder-ct-react', '@okep/experimental-ct-react'),
+      build('pw-recorder-ct-core', '@okep/experimental-ct-core'),
     ]);
 
     const buildPlaywrightTestPlugin = async () => {

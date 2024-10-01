@@ -19,7 +19,7 @@ import { test, expect, countTimes } from './playwright-test-fixtures';
 test('should handle fixture timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         timeout: async ({}, runTest) => {
           await runTest();
@@ -44,7 +44,7 @@ test('should handle fixture timeout', async ({ runInlineTest }) => {
 test('should handle worker fixture timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         timeout: [async ({}, runTest) => {
           await runTest();
@@ -63,7 +63,7 @@ test('should handle worker fixture timeout', async ({ runInlineTest }) => {
 test('should handle worker fixture error', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         failure: [async ({}, runTest) => {
           throw new Error('Worker failed');
@@ -82,7 +82,7 @@ test('should handle worker fixture error', async ({ runInlineTest }) => {
 test('should handle worker tear down fixture error', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         failure: [async ({}, runTest) => {
           await runTest();
@@ -102,7 +102,7 @@ test('should handle worker tear down fixture error', async ({ runInlineTest }) =
 test('should handle worker tear down fixture error after failed test', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         failure: [async ({}, runTest) => {
           await runTest();
@@ -123,7 +123,7 @@ test('should handle worker tear down fixture error after failed test', async ({ 
 test('should throw when using non-defined super worker fixture', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [async ({ foo }, runTest) => {
           await runTest();
@@ -142,7 +142,7 @@ test('should throw when using non-defined super worker fixture', async ({ runInl
 test('should throw when defining test fixture with the same name as a worker fixture', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'e.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({
         foo: [async ({}, runTest) => {
           await runTest();
@@ -166,7 +166,7 @@ test('should throw when defining test fixture with the same name as a worker fix
 test('should throw when defining worker fixture with the same name as a test fixture', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'e.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({
         foo: [async ({}, runTest) => {
           await runTest();
@@ -190,7 +190,7 @@ test('should throw when defining worker fixture with the same name as a test fix
 test('should throw when worker fixture depends on a test fixture', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'f.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [async ({}, runTest) => {
           await runTest();
@@ -211,7 +211,7 @@ test('should throw when worker fixture depends on a test fixture', async ({ runI
 test('should define the same fixture in two files', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({
         foo: [async ({}, runTest) => {
           await runTest();
@@ -221,7 +221,7 @@ test('should define the same fixture in two files', async ({ runInlineTest }) =>
       test1('works', async ({foo}) => {});
     `,
     'b.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test2 = base.extend({
         foo: [async ({}, runTest) => {
           await runTest();
@@ -238,7 +238,7 @@ test('should define the same fixture in two files', async ({ runInlineTest }) =>
 test('should detect fixture dependency cycle', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'x.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         good1: async ({}, run) => run(),
         foo: async ({bar}, run) => run(),
@@ -259,7 +259,7 @@ test('should detect fixture dependency cycle', async ({ runInlineTest }) => {
 test('should hide boxed fixtures in dependency cycle', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'x.spec.ts': `
-      import { test as base } from '@playwright/test';
+      import { test as base } from '@okep/test';
       const test = base.extend({
         storageState: async ({ context, storageState }, use) => {
           await use(storageState);
@@ -275,7 +275,7 @@ test('should hide boxed fixtures in dependency cycle', async ({ runInlineTest })
 test('should show boxed fixtures in dependency cycle if there are no public fixtures', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'x.spec.ts': `
-      import { test as base } from '@playwright/test';
+      import { test as base } from '@okep/test';
       const test = base.extend({
         f1: [async ({ f2 }, use) => {
           await use(f2);
@@ -294,12 +294,12 @@ test('should show boxed fixtures in dependency cycle if there are no public fixt
 test('should not reuse fixtures from one file in another one', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({ foo: ({}, run) => run() });
       test('test1', async ({}) => {});
     `,
     'b.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test1', async ({}) => {});
       test('test2', async ({foo}) => {});
     `,
@@ -312,7 +312,7 @@ test('should not reuse fixtures from one file in another one', async ({ runInlin
 test('should throw for cycle in two overrides', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({
         foo: async ({}, run) => await run('foo'),
         bar: async ({}, run) => await run('bar'),
@@ -336,7 +336,7 @@ test('should throw for cycle in two overrides', async ({ runInlineTest }) => {
 test('should throw when overridden worker fixture depends on a test fixture', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'f.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({
         foo: async ({}, run) => await run('foo'),
         bar: [ async ({}, run) => await run('bar'), { scope: 'worker' } ],
@@ -356,7 +356,7 @@ test('should throw when overridden worker fixture depends on a test fixture', as
 test('should throw for unknown fixture parameter', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'f.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: async ({ bar }, run) => await run('foo'),
       });
@@ -373,7 +373,7 @@ test('should throw for unknown fixture parameter', async ({ runInlineTest }) => 
 test('should throw when calling runTest twice', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'f.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: async ({}, run) => {
           await run();
@@ -391,7 +391,7 @@ test('should throw when calling runTest twice', async ({ runInlineTest }) => {
 test('should print nice error message for problematic fixtures', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'x.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         bad: [ undefined, { get scope() { throw new Error('oh my!') } } ],
       });
@@ -406,7 +406,7 @@ test('should print nice error message for problematic fixtures', async ({ runInl
 test('should exit with timeout when fixture causes an exception in the test', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         throwAfterTimeout: async ({}, use) => {
           let callback;
@@ -428,7 +428,7 @@ test('should exit with timeout when fixture causes an exception in the test', as
 test('should error for unsupported scope', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         failure: [async ({}, use) => {
           await use();
@@ -445,7 +445,7 @@ test('should error for unsupported scope', async ({ runInlineTest }) => {
 test('should give enough time for fixture teardown', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({ }, use) => {
           await use();
@@ -471,7 +471,7 @@ test('should give enough time for fixture teardown', async ({ runInlineTest }) =
 test('should not give enough time for second fixture teardown after timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture2: async ({ }, use) => {
           await use();
@@ -504,7 +504,7 @@ test('should not give enough time for second fixture teardown after timeout', as
 test('should not teardown when setup times out', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({ }, use) => {
           await new Promise(f => setTimeout(f, 1500));
@@ -526,7 +526,7 @@ test('should not teardown when setup times out', async ({ runInlineTest }) => {
 test('should not report fixture teardown error twice', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({ }, use) => {
           await use();
@@ -547,7 +547,7 @@ test('should not report fixture teardown error twice', async ({ runInlineTest })
 test('should not report fixture teardown timeout twice', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({ }, use) => {
           await use();
@@ -568,7 +568,7 @@ test('should not report fixture teardown timeout twice', async ({ runInlineTest 
 test('should handle fixture teardown error after test timeout and continue', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({ }, use) => {
           await use();
@@ -593,7 +593,7 @@ test('should handle fixture teardown error after test timeout and continue', asy
 test('should report worker fixture teardown with debug info', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: [ async ({ }, use) => {
           await use();
@@ -626,7 +626,7 @@ test('should report worker fixture teardown with debug info', async ({ runInline
 test('should not run user fn when require fixture has failed', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [ async ({ }, use) => {
           console.log('\\n%%foo');
@@ -679,8 +679,8 @@ test('should not run user fn when require fixture has failed', async ({ runInlin
 test('should provide helpful error message when digests do not match', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'helper.ts': `
-      import { test as base } from '@playwright/test';
-      export * from '@playwright/test';
+      import { test as base } from '@okep/test';
+      export * from '@okep/test';
       export const test = base.extend({
         foo: [ async ({}, use) => use(), { scope: 'worker' } ],
       });
@@ -717,7 +717,7 @@ test('should provide helpful error message when digests do not match', async ({ 
 test('tear down base fixture after error in derived', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         context: async ({}, use, testInfo) => {
           console.log('\\n%%context setup ' + testInfo.status);
@@ -746,7 +746,7 @@ test('tear down base fixture after error in derived', async ({ runInlineTest }) 
 test('should not continue with scope teardown after fixture teardown timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         fixture: async ({ }, use) => {
           await use();
@@ -772,7 +772,7 @@ test('should not continue with scope teardown after fixture teardown timeout', a
 test('should report fixture teardown error after test error', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: async ({ }, use) => {
           await use();

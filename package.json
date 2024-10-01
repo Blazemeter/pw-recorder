@@ -1,13 +1,13 @@
 {
   "name": "pw-recorder-internal",
   "private": false,
-  "version": "1.49.0-next",
+  "version": "1.49.3-alpha",
   "description": "A high-level API to automate web browsers",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microsoft/playwright.git"
+    "url": "git+https://github.com/microsoft/pw-recorder.git"
   },
-  "homepage": "https://playwright.dev",
+  "homepage": "https://pw-recorder.dev",
   "engines": {
     "node": ">=18"
   },
@@ -16,20 +16,20 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "ctest": "playwright test --config=tests/library/playwright.config.ts --project=chromium-*",
-    "ftest": "playwright test --config=tests/library/playwright.config.ts --project=firefox-*",
-    "wtest": "playwright test --config=tests/library/playwright.config.ts --project=webkit-*",
-    "atest": "playwright test --config=tests/android/playwright.config.ts",
-    "etest": "playwright test --config=tests/electron/playwright.config.ts",
-    "webview2test": "playwright test --config=tests/webview2/playwright.config.ts",
-    "itest": "playwright test --config=tests/installation/playwright.config.ts",
-    "stest": "playwright test --config=tests/stress/playwright.config.ts",
-    "biditest": "playwright test --config=tests/bidi/playwright.config.ts",
-    "test-html-reporter": "playwright test --config=packages/html-reporter",
-    "test-web": "playwright test --config=packages/web",
-    "ttest": "node ./tests/playwright-test/stable-test-runner/node_modules/@playwright/test/cli test --config=tests/playwright-test/playwright.config.ts",
-    "ct": "playwright test tests/components/test-all.spec.js --reporter=list",
-    "test": "playwright test --config=tests/library/playwright.config.ts",
+    "ctest": "pw-recorder test --config=tests/library/pw-recorder.config.ts --project=chromium-*",
+    "ftest": "pw-recorder test --config=tests/library/pw-recorder.config.ts --project=firefox-*",
+    "wtest": "pw-recorder test --config=tests/library/pw-recorder.config.ts --project=webkit-*",
+    "atest": "pw-recorder test --config=tests/android/pw-recorder.config.ts",
+    "etest": "pw-recorder test --config=tests/electron/pw-recorder.config.ts",
+    "webview2test": "pw-recorder test --config=tests/webview2/pw-recorder.config.ts",
+    "itest": "pw-recorder test --config=tests/installation/pw-recorder.config.ts",
+    "stest": "pw-recorder test --config=tests/stress/pw-recorder.config.ts",
+    "biditest": "pw-recorder test --config=tests/bidi/pw-recorder.config.ts",
+    "test-html-reporter": "pw-recorder test --config=packages/html-reporter",
+    "test-web": "pw-recorder test --config=packages/web",
+    "ttest": "node ./tests/pw-recorder-test/stable-test-runner/node_modules/@okep/test/cli test --config=tests/pw-recorder-test/pw-recorder.config.ts",
+    "ct": "pw-recorder test tests/components/test-all.spec.js --reporter=list",
+    "test": "pw-recorder test --config=tests/library/pw-recorder.config.ts",
     "eslint": "eslint --cache --report-unused-disable-directives --ext ts,tsx,js,jsx,mjs .",
     "tsc": "tsc -p . && tsc -p packages/html-reporter/",
     "build-installer": "babel -s --extensions \".ts\" --out-dir packages/pw-recorder-core/lib/utils/ packages/pw-recorder-core/src/utils",
@@ -45,7 +45,7 @@
     "roll": "node utils/roll_browser.js",
     "check-deps": "node utils/check_deps.js",
     "build-android-driver": "./utils/build_android_driver.sh",
-    "innerloop": "playwright run-server --reuse-browser"
+    "innerloop": "pw-recorder run-server --reuse-browser"
   },
   "workspaces": [
     "packages/*"
@@ -87,7 +87,7 @@
     "electron": "^30.1.2",
     "esbuild": "^0.18.11",
     "eslint": "^8.55.0",
-    "eslint-plugin-internal-playwright": "file:utils/eslint-plugin-internal-playwright",
+    "eslint-plugin-internal-pw-recorder": "file:utils/eslint-plugin-internal-pw-recorder",
     "eslint-plugin-notice": "^0.9.10",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",

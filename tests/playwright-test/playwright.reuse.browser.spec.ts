@@ -40,13 +40,13 @@ test('should reuse browser', async ({ runInlineTest, runServer }) => {
   const server = await runServer();
   const result = await runInlineTest({
     'src/a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('a', async ({ browser }) => {
         console.log('%%' + process.env.TEST_WORKER_INDEX + ':' + browser._guid);
       });
     `,
     'src/b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('b', async ({ browser }) => {
         console.log('%%' + process.env.TEST_WORKER_INDEX + ':' + browser._guid);
       });
@@ -77,13 +77,13 @@ test('should reuse browser with special characters in the launch options', async
       }
     `,
     'src/a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('a', async ({ browser }) => {
         console.log('%%' + process.env.TEST_WORKER_INDEX + ':' + browser._guid);
       });
     `,
     'src/b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('b', async ({ browser }) => {
         console.log('%%' + process.env.TEST_WORKER_INDEX + ':' + browser._guid);
       });
@@ -114,7 +114,7 @@ test('should produce correct test steps', async ({ runInlineTest, runServer }) =
       module.exports = Reporter;
     `,
     'src/a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('a', async ({ page }) => {
         await page.goto('about:blank');
         await page.evaluate(() => console.log('hello'));

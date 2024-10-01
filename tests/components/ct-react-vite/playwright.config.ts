@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { defineConfig, devices } from '@playwright/experimental-ct-react';
+import { defineConfig, devices } from '@okep/experimental-ct-react';
 import { resolve } from 'path';
 
 export default defineConfig({

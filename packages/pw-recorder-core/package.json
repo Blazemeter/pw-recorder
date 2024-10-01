@@ -1,12 +1,12 @@
 {
   "name": "pw-recorder-core",
-  "version": "1.49.0-next",
+  "version": "1.49.3-alpha",
   "description": "A high-level API to automate web browsers",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microsoft/playwright.git"
+    "url": "git+https://github.com/microsoft/pw-recorder.git"
   },
-  "homepage": "https://playwright.dev",
+  "homepage": "https://pw-recorder.dev",
   "engines": {
     "node": ">=18"
   },
@@ -38,7 +38,7 @@
     "./types/structs": "./types/structs.d.ts"
   },
   "bin": {
-    "playwright-core": "cli.js"
+    "pw-recorder-core": "cli.js"
   },
   "types": "types/types.d.ts"
 }

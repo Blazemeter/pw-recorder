@@ -19,14 +19,14 @@ import { test, expect } from './playwright-test-fixtures';
 test('should clear cache with type:module', async ({ runCLICommand }) => {
   const result = await runCLICommand({
     'pw-recorder.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({});
     `,
     'package.json': `
       { "type": "module" }
     `,
     'a.spec.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('example', () => {});
     `,
   }, 'clear-cache');
@@ -36,11 +36,11 @@ test('should clear cache with type:module', async ({ runCLICommand }) => {
 test('should clear cache for ct', async ({ runCLICommand }) => {
   const result = await runCLICommand({
     'pw-recorder.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({});
     `,
     'a.spec.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('example', () => {});
     `,
   }, 'clear-cache', []);

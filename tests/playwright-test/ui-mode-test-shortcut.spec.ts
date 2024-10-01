@@ -20,7 +20,7 @@ test.describe.configure({ mode: 'parallel', retries });
 
 const basicTestTree = {
   'a.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('test 0', () => { test.skip(); });
     test('test 1', () => {});
     test('test 2', async () => { await new Promise(() => {}); });

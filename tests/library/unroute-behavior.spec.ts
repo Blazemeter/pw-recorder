@@ -15,7 +15,7 @@
  */
 
 import { browserTest as it, expect } from '../config/browserTest';
-import type { Route } from '@pw-recorder/test';
+import type { Route } from '@okep/test';
 
 it('context.unroute should not wait for pending handlers to complete', async ({ page, context, server }) => {
   it.info().annotations.push({ type: 'issue', description: 'https://github.com/microsoft/playwright/issues/23781' });

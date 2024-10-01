@@ -21,7 +21,7 @@ import { test, expect, stripAnsi } from './playwright-test-fixtures';
 test('should support spec.ok and stats', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math works!', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -45,7 +45,7 @@ test('should support spec.ok and stats', async ({ runInlineTest }) => {
 test('should not report skipped due to sharding', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', async () => {
       });
       test('two', async () => {
@@ -53,7 +53,7 @@ test('should not report skipped due to sharding', async ({ runInlineTest }) => {
       });
     `,
     'b.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('three', async () => {
       });
       test('four', async () => {
@@ -90,7 +90,7 @@ test('should report projects and stats', async ({ runInlineTest }, testInfo) => 
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math works!', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -122,7 +122,7 @@ test('should report projects and stats', async ({ runInlineTest }, testInfo) => 
 test('should show steps', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math works!', async ({}) => {
         expect(1 + 1).toBe(2);
         await test.step('math works in a step', async () => {
@@ -159,7 +159,7 @@ test('should show steps', async ({ runInlineTest }) => {
 test('should display tags separately from title', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math works! @USR-MATH-001 @USR-MATH-002', { tag: '@foo' }, async ({}) => {
         test.info().annotations.push({ type: 'issue', description: 'issue-link' });
         test.info().annotations.push({ type: 'novalue' });
@@ -174,7 +174,7 @@ test('should display tags separately from title', async ({ runInlineTest }) => {
 test('should have relative always-posix paths', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('math works!', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -192,7 +192,7 @@ test('should have error position in results', async ({
 }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('math works!', async ({}) => {
         expect(1 + 1).toBe(3);
       });
@@ -210,7 +210,7 @@ test('should add dot in addition to file json with CI', async ({ runInlineTest }
       module.exports = { reporter: [['json', { outputFile: 'a.json' }]] };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('one', async ({}) => {
         expect(1).toBe(1);
       });
@@ -227,7 +227,7 @@ test('should add line in addition to file json without CI', async ({ runInlineTe
       module.exports = { reporter: [['json', { outputFile: 'a.json' }]] };
     `,
     'a.test.js': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('one', async ({}) => {
         expect(1).toBe(1);
       });
@@ -240,7 +240,7 @@ test('should add line in addition to file json without CI', async ({ runInlineTe
 test('should have starting time in results', async ({ runInlineTest }, testInfo) => {
   const result = await runInlineTest({
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('math works!', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -258,7 +258,7 @@ test.describe('report location', () => {
         module.exports = { reporter: [['json', { outputFile: '../my-report/a.json' }]] };
       `,
       'nested/project/a.test.js': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('one', async ({}) => {
           expect(1).toBe(1);
         });
@@ -276,7 +276,7 @@ test.describe('report location', () => {
         module.exports = { projects: [ {} ] };
       `,
       'foo/bar/baz/tests/a.spec.js': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         const fs = require('fs');
         test('pass', ({}, testInfo) => {
         });
@@ -297,7 +297,7 @@ test.describe('report location', () => {
         module.exports = { projects: [ {} ] };
       `,
       'foo/bar/baz/tests/a.spec.js': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         const fs = require('fs');
         test('pass', ({}, testInfo) => {
         });
@@ -316,7 +316,7 @@ test.describe('report location', () => {
         module.exports = { projects: [ {} ] };
       `,
       'tests/a.spec.js': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         const fs = require('fs');
         test('pass', ({}, testInfo) => {
         });

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { test, expect } from '@playwright/test';
-import type { Reporter, TestCase } from '@playwright/test/reporter';
+import { test, expect } from '@okep/test';
+import type { Reporter, TestCase } from '@okep/test/reporter';
 
 test.use({ locale: 'en-US' });
 

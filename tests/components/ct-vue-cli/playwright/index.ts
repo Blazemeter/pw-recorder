@@ -1,4 +1,4 @@
-import { beforeMount, afterMount } from '@playwright/experimental-ct-vue/hooks';
+import { beforeMount, afterMount } from '@okep/experimental-ct-vue/hooks';
 import { router } from '../src/router';
 import Button from '../src/components/Button.vue';
 import '../src/assets/index.css';

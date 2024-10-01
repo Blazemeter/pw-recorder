@@ -17,7 +17,7 @@
 import { test, expect, stripAnsi } from './playwright-test-fixtures';
 
 const stepIndentReporter = `
-import { FullConfig, Location, Reporter, Suite, TestStep } from '@playwright/test/reporter';
+import { FullConfig, Location, Reporter, Suite, TestStep } from '@okep/test/reporter';
 import * as path from 'path';
 
 function formatPrefix(str: string) {
@@ -119,7 +119,7 @@ test('should report api step hierarchy', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await test.step('outer step 1', async () => {
           await test.step('inner step 1.1', async () => {});
@@ -163,7 +163,7 @@ test('should report before hooks step error', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeEach(async ({}) => {
         throw new Error('oh my');
       });
@@ -193,7 +193,7 @@ test('should not report nested after hooks', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('timeout', async ({ page }) => {
         await test.step('my step', async () => {
           await new Promise(() => {});
@@ -242,7 +242,7 @@ test('should report test.step from fixtures', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: async ({}, use) => {
           await base.step('setup foo', () => {});
@@ -290,7 +290,7 @@ test('should report expect step locations', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}) => {
         expect(true).toBeTruthy();
       });
@@ -314,7 +314,7 @@ test('should report custom expect steps', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect as baseExpect } from '@playwright/test';
+      import { test, expect as baseExpect } from '@okep/test';
 
       const expect = baseExpect.extend({
         toBeWithinRange(received, floor, ceiling) {
@@ -365,7 +365,7 @@ hook      |Worker Cleanup
 test('should not pass arguments and return value from step', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('steps with return values', async ({ page }) => {
         const v1 = await test.step('my step', (...args) => {
           expect(args.length).toBe(0);
@@ -395,7 +395,7 @@ test('should mark step as failed when soft expect fails', async ({ runInlineTest
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}) => {
         await test.step('outer', async () => {
           await test.step('inner', async () => {
@@ -432,7 +432,7 @@ test('should nest steps based on zones', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeAll(async () => {
         await test.step('in beforeAll', () => {});
       });
@@ -507,7 +507,7 @@ test('should not mark page.close as failed when page.click fails', async ({ runI
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       let page: Page;
 
       test.beforeAll(async ({ browser }) => {
@@ -551,7 +551,7 @@ test('should not propagate errors from within toPass', async ({ runInlineTest })
     'reporter.ts': stepIndentReporter,
     'playwright.config.ts': `module.exports = { reporter: './reporter', };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async () => {
         let i = 0;
         await expect(() => {
@@ -579,7 +579,7 @@ test('should show final toPass error', async ({ runInlineTest }) => {
     'reporter.ts': stepIndentReporter,
     'playwright.config.ts': `module.exports = { reporter: './reporter', };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async () => {
         await expect(() => {
           expect(true).toBe(false);
@@ -606,7 +606,7 @@ test('should propagate nested soft errors', async ({ runInlineTest }) => {
     'reporter.ts': stepIndentReporter,
     'playwright.config.ts': `module.exports = { reporter: './reporter', };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async () => {
         await test.step('first outer', async () => {
           await test.step('first inner', async () => {
@@ -650,7 +650,7 @@ test('should not propagate nested hard errors', async ({ runInlineTest }) => {
     'reporter.ts': stepIndentReporter,
     'playwright.config.ts': `module.exports = { reporter: './reporter', };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async () => {
         await test.step('first outer', async () => {
           await test.step('first inner', async () => {
@@ -694,7 +694,7 @@ test('should step w/o box', async ({ runInlineTest }) => {
     'reporter.ts': stepIndentReporter,
     'playwright.config.ts': `module.exports = { reporter: [['./reporter', { printErrorLocation: true }]], };`,
     'a.test.ts':
-    ` /*1*/ import { test, expect } from '@playwright/test';
+    ` /*1*/ import { test, expect } from '@okep/test';
       /*2*/ test('fail', async () => {
       /*3*/   await test.step('boxed step', async () => {
       /*4*/     expect(1).toBe(2);
@@ -727,7 +727,7 @@ test('should step w/ box', async ({ runInlineTest }) => {
     'reporter.ts': stepIndentReporter,
     'playwright.config.ts': `module.exports = { reporter: [['./reporter', { printErrorLocation: true }]], };`,
     'a.test.ts':
-    ` /*1*/ import { test, expect } from '@playwright/test';
+    ` /*1*/ import { test, expect } from '@okep/test';
       /*2*/ test('fail', async () => {
       /*3*/   const helper = async () => {
       /*4*/     await test.step('boxed step', async () => {
@@ -760,7 +760,7 @@ test('should soft step w/ box', async ({ runInlineTest }) => {
     'reporter.ts': stepIndentReporter,
     'playwright.config.ts': `module.exports = { reporter: [['./reporter', { printErrorLocation: true }]], };`,
     'a.test.ts':
-    ` /*1*/ import { test, expect } from '@playwright/test';
+    ` /*1*/ import { test, expect } from '@okep/test';
       /*2*/ test('fail', async () => {
       /*3*/   const helper = async () => {
       /*4*/     await test.step('boxed step', async () => {
@@ -797,7 +797,7 @@ test('should not generate dupes for named expects', async ({ runInlineTest }) =>
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('timeout', async ({ page }) => {
         await page.setContent('<div style="background:rgb(1,2,3)">hi</div>');
         await expect(page.locator('div'), 'Checking color')
@@ -833,7 +833,7 @@ test('step inside expect.toPass', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({}) => {
         await test.step('step 1', async () => {
           let counter = 0
@@ -881,7 +881,7 @@ test('library API call inside expect.toPass', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({page}) => {
         let counter = 0
         await expect(async () => {
@@ -929,7 +929,7 @@ test('library API call inside expect.poll', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({page}) => {
         let counter = 0
         const a = [];
@@ -981,7 +981,7 @@ test('web assertion inside expect.poll', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await page.setContent('<div>foo</div>');
         let counter = 0
@@ -1032,7 +1032,7 @@ test('should report expect steps', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({}) => {
         expect(true).toBeTruthy();
         expect(false).toBeTruthy();
@@ -1077,7 +1077,7 @@ test('should report api steps', async ({ runInlineTest }) => {
     'reporter.ts': stepIndentReporter,
     'playwright.config.ts': `module.exports = { reporter: [['./reporter', { skipErrorMessage: true }]] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page, request }) => {
         await Promise.all([
           page.waitForNavigation(),
@@ -1157,7 +1157,7 @@ test('should report api step failure', async ({ runInlineTest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('fail', async ({ page }) => {
         await page.setContent('<button></button>');
         await page.click('input', { timeout: 1 });
@@ -1191,7 +1191,7 @@ test('should show nice stacks for locators', async ({ runInlineTest }) => {
     'reporter.ts': stepIndentReporter,
     'playwright.config.ts': `module.exports = { reporter: [['./reporter', { printErrorLocation: true }]] };`,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         await page.setContent('<button></button>');
         const locator = page.locator('button');
@@ -1223,7 +1223,7 @@ test('should allow passing location to test.step', async ({ runInlineTest, runTS
   const result = await runInlineTest({
     'reporter.ts': stepIndentReporter,
     'helper.ts': `
-      import { Location, TestType } from '@playwright/test';
+      import { Location, TestType } from '@okep/test';
 
       export async function dummyStep(test: TestType<{}, {}>, title: string, action: () => void, location: Location) {
         await test.step(title, action, { location });
@@ -1239,7 +1239,7 @@ test('should allow passing location to test.step', async ({ runInlineTest, runTS
       };
     `,
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       import { dummyStep, getCustomLocation } from './helper';
 
       test('custom location test', async () => {
@@ -1258,7 +1258,7 @@ hook      |After Hooks
 
   const { exitCode } = await runTSC({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should work', async () => {
         const location = { file: 'dummy-file.ts', line: 123, column: 45 };
         await test.step('step1', () => {}, { location });

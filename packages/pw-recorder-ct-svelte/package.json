@@ -1,12 +1,12 @@
 {
-  "name": "@pw-recorder/experimental-ct-svelte",
-  "version": "1.49.0-next",
+  "name": "@okep/experimental-ct-svelte",
+  "version": "1.49.3-alpha",
   "description": "Playwright Component Testing for Svelte",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microsoft/playwright.git"
+    "url": "git+https://github.com/microsoft/pw-recorder.git"
   },
-  "homepage": "https://playwright.dev",
+  "homepage": "https://pw-recorder.dev",
   "engines": {
     "node": ">=18"
   },
@@ -30,13 +30,13 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@playwright/experimental-ct-core": "1.49.0-next",
+    "@okep/experimental-ct-core": "1.49.3-alpha",
     "@sveltejs/vite-plugin-svelte": "^3.0.1"
   },
   "devDependencies": {
     "svelte": "^4.2.19"
   },
   "bin": {
-    "playwright": "cli.js"
+    "pw-recorder": "cli.js"
   }
 }

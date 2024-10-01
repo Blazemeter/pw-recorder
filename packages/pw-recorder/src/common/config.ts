@@ -67,7 +67,7 @@ export class FullConfigInternal {
 
     this.configDir = configDir;
     this.configCLIOverrides = configCLIOverrides;
-    const privateConfiguration = (userConfig as any)['@playwright/test'];
+    const privateConfiguration = (userConfig as any)['@okep/test'];
     this.plugins = (privateConfiguration?.plugins || []).map((p: any) => ({ factory: p }));
 
     this.config = {

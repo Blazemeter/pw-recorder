@@ -15,6 +15,6 @@
  * limitations under the License.
  */
 
-const { program } = require('@playwright/experimental-ct-core/lib/program');
+const { program } = require('@okep/experimental-ct-core/lib/program');
 
 program.parse(process.argv);

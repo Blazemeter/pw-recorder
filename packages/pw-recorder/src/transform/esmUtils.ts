@@ -18,7 +18,7 @@ import url from 'url';
 
 const kExperimentalLoaderOptions = [
   '--no-warnings',
-  `--experimental-loader=${url.pathToFileURL(require.resolve('playwright/lib/transform/esmLoader')).toString()}`,
+  `--experimental-loader=${url.pathToFileURL(require.resolve('pw-recorder/lib/transform/esmLoader')).toString()}`,
 ];
 
 export function execArgvWithExperimentalLoaderOptions() {

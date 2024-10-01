@@ -1,6 +1,6 @@
 // @ts-check
 import '../src/assets/index.css';
-import { beforeMount, afterMount } from '@pw-recorder/experimental-ct-svelte/hooks';
+import { beforeMount, afterMount } from '@okep/experimental-ct-svelte/hooks';
 
 export type HooksConfig = {
   route: string;

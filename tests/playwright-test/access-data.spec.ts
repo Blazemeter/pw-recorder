@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should access error in fixture', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'test-error-visible-in-env.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [async ({}, run, testInfo) => {
           await run();
@@ -41,7 +41,7 @@ test('should access error in fixture', async ({ runInlineTest }) => {
 test('should access annotations in fixture', async ({ runInlineTest }) => {
   const { exitCode, report } = await runInlineTest({
     'test-data-visible-in-env.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [async ({}, run, testInfo) => {
           await run();
@@ -76,7 +76,7 @@ test('should report projectName in result', async ({ runInlineTest }) => {
       };
     `,
     'test-data-visible-in-env.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('some test', async ({}, testInfo) => {
       });
     `
@@ -89,7 +89,7 @@ test('should report projectName in result', async ({ runInlineTest }) => {
 test('should access testInfo.attachments in fixture', async ({ runInlineTest }) => {
   const { exitCode, report } = await runInlineTest({
     'test-data-visible-in-env.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: async ({}, run, testInfo) => {
           await run();

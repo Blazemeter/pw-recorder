@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { JSONReport, JSONReportSpec, JSONReportSuite, JSONReportTest, JSONReportTestResult } from '@playwright/test/reporter';
+import type { JSONReport, JSONReportSpec, JSONReportSuite, JSONReportTest, JSONReportTestResult } from '@okep/test/reporter';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
@@ -145,7 +145,7 @@ async function runPlaywrightTest(childProcess: CommonFixtures['childProcess'], b
   const reportFile = path.join(baseDir, 'report.json');
   // When we have useIntermediateMergeReport, we want the JSON reporter only at the merge step.
   const envWithJsonReporter = {
-    PW_TEST_REPORTER: path.join(__dirname, '../../packages/playwright/lib/reporters/json.js'),
+    PW_TEST_REPORTER: path.join(__dirname, '../../packages/pw-recorder/lib/reporters/json.js'),
     PLAYWRIGHT_JSON_OUTPUT_NAME: reportFile,
     ...env,
   };
@@ -472,7 +472,7 @@ export function parseTestRunnerOutput(output: string) {
 }
 
 export const playwrightCtConfigText = `
-import { defineConfig } from '@playwright/experimental-ct-react';
+import { defineConfig } from '@okep/experimental-ct-react';
 export default defineConfig({
   use: {
     ctPort: ${3200 + (+process.env.TEST_PARALLEL_INDEX)}

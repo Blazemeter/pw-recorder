@@ -21,7 +21,7 @@ import path from 'path';
 import type { PageTestFixtures, PageWorkerFixtures } from '../page/pageTestApi';
 import type { TraceViewerFixtures } from '../config/traceViewerFixtures';
 import { traceViewerFixtures } from '../config/traceViewerFixtures';
-export { expect } from '@pw-recorder/test';
+export { expect } from '@okep/test';
 import { TestChildProcess } from '../config/commonFixtures';
 import { chromiumSwitches } from '../../packages/pw-recorder-core/lib/server/chromium/chromiumSwitches';
 

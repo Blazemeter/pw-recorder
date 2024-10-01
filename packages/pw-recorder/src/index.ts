@@ -34,7 +34,7 @@ if ((process as any)['__pw_initiator__']) {
   const originalStackTraceLimit = Error.stackTraceLimit;
   Error.stackTraceLimit = 200;
   try {
-    throw new Error('Requiring @playwright/test second time, \nFirst:\n' + (process as any)['__pw_initiator__'] + '\n\nSecond: ');
+    throw new Error('Requiring @okep/test second time, \nFirst:\n' + (process as any)['__pw_initiator__'] + '\n\nSecond: ');
   } finally {
     Error.stackTraceLimit = originalStackTraceLimit;
   }

@@ -17,7 +17,7 @@
 
 import { ManualPromise } from '../../../packages/pw-recorder-core/lib/utils/manualPromise';
 import { EventEmitter } from '../../../packages/pw-recorder-core/lib/client/eventEmitter';
-import { test, expect } from '@pw-recorder/test';
+import { test, expect } from '@okep/test';
 
 test('should not throw with ignoreErrors', async () => {
   const ee = new EventEmitter();

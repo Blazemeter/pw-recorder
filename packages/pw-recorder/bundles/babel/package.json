@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": false,
   "scripts": {
-    "esbuild": "esbuild ./src/babelBundleImpl.ts --bundle --outdir=../../lib/transform --format=cjs --platform=node --target=ES2019 --external:playwright",
+    "esbuild": "esbuild ./src/babelBundleImpl.ts --bundle --outdir=../../lib/transform --format=cjs --platform=node --target=ES2019 --external:pw-recorder",
     "build": "npm run esbuild -- --minify",
     "watch": "npm run esbuild -- --watch --sourcemap",
     "generate-license": "node ../../../../utils/generate_third_party_notice.js"

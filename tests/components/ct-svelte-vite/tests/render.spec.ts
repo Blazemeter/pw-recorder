@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-svelte';
+import { test, expect } from '@okep/experimental-ct-svelte';
 import type { HooksConfig } from '../playwright';
 import Button from '@/components/Button.svelte';
 import Empty from '@/components/Empty.svelte';

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-vue';
+import { test, expect } from '@okep/experimental-ct-vue';
 import Counter from '@/components/Counter.vue';
 
 test('update props without remounting', async ({ mount }) => {

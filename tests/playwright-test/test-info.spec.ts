@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should work directly', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test 1', async ({}, testInfo) => {
         expect(testInfo.title).toBe('test 1');
       });
@@ -34,8 +34,8 @@ test('should work directly', async ({ runInlineTest }) => {
 test('should work via fixture', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'helper.ts': `
-      import { test as base } from '@playwright/test';
-      export * from '@playwright/test';
+      import { test as base } from '@okep/test';
+      export * from '@okep/test';
       export const test = base.extend({
         title: async ({}, run, testInfo) => {
           await run(testInfo.title);
@@ -58,8 +58,8 @@ test('should work via fixture', async ({ runInlineTest }) => {
 test('should work via test.info', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'helper.ts': `
-      import { test as base } from '@playwright/test';
-      export * from '@playwright/test';
+      import { test as base } from '@okep/test';
+      export * from '@okep/test';
       export const test = base.extend({
         title: async ({}, run) => {
           await run(base.info().title);
@@ -83,7 +83,7 @@ test('should work via test.info', async ({ runInlineTest }) => {
 test('should throw outside test', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.info();
       test('test 1', async ({title}) => {});
     `,

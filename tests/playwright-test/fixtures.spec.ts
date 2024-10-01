@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should work', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({}, test) => await test(123),
       });
@@ -35,7 +35,7 @@ test('should work', async ({ runInlineTest }) => {
 test('should work with comments inside fixtures', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({}, test) => await test(123),
         foo: async ({}, test) => await  test('foo'),
@@ -61,7 +61,7 @@ test('should work with comments inside fixtures', async ({ runInlineTest }) => {
 test('should throw a pretty error if fixtures use rest property', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({...props}, use) => await use(123),
       });
@@ -81,7 +81,7 @@ test('should throw a pretty error if fixtures use rest property', async ({ runIn
 test('should work with a sync test function', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({}, test) => await test(123),
       });
@@ -97,7 +97,7 @@ test('should work with a sync test function', async ({ runInlineTest }) => {
 test('should work with a sync fixture function', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: ({}, use) => {
           use(123);
@@ -115,7 +115,7 @@ test('should work with a sync fixture function', async ({ runInlineTest }) => {
 test('should work with a non-arrow function', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({}, test) => await test(123),
       });
@@ -131,7 +131,7 @@ test('should work with a non-arrow function', async ({ runInlineTest }) => {
 test('should work with a named function', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({}, test) => await test(123),
       });
@@ -147,7 +147,7 @@ test('should work with a named function', async ({ runInlineTest }) => {
 test('should work with renamed parameters', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({}, test) => await test(123),
       });
@@ -163,7 +163,7 @@ test('should work with renamed parameters', async ({ runInlineTest }) => {
 test('should work with destructured object', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({}, test) => await test({ foo: 'foo', bar: { x: 'x', y: 'y' }, baz: 'baz' }),
       });
@@ -183,7 +183,7 @@ test('should work with destructured object', async ({ runInlineTest }) => {
 test('should work with destructured array', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({}, test) => await test(['foo', 'bar', { baz: 'baz' }]),
         more: async ({}, test) => await test(55),
@@ -209,7 +209,7 @@ test('should work with destructured array', async ({ runInlineTest }) => {
 test('should fail if parameters are not destructured', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: async ({}, test) => await test(123),
       });
@@ -230,7 +230,7 @@ test('should fail if parameters are not destructured', async ({ runInlineTest })
 test('should fail with an unknown fixture', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should use asdf', async ({asdf}) => {
         expect(asdf).toBe(123);
       });
@@ -245,7 +245,7 @@ test('should fail with an unknown fixture', async ({ runInlineTest }) => {
 test('should run the fixture every time', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       let counter = 0;
       const test = base.extend({
         asdf: async ({}, test) => await test(counter++),
@@ -268,7 +268,7 @@ test('should only run worker fixtures once', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
       let counter = 0;
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         asdf: [ async ({}, test) => await test(counter++), { scope: 'worker' } ],
       });
@@ -289,7 +289,7 @@ test('should only run worker fixtures once', async ({ runInlineTest }) => {
 test('each file should get their own fixtures', async ({ runInlineTest }) => {
   const { results } = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         worker: [ async ({}, test) => await test('worker-a'), { scope: 'worker' } ],
         test: async ({}, test) => await test('test-a'),
@@ -300,7 +300,7 @@ test('each file should get their own fixtures', async ({ runInlineTest }) => {
       });
     `,
     'b.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         worker: [ async ({}, test) => await test('worker-b'), { scope: 'worker' } ],
         test: async ({}, test) => await test('test-b'),
@@ -311,7 +311,7 @@ test('each file should get their own fixtures', async ({ runInlineTest }) => {
       });
     `,
     'c.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         worker: [ async ({}, test) => await test('worker-c'), { scope: 'worker' } ],
         test: async ({}, test) => await test('test-c'),
@@ -329,7 +329,7 @@ test('tests should be able to share worker fixtures', async ({ runInlineTest }) 
   const { results } = await runInlineTest({
     'worker.js': `
       global.counter = 0;
-      const { test: base, expect } = require('@playwright/test');
+      const { test: base, expect } = require('@okep/test');
       const test = base.extend({
         worker: [ async ({}, test) => await test(global.counter++), { scope: 'worker' } ],
       });
@@ -360,7 +360,7 @@ test('tests should be able to share worker fixtures', async ({ runInlineTest }) 
 test('automatic fixtures should work', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       let counterTest = 0;
       let counterHooksIncluded = 0;
       let counterWorker = 0;
@@ -419,7 +419,7 @@ test('automatic fixtures should work', async ({ runInlineTest }) => {
 test('automatic fixture should start before regular fixture and teardown after', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.use({
         auto: [ async ({}, runTest) => {
           console.log('\\n%%auto-setup');
@@ -448,7 +448,7 @@ test('automatic fixture should start before regular fixture and teardown after',
 test('automatic fixtures should keep workerInfo after conditional skip', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.use({
         automaticTestFixture: [ async ({}, runTest, workerInfo) => {
           await runTest();
@@ -477,7 +477,7 @@ test('tests does not run non-automatic worker fixtures', async ({ runInlineTest 
   const result = await runInlineTest({
     'a.test.ts': `
       let counter = 0;
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         nonAutomaticWorkerFixture: [ async ({}, runTest) => {
           ++counter;
@@ -498,7 +498,7 @@ test('should teardown fixtures after timeout', async ({ runInlineTest }, testInf
   require('fs').writeFileSync(file, '', 'utf8');
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         file: [ ${JSON.stringify(file)}, { scope: 'worker' } ],
         w: [ async ({ file }, runTest) => {
@@ -526,7 +526,7 @@ test('should teardown fixtures after timeout', async ({ runInlineTest }, testInf
 test('should work with two different test objects', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({
         foo: async ({}, test) => await test(123),
       });
@@ -548,7 +548,7 @@ test('should work with two different test objects', async ({ runInlineTest }) =>
 test('should work with overrides calling base', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({
         dep: async ({}, test) => await test('override'),
         foo: async ({}, test) => await test('base'),
@@ -571,7 +571,7 @@ test('should work with overrides calling base', async ({ runInlineTest }) => {
 test('should understand worker fixture params in overrides calling base', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({
         param: [ 'param', { scope: 'worker', option: true }],
       }).extend({
@@ -603,7 +603,7 @@ test('should understand worker fixture params in overrides calling base', async 
 test('should work with two overrides calling base', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test1 = base.extend({
         foo: async ({}, test) => await test('foo'),
         bar: async ({}, test) => await test('bar'),
@@ -624,7 +624,7 @@ test('should work with two overrides calling base', async ({ runInlineTest }) =>
 test('should not create a new worker for test fixtures', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('base test', async ({}, testInfo) => {
         expect(testInfo.workerIndex).toBe(0);
       });
@@ -640,7 +640,7 @@ test('should not create a new worker for test fixtures', async ({ runInlineTest 
       });
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const test2 = test.extend({
         foo: async ({}, run) => {
           console.log('foo-b');
@@ -667,7 +667,7 @@ test('should not create a new worker for test fixtures', async ({ runInlineTest 
 test('should create a new worker for worker fixtures', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('base test', async ({}, testInfo) => {
         console.log('\\n%%base-' + testInfo.workerIndex);
       });
@@ -683,7 +683,7 @@ test('should create a new worker for worker fixtures', async ({ runInlineTest })
       });
     `,
     'b.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       const test2 = test.extend({
         bar: async ({}, run) => {
           console.log('bar-b');
@@ -707,7 +707,7 @@ test('should create a new worker for worker fixtures', async ({ runInlineTest })
 test('should run tests in order', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test1', async ({}, testInfo) => {
         expect(testInfo.workerIndex).toBe(0);
         console.log('\\n%%test1');
@@ -744,7 +744,7 @@ test('should run tests in order', async ({ runInlineTest }) => {
 test('worker fixture should not receive TestInfo', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.use({
         worker: [async ({}, use, info) => {
           expect(info.title).toBe(undefined);
@@ -765,7 +765,7 @@ test('worker fixture should not receive TestInfo', async ({ runInlineTest }) => 
 test('worker teardown errors reflected in timed-out tests', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
         foo: [async ({}, use) => {
           let cb;
@@ -787,7 +787,7 @@ test('worker teardown errors reflected in timed-out tests', async ({ runInlineTe
 test('automatic worker fixtures should start before automatic test fixtures', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test as base, expect } from '@playwright/test';
+      import { test as base, expect } from '@okep/test';
       const test = base.extend({
           autoTest: [async ({}, use) => {
               console.log('\\n%%TEST FIXTURE 1');

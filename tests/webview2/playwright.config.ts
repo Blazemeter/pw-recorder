@@ -17,7 +17,7 @@
 import { config as loadEnv } from 'dotenv';
 loadEnv({ path: path.join(__dirname, '..', '..', '.env') });
 
-import type { Config, PlaywrightTestOptions, PlaywrightWorkerOptions } from '@pw-recorder/test';
+import type { Config, PlaywrightTestOptions, PlaywrightWorkerOptions } from '@okep/test';
 import * as path from 'path';
 
 process.env.PWPAGE_IMPL = 'webview2';

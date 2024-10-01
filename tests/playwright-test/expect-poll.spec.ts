@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should poll predicate', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should poll sync predicate', async () => {
         let i = 0;
         await test.expect.poll(() => ++i).toBe(3);
@@ -44,7 +44,7 @@ test('should poll predicate', async ({ runInlineTest }) => {
 test('should compile', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { test, expect as baseExpect } from '@playwright/test';
+      import { test, expect as baseExpect } from '@okep/test';
       const expect = baseExpect.extend({
         toBeWithinRange() { return { message: () => "is within range", pass: true }; },
       })
@@ -75,7 +75,7 @@ test('should compile', async ({ runTSC }) => {
 test('should respect timeout', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await test.expect.poll(() => false, { timeout: 100 }).toBe(3);
       });
@@ -92,7 +92,7 @@ test('should respect timeout', async ({ runInlineTest }) => {
 test('should fail when passed in non-function', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await test.expect.poll(false).toBe(3);
       });
@@ -105,7 +105,7 @@ test('should fail when passed in non-function', async ({ runInlineTest }) => {
 test('should fail when used with web-first assertion', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async ({ page }) => {
         await test.expect.poll(() => page.locator('body')).toHaveText('foo');
       });
@@ -118,7 +118,7 @@ test('should fail when used with web-first assertion', async ({ runInlineTest })
 test('should time out when running infinite predicate', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async ({ page }) => {
         await test.expect.poll(() => new Promise(x => {}), { timeout: 100 }).toBe(42);
       });
@@ -131,7 +131,7 @@ test('should time out when running infinite predicate', async ({ runInlineTest }
 test('should show error that is thrown from predicate', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async ({ page }) => {
         await test.expect.poll(() => { throw new Error('foo bar baz'); }, { timeout: 100 }).toBe(42);
       });
@@ -144,7 +144,7 @@ test('should show error that is thrown from predicate', async ({ runInlineTest }
 test('should not retry predicate that threw an error', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async ({ page }) => {
         let iteration = 0;
         await test.expect.poll(() => {
@@ -162,7 +162,7 @@ test('should not retry predicate that threw an error', async ({ runInlineTest })
 test('should support .not predicate', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async ({ page }) => {
         let i = 0;
         await test.expect.poll(() => ++i).not.toBeLessThan(3);
@@ -176,7 +176,7 @@ test('should support .not predicate', async ({ runInlineTest }) => {
 test('should support custom matchers', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect as baseExpect } from '@playwright/test';
+      import { test, expect as baseExpect } from '@okep/test';
 
       const expect = baseExpect.extend({
         toBeWithinRange(received, floor, ceiling) {
@@ -210,7 +210,7 @@ test('should support custom matchers', async ({ runInlineTest }) => {
 test('should respect interval', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         let probes = 0;
         const startTime = Date.now();
@@ -227,7 +227,7 @@ test('should respect interval', async ({ runInlineTest }) => {
 test('should show intermediate result for poll that spills over test time', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await test.expect.poll(() => 3).toBe(2);
       });
@@ -241,7 +241,7 @@ test('should show intermediate result for poll that spills over test time', asyn
 test('should propagate promise rejections', { annotation: { type: 'issue', description: 'https://github.com/microsoft/playwright/issues/32256' } }, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await expect.poll(() => Promise.reject('some error')).toBe({ foo: 'baz' });
       });
@@ -254,7 +254,7 @@ test('should propagate promise rejections', { annotation: { type: 'issue', descr
 test('should propagate string exception from async arrow function', { annotation: { type: 'issue', description: 'https://github.com/microsoft/playwright/issues/32256' } }, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await expect.poll(async () => { throw 'some error' }).toBe({ foo: 'baz' });
       });
@@ -269,7 +269,7 @@ test('should show custom message', {
 }, async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should fail', async () => {
         await expect.poll(() => 1, { message: 'custom message', timeout: 500 }).toBe(2);
       });

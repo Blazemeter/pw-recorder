@@ -36,12 +36,12 @@ test('install command should work', async ({ exec, installedSoftwareOnDisk }) =>
   await exec('node sanity.js playwright', { env: { PLAYWRIGHT_BROWSERS_PATH: '0' } });
   await exec('node sanity.js playwright chromium firefox webkit');
 
-  const packages = ['pw-recorder-chromium', 'pw-recorder-firefox', 'pw-recorder-webkit', '@playwright/browser-chromium', '@playwright/browser-firefox', '@playwright/browser-webkit'];
+  const packages = ['pw-recorder-chromium', 'pw-recorder-firefox', 'pw-recorder-webkit', '@okep/browser-chromium', '@okep/browser-firefox', '@okep/browser-webkit'];
   for (const pkg of packages) {
     await test.step(pkg, async () => {
       const result = await exec(`npm i ${pkg}`);
       expect(result).toHaveLoggedSoftwareDownload([]);
-      if (!pkg.includes('@playwright/browser-'))
+      if (!pkg.includes('@okep/browser-'))
         await exec('node sanity.js', pkg, 'chromium firefox webkit');
     });
   }
@@ -81,13 +81,13 @@ test('should print the right install command without browsers', async ({ exec })
 test('subsequent installs works', async ({ exec }) => {
   test.info().annotations.push({ type: 'issue', description: 'https://github.com/microsoft/playwright/issues/1651' });
 
-  await exec('npm i @playwright/browser-chromium');
+  await exec('npm i @okep/browser-chromium');
   // Note: the `npm install` would not actually crash, the error
   // is merely logged to the console. To reproduce the error, we should make
   // sure that script's install.js can be run subsequently without unhandled promise rejections.
   // Note: the flag `--unhandled-rejections=strict` will force node to terminate in case
   // of UnhandledPromiseRejection.
-  await exec('node --unhandled-rejections=strict', path.join('node_modules', '@playwright', 'browser-chromium', 'install.js'));
+  await exec('node --unhandled-rejections=strict', path.join('node_modules', '@okep', 'browser-chromium', 'install.js'));
 });
 
 test('install playwright-chromium should work', async ({ exec, installedSoftwareOnDisk }) => {

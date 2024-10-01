@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should print tsconfig parsing error', async ({ runInlineTest }) => {
   const files = {
     'a.spec.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       test('pass', async () => {});
     `,
     'tsconfig.json': `
@@ -58,21 +58,21 @@ test('should respect path resolver', async ({ runInlineTest }) => {
     }`,
     'a.test.ts': `
       import { foo } from 'util/b';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
     `,
     'b.test.ts': `
       import { foo } from 'util2/b';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
     `,
     'c.test.ts': `
       import { foo } from 'util3';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -99,7 +99,7 @@ test('should respect path resolver', async ({ runInlineTest }) => {
       import { foo } from 'parent-util/b';
       // This import should pick up <root>/tsconfig through the helper
       import { foo as foo2 } from '../helper';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
         expect(testInfo.project.name).toBe(foo2);
@@ -133,14 +133,14 @@ test('should respect baseurl', async ({ runInlineTest }) => {
     }`,
     'a.test.ts': `
       import { foo } from 'util/b';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
     `,
     'b.test.ts': `
       import { foo } from 'util2';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -170,7 +170,7 @@ test('should respect baseurl w/o paths', async ({ runInlineTest }) => {
     'dir2/inner.spec.ts': `
       // This import should pick up ../foo/bar/util/b due to baseUrl.
       import { foo } from 'foo/bar/util/b';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(foo).toBe(42);
       });
@@ -206,7 +206,7 @@ test('should fallback to *:* when baseurl and paths are specified', async ({ run
       import { foo } from 'foo/bar/util/b';
       // This import should pick up ../shared/x due to baseUrl+paths.
       import { x } from 'shared/x';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(foo).toBe(42);
         expect(x).toBe(43);
@@ -235,7 +235,7 @@ test('should use the location of the tsconfig as the paths root when no baseUrl 
     'dir2/inner.spec.ts': `
       // This import should pick up ../foo/bar/util/b due to paths.
       import { foo } from 'foo/bar/util/b';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(foo).toBe(42);
       });
@@ -274,7 +274,7 @@ test('should respect complex path resolver', async ({ runInlineTest }) => {
     }`,
     'a.spec.ts': `
       import { foo } from 'prefix-matchedstar';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -284,7 +284,7 @@ test('should respect complex path resolver', async ({ runInlineTest }) => {
     `,
     'b.spec.ts': `
       import { foo } from 'prefix-matchedstar-suffix';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -294,7 +294,7 @@ test('should respect complex path resolver', async ({ runInlineTest }) => {
     `,
     'c.spec.ts': `
       import { foo } from 'matchedstar-suffix';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -304,7 +304,7 @@ test('should respect complex path resolver', async ({ runInlineTest }) => {
     `,
     'd.spec.ts': `
       import { foo } from 'no-star';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -314,7 +314,7 @@ test('should respect complex path resolver', async ({ runInlineTest }) => {
     `,
     'e.spec.ts': `
       import { foo } from 'longest-prefix';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -329,7 +329,7 @@ test('should respect complex path resolver', async ({ runInlineTest }) => {
     `,
     'f.spec.ts': `
       import { foo } from 'barfoobar';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -339,7 +339,7 @@ test('should respect complex path resolver', async ({ runInlineTest }) => {
     `,
     'g.spec.ts': `
       import { foo } from 'foo/[bar]';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -368,7 +368,7 @@ test('should not use baseurl for relative imports', async ({ runInlineTest }) =>
     'frontend/playwright/tests/forms_cms_standard.spec.ts': `
       // This relative import should not use baseUrl
       import { foo } from '../utils';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(foo).toBe(42);
       });
@@ -412,7 +412,7 @@ test('should not use baseurl for relative imports when dir with same name exists
       // This absolute import should use baseUrl
       import { bar } from '.bar';
 
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(foo).toBe(42);
         expect(index).toBe(42);
@@ -441,7 +441,7 @@ test('should respect path resolver for JS files when allowJs', async ({ runInlin
     }`,
     'a.test.js': `
       const { foo } = require('util/b');
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -468,7 +468,7 @@ test('should not respect path resolver for JS files w/o allowJS', async ({ runIn
     }`,
     'a.test.js': `
       const { foo } = require('util/b');
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -495,14 +495,14 @@ test('should respect path resolver for JS and TS files from jsconfig.json', asyn
     }`,
     'a.test.js': `
       const { foo } = require('util/b');
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
     `,
     'b.test.ts': `
       import { foo } from 'util/b';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(testInfo.project.name).toBe(foo);
       });
@@ -543,7 +543,7 @@ test('should support extends in tsconfig.json', async ({ runInlineTest }) => {
       // This js file is affected by tsconfig because allowJs is inherited.
       // Next line resolve to the final baseUrl ("dir") + relative path mapping ("./foo/bar/util/*").
       const { foo } = require('util/file');
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(foo).toBe('foo');
       });
@@ -573,7 +573,7 @@ test('should resolve paths relative to the originating config when extending and
       // This resolves relative to the base tsconfig that defined path mapping,
       // because there is no baseUrl in the final tsconfig.
       const { foo } = require('~/file');
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(foo).toBe('foo');
       });
@@ -612,7 +612,7 @@ test('should respect tsconfig project references', async ({ runInlineTest }) => 
     `,
     'a.test.ts': `
       import { foo } from 'util/b';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}, testInfo) => {
         expect(foo).toBe('foo');
       });
@@ -660,7 +660,7 @@ test('should respect --tsconfig option', async ({ runInlineTest }) => {
     }`,
     'tests42/a.test.ts': `
       import { foo } from '~/foo';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('test', ({}) => {
         expect(foo).toBe(42);
       });
@@ -685,7 +685,7 @@ test.describe('directory imports', () => {
         export const foo: 'bar';
       `,
       'a.test.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         import { foo } from './foo-pkg';
         test('pass', async () => {
           const bar: 'bar' = foo;
@@ -714,7 +714,7 @@ test.describe('directory imports', () => {
         { "type": "module" }
       `,
       'a.test.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         import { foo } from './foo-pkg';
         test('pass', async () => {
           const bar: 'bar' = foo;
@@ -743,7 +743,7 @@ test.describe('directory imports', () => {
       `,
       'tests/hello.test.ts': `
         import { greet } from '@acme/lib';
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('hello', async ({}) => {
           const foo: number = greet();
           expect(foo).toBe(2);
@@ -787,7 +787,7 @@ test.describe('directory imports', () => {
       `,
       'tests/hello.test.ts': `
         import { greet } from '@acme/lib';
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('hello', async ({}) => {
           const foo: number = greet();
           expect(foo).toBe(2);
@@ -846,7 +846,7 @@ test.describe('directory imports', () => {
       `,
       'example.spec.ts': `
         import { foo } from 'app/pkg';
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('test', ({}) => {
           const bar: number = foo;
           expect(bar).toBe(42);
@@ -893,7 +893,7 @@ test.describe('directory imports', () => {
       `,
       'example.spec.ts': `
         import { foo } from 'app/pkg';
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('test', ({}) => {
           const bar: number = foo;
           expect(bar).toBe(42);
@@ -924,7 +924,7 @@ test.describe('directory imports', () => {
         { "name": "test-project" }
       `,
       'a.test.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         import { foo } from 'foo-pkg';
         test('pass', async () => {
           const bar: 'bar' = foo;
@@ -966,7 +966,7 @@ test.describe('directory imports', () => {
         { "name": "test-project", "type": "module" }
       `,
       'a.test.ts': `
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         import { foo } from 'foo-pkg';
         test('pass', async () => {
           const bar: 'bar' = foo;
@@ -1029,7 +1029,7 @@ test.describe('directory imports', () => {
       `,
       'example.spec.ts': `
         import { filename } from 'app/pkg';
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('test', ({}) => {
           const foo: 'index.js' = filename;
           expect(foo).toBe('index.js');
@@ -1081,7 +1081,7 @@ test.describe('directory imports', () => {
       `,
       'example.spec.ts': `
         import { filename } from 'app/pkg';
-        import { test, expect } from '@playwright/test';
+        import { test, expect } from '@okep/test';
         test('test', ({}) => {
           const foo: 'index.js' = filename;
           expect(foo).toBe('index.js');

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { test, expect } from '@pw-recorder/test';
+import { test, expect } from '@okep/test';
 import { createClock as rawCreateClock, install as rawInstall } from '../../packages/pw-recorder-core/src/server/injected/clock';
 import type { InstallConfig, ClockController, ClockMethods } from '../../packages/pw-recorder-core/src/server/injected/clock';
 

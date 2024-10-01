@@ -1,5 +1,5 @@
 {
-  "name": "playwright-test-plugin",
+  "name": "pw-recorder-test-plugin",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
-    "@playwright/test": "1.x"
+    "@okep/test": "1.x"
   },
   "keywords": [],
   "author": "",

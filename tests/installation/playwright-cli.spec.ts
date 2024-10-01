@@ -25,7 +25,7 @@ test('cli should work', async ({ exec, tmpWorkspace }) => {
     const result = await exec('npx playwright codegen', {
       env: {
         PWTEST_CLI_IS_UNDER_TEST: '1',
-        PWTEST_CLI_AUTO_EXIT_WHEN: '@playwright/test',
+        PWTEST_CLI_AUTO_EXIT_WHEN: '@okep/test',
       }
     });
     expect(result).toContain(`{ page }`);

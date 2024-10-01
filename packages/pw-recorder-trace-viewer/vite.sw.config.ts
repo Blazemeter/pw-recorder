@@ -29,10 +29,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@isomorphic': path.resolve(__dirname, '../pw-recorder-core/src/utils/isomorphic'),
-      '@protocol': path.resolve(__dirname, '../protocol/src'),
+      '@protocol': path.resolve(__dirname, '../pw-recorder-protocol/src'),
       '@testIsomorphic': path.resolve(__dirname, '../pw-recorder-core/src/utils/testIsomorphic'),
-      '@trace': path.resolve(__dirname, '../trace/src'),
-      '@web': path.resolve(__dirname, '../web/src'),
+      '@trace': path.resolve(__dirname, '../pw-recorder-trace/src'),
+      '@web': path.resolve(__dirname, '../pw-recorder-web/src'),
     },
   },
   build: {

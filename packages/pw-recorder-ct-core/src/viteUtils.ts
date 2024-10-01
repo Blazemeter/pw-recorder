@@ -17,12 +17,12 @@
 import fs from 'fs';
 import path from 'path';
 import { debug } from 'pw-recorder-core/lib/utilsBundle';
-import { getUserData } from 'playwright/lib/transform/compilationCache';
+import { getUserData } from 'pw-recorder/lib/transform/compilationCache';
 import type { PlaywrightTestConfig as BasePlaywrightTestConfig } from 'playwright/types/test';
 import type { FullConfig } from 'playwright/types/testReporter';
 import type { InlineConfig, Plugin, TransformResult, UserConfig } from 'vite';
 import type { ImportInfo } from './tsxTransform';
-import { resolveHook } from 'playwright/lib/transform/transform';
+import { resolveHook } from 'pw-recorder/lib/transform/transform';
 
 const log = debug('pw:vite');
 
@@ -195,5 +195,5 @@ export function transformIndexFile(id: string, content: string, templateDir: str
 }
 
 export function frameworkConfig(config: FullConfig): { registerSourceFile: string, frameworkPluginFactory?: () => Promise<Plugin> } {
-  return (config as any)['@playwright/experimental-ct-core'];
+  return (config as any)['@okep/experimental-ct-core'];
 }

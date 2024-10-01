@@ -9,7 +9,7 @@
  * 3. Delete the repo.
  */
 
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@okep/test';
 
 const user = process.env.GITHUB_USER;
 const repo = 'Test-Repo-1';

@@ -19,7 +19,7 @@ import { test, expect } from './playwright-test-fixtures';
 test('should expose request fixture', async ({ runInlineTest, server }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ request }) => {
         const response = await request.get('${server.PREFIX}/simple.json');
         const json = await response.json();
@@ -38,7 +38,7 @@ test('should use baseURL in request fixture', async ({ runInlineTest, server }) 
       module.exports = { use: { baseURL: '${server.PREFIX}' } };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ request }) => {
         const response = await request.get('/simple.json');
         const json = await response.json();
@@ -68,7 +68,7 @@ test('should stop tracing on requestContext.dispose()', async ({ runInlineTest, 
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('hanging request', async ({ page, request }) => {
         const response = await page.goto('${server.EMPTY_PAGE}');
         expect(response.status()).toBe(200);
@@ -84,7 +84,7 @@ test('should stop tracing on requestContext.dispose()', async ({ runInlineTest, 
 test('should hint unrouteAll if failed in the handler', async ({ runInlineTest, server }) => {
   const result = await runInlineTest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('late fetch', async ({ page }) => {
         let closedCallback = () => {};
         const closedPromise = new Promise<void>(f => closedCallback = f);

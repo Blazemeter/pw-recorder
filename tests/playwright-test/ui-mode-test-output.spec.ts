@@ -22,7 +22,7 @@ test.describe.configure({ mode: 'parallel', retries });
 test('should print load errors', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('syntax error', () => {
         await 1;
       });
@@ -35,7 +35,7 @@ test('should print load errors', async ({ runUITest }) => {
 test('should work after theme switch', async ({ runUITest, writeFiles }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('syntax error', async () => {
         console.log('Hello world 1');
       });
@@ -49,7 +49,7 @@ test('should work after theme switch', async ({ runUITest, writeFiles }) => {
   await page.getByLabel('Dark mode').click();
   await writeFiles({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('syntax error', async () => {
         console.log('Hello world 2');
       });
@@ -62,7 +62,7 @@ test('should work after theme switch', async ({ runUITest, writeFiles }) => {
 test('should print buffers', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test } from '@playwright/test';
+      import { test } from '@okep/test';
       import { PassThrough } from 'stream';
       test('print', () => {
         const writable = new PassThrough();
@@ -80,7 +80,7 @@ test('should print buffers', async ({ runUITest }) => {
 test('should show console messages for test', async ({ runUITest }, testInfo) => {
   const { page } = await runUITest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('print', async ({ page }) => {
         await page.evaluate(() => console.log('page message'));
         console.log('node message');
@@ -117,7 +117,7 @@ test('should show console messages for test', async ({ runUITest }, testInfo) =>
 test('should format console messages in page', async ({ runUITest }, testInfo) => {
   const { page } = await runUITest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('print', async ({ page }) => {
         await page.evaluate(async () => {
           console.log('Object %O', { a: 1 });
@@ -159,7 +159,7 @@ test('should format console messages in page', async ({ runUITest }, testInfo) =
 test('should stream console messages live', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('print', async ({ page }) => {
         await page.setContent('<button>Click me</button>');
         const button = page.getByRole('button', { name: 'Click me' });
@@ -186,7 +186,7 @@ test('should stream console messages live', async ({ runUITest }) => {
 test('should print beforeAll console messages once', async ({ runUITest }, testInfo) => {
   const { page } = await runUITest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test.beforeAll(() => {
         console.log('before all log');
       });
@@ -210,7 +210,7 @@ test('should print web server output', async ({ runUITest }, { workerIndex }) =>
   const serverPath = path.join(__dirname, 'assets', 'simple-server.js');
   const { page } = await runUITest({
     'test.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('connect to the server', async ({baseURL, page}) => {
         expect(baseURL).toBe('http://localhost:${port}');
       });

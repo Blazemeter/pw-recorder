@@ -20,7 +20,7 @@ test.describe.configure({ mode: 'parallel', retries });
 
 const basicTestTree = {
   'a.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('passes', () => {});
     test('fails', () => { expect(1).toBe(2); });
     test.describe('suite', () => {
@@ -29,7 +29,7 @@ const basicTestTree = {
     });
   `,
   'b.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('passes', () => {});
     test('fails', () => { expect(1).toBe(2); });
   `,
@@ -59,7 +59,7 @@ test('should filter by explicit tags', async ({ runUITest }) => {
 test('should display native tags and filter by them on click', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('p', () => {});
       test('pwt', { tag: '@smoke' }, () => {});
   `,
@@ -120,7 +120,7 @@ test('should filter by project', async ({ runUITest }) => {
   const { page } = await runUITest({
     ...basicTestTree,
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         projects: [
           { name: 'foo' },
@@ -179,7 +179,7 @@ test('should not hide filtered while running', async ({ runUITest, createLatch }
   const latch = createLatch();
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
       test('fails', async () => {
         ${latch.blockingCode}
@@ -208,7 +208,7 @@ test('should not hide filtered while running', async ({ runUITest, createLatch }
 test('should filter skipped', async ({ runUITest, createLatch }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
       test.skip('fails', async () => {
         expect(1).toBe(2);

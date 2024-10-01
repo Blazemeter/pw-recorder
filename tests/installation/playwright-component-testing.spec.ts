@@ -18,12 +18,12 @@ import path from 'path';
 
 test.slow();
 
-test('pnpm: @playwright/experimental-ct-react should work', async ({ exec, tmpWorkspace, writeFiles }) => {
-  await exec('pnpm add @playwright/experimental-ct-react react react-dom');
+test('pnpm: @okep/experimental-ct-react should work', async ({ exec, tmpWorkspace, writeFiles }) => {
+  await exec('pnpm add @okep/experimental-ct-react react react-dom');
   await exec('pnpm exec playwright install');
   await writeFiles({
     'pw-recorder.config.ts': `
-      import { defineConfig } from '@playwright/experimental-ct-react';
+      import { defineConfig } from '@okep/experimental-ct-react';
       export default defineConfig({});
     `,
     'pw-recorder/index.html': `<script type="module" src="./index.js"></script>`,
@@ -34,7 +34,7 @@ test('pnpm: @playwright/experimental-ct-react should work', async ({ exec, tmpWo
       }
     `,
     'example.spec.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './Button';
 
       test('sample test', async ({ page, mount }) => {
@@ -52,8 +52,8 @@ test('pnpm: @playwright/experimental-ct-react should work', async ({ exec, tmpWo
   await exec('node read-json-report.js', path.join(tmpWorkspace, 'report.json'), '--validate-chromium-project-only');
 });
 
-test('pnpm: JSX inside a @playwright/test should work', async ({ exec, tmpWorkspace, writeFiles }) => {
-  await exec('pnpm add @playwright/test');
+test('pnpm: JSX inside a @okep/test should work', async ({ exec, tmpWorkspace, writeFiles }) => {
+  await exec('pnpm add @okep/test');
   await exec('pnpm exec playwright install');
   await writeFiles({
     'Button.tsx': `
@@ -62,7 +62,7 @@ test('pnpm: JSX inside a @playwright/test should work', async ({ exec, tmpWorksp
       }
     `,
     'example.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       import { Button } from './Button';
 
       test('sample test', async ({ page }) => {
@@ -70,6 +70,6 @@ test('pnpm: JSX inside a @playwright/test should work', async ({ exec, tmpWorksp
       });
     `,
   });
-  await exec(`node node_modules/@playwright/test/cli.js test --browser=chromium --reporter=list,json example.spec.ts`, { env: { PLAYWRIGHT_JSON_OUTPUT_NAME: 'report.json' } });
+  await exec(`node node_modules/@okep/test/cli.js test --browser=chromium --reporter=list,json example.spec.ts`, { env: { PLAYWRIGHT_JSON_OUTPUT_NAME: 'report.json' } });
   await exec('node read-json-report.js', path.join(tmpWorkspace, 'report.json'), '--validate-chromium-project-only');
 });

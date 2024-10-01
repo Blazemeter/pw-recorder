@@ -20,7 +20,7 @@ test.describe.configure({ mode: 'parallel', retries });
 
 const basicTestTree = {
   'a.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('passes', () => {});
     test('fails', () => {});
     test.describe('suite', () => {
@@ -29,7 +29,7 @@ const basicTestTree = {
     });
   `,
   'b.test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('passes', () => {});
     test('fails', () => {});
   `,
@@ -49,7 +49,7 @@ test('should pick new / deleted files', async ({ runUITest, writeFiles, deleteFi
 
   await writeFiles({
     'c.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
       test('fails', () => {});
     `
@@ -94,7 +94,7 @@ test('should pick new / deleted tests', async ({ runUITest, writeFiles, deleteFi
 
   await writeFiles({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
       test('new', () => {});
       test('fails', () => {});
@@ -115,7 +115,7 @@ test('should pick new / deleted tests', async ({ runUITest, writeFiles, deleteFi
 
   await writeFiles({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('new', () => {});
     `
   });
@@ -135,7 +135,7 @@ test('should not loose run information after execution if test wrote into testDi
     'a.test.ts': `
       import fs from 'fs';
       import path from 'path';
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {
         fs.writeFileSync(path.join(test.info().project.testDir, 'something.txt'), 'hi');
       });
@@ -181,7 +181,7 @@ test('should pick new / deleted nested tests', async ({ runUITest, writeFiles, d
 
   await writeFiles({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
       test.describe('suite', () => {
         test('inner new', () => {});
@@ -202,7 +202,7 @@ test('should pick new / deleted nested tests', async ({ runUITest, writeFiles, d
 test('should update test locations', async ({ runUITest, writeFiles }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('passes', () => {});
     `,
   });
@@ -233,7 +233,7 @@ test('should update test locations', async ({ runUITest, writeFiles }) => {
 
   await writeFiles({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('new-test', () => {});
 
       test('passes', () => {});

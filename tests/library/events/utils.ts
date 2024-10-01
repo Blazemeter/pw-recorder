@@ -19,7 +19,7 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import { expect } from '@pw-recorder/test';
+import { expect } from '@okep/test';
 
 export const mustNotCall = (msg?: string) => {
   return function mustNotCall() {

@@ -27,7 +27,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@web': path.resolve(__dirname, '../web/src'),
+      '@web': path.resolve(__dirname, '../pw-recorder-web/src'),
     },
   },
   build: {

@@ -62,10 +62,11 @@ export class RecorderApp extends EventEmitter implements IRecorderApp {
     await syncLocalStorageWithSettings(this._page, 'recorder');
 
     await this._page._setServerRequestInterceptor(route => {
-      if (!route.request().url().startsWith('https://playwright/'))
+      if (!route.request().url().startsWith('https://pw-recorder/'))
         return false;
 
-      const uri = route.request().url().substring('https://playwright/'.length);
+      const uri = route.request().url().substring('https://pw-recorder/'.length);
+      console.log(uri)
       const file = require.resolve('../../vite/recorder/' + uri);
       fs.promises.readFile(file).then(buffer => {
         route.fulfill({
@@ -88,7 +89,7 @@ export class RecorderApp extends EventEmitter implements IRecorderApp {
     });
 
     const mainFrame = this._page.mainFrame();
-    await mainFrame.goto(serverSideCallMetadata(), 'https://playwright/index.html');
+    await mainFrame.goto(serverSideCallMetadata(), 'https://pw-recorder/index.html');
   }
 
   static factory(context: BrowserContext): IRecorderAppFactory {

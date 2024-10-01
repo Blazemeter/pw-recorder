@@ -22,7 +22,7 @@ test.describe.configure({ mode: 'parallel', retries });
 test('should merge trace events', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('trace test', async ({ page }) => {
         await page.setContent('<button>Submit</button>');
         expect(1).toBe(1);
@@ -51,7 +51,7 @@ test('should merge trace events', async ({ runUITest }) => {
 test('should merge web assertion events', async ({  runUITest }, testInfo) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('trace test', async ({ page }) => {
         await page.setContent('<button>Submit</button>');
         await expect(page.locator('button')).toBeVisible();
@@ -76,7 +76,7 @@ test('should merge web assertion events', async ({  runUITest }, testInfo) => {
 test('should merge screenshot assertions', async ({  runUITest }, testInfo) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('trace test', async ({ page }) => {
         await page.setContent('<button>Submit</button>');
         await expect(page.locator('button')).toHaveScreenshot();
@@ -104,7 +104,7 @@ test('should merge screenshot assertions', async ({  runUITest }, testInfo) => {
 test('should locate sync assertions in source', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('trace test', async ({}) => {
         expect(1).toBe(1);
       });
@@ -123,7 +123,7 @@ test('should locate sync assertions in source', async ({ runUITest }) => {
 test('should show snapshots for sync assertions', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('trace test', async ({ page }) => {
         await page.setContent('<button>Submit</button>');
         await page.getByRole('button').click();
@@ -161,7 +161,7 @@ test('should show image diff', async ({ runUITest }) => {
     `,
     'snapshot.png': createImage(100, 100, 255, 0, 0),
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('vrt test', async ({ page }) => {
         await page.setViewportSize({ width: 100, height: 100 });
         await expect(page).toHaveScreenshot('snapshot.png', { timeout: 2000 });
@@ -188,7 +188,7 @@ test('should show screenshot', async ({ runUITest }) => {
       };
     `,
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('vrt test', async ({ page }) => {
       });
     `,
@@ -203,7 +203,7 @@ test('should show screenshot', async ({ runUITest }) => {
 test('should not fail on internal page logs', async ({ runUITest, server }) => {
   const { page } = await runUITest({
     'a.test.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ browser }, testInfo) => {
         const context = await browser.newContext({ storageState: { cookies: [], origins: [] } });
         const page = await context.newPage();
@@ -232,7 +232,7 @@ test('should not fail on internal page logs', async ({ runUITest, server }) => {
 test('should not show caught errors in the errors tab', async ({ runUITest }, testInfo) => {
   const { page } = await runUITest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }, testInfo) => {
         await page.setContent("<input id='checkbox' type='checkbox'></input>");
         await expect(page.locator('input')).toBeChecked({ timeout: 1 }).catch(() => {});
@@ -264,7 +264,7 @@ test('should not show caught errors in the errors tab', async ({ runUITest }, te
 test('should reveal errors in the sourcetab', async ({ runUITest }) => {
   const { page } = await runUITest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page }) => {
         throw new Error('Oh my');
       });
@@ -290,7 +290,7 @@ test('should reveal errors in the sourcetab', async ({ runUITest }) => {
 test('should show request source context id', async ({ runUITest, server }) => {
   const { page } = await runUITest({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('pass', async ({ page, context, request }) => {
         await page.goto('${server.EMPTY_PAGE}');
         const page2 = await context.newPage();

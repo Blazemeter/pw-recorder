@@ -17,7 +17,7 @@
 import type { TestServer } from 'tests/config/testserver';
 import type { Recorder } from './inspectorTest';
 import { test, expect } from './inspectorTest';
-import type { Page } from '@pw-recorder/test';
+import type { Page } from '@okep/test';
 
 test.describe('cli codegen', () => {
   test.skip(({ mode }) => mode !== 'default');

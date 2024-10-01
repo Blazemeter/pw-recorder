@@ -35,7 +35,7 @@ const testFiles = {
     import os from 'os';
     import path from 'path';
 
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
 
     test.describe('shared', () => {
       let page;
@@ -195,7 +195,7 @@ test('should work with screenshot: only-on-failure', async ({ runInlineTest }, t
 test('should work with screenshot: only-on-failure & fullPage', async ({ runInlineTest, server }, testInfo) => {
   const result = await runInlineTest({
     'artifacts.spec.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
 
     test('should fail and take fullPage screenshots', async ({ page }) => {
       await page.setViewportSize({ width: 500, height: 500 });
@@ -377,7 +377,7 @@ test('should take screenshot when page is closed in afterEach', async ({ runInli
       module.exports = { use: { screenshot: 'on' } };
     `,
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
 
       test.afterEach(async ({ page }) => {
         await page.close();

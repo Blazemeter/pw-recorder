@@ -22,7 +22,7 @@ test.describe.configure({ mode: 'parallel', retries });
 test('should run global setup and teardown', async ({ runUITest }, testInfo) => {
   const { page, testProcess } = await runUITest({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         globalSetup: './globalSetup',
         globalTeardown: './globalTeardown.ts',
@@ -42,7 +42,7 @@ test('should run global setup and teardown', async ({ runUITest }, testInfo) => 
       };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should work', async ({}) => {});
     `
   }, undefined, { additionalArgs: ['--output=foo'] });
@@ -67,7 +67,7 @@ test('should teardown on sigint', async ({ runUITest, nodeVersion }) => {
 
   const { page, testProcess } = await runUITest({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         globalSetup: './globalSetup',
         globalTeardown: './globalTeardown.ts',
@@ -80,7 +80,7 @@ test('should teardown on sigint', async ({ runUITest, nodeVersion }) => {
       export default () => console.log('\\n%%from-global-teardown');
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should work', async ({}) => {});
     `
   });
@@ -98,7 +98,7 @@ test('should teardown on sigint', async ({ runUITest, nodeVersion }) => {
 test('should show errors in config', async ({ runUITest }) => {
   const { page } = await runUITest({
     'playwright.config.ts': `
-      import { defineConfig, devices } from '@playwright/test';
+      import { defineConfig, devices } from '@okep/test';
       throw new Error("URL is empty")
     `,
   });
@@ -108,7 +108,7 @@ test('should show errors in config', async ({ runUITest }) => {
 
 const testsWithSetup = {
   'playwright.config.ts': `
-    import { defineConfig } from '@playwright/test';
+    import { defineConfig } from '@okep/test';
     export default defineConfig({
       projects: [
         { name: 'setup', teardown: 'teardown', testMatch: 'setup.ts' },
@@ -118,19 +118,19 @@ const testsWithSetup = {
     });
   `,
   'setup.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('setup', async ({}) => {
       console.log('from-setup');
     });
   `,
   'test.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('test', async ({}) => {
       console.log('from-test');
     });
   `,
   'teardown.ts': `
-    import { test, expect } from '@playwright/test';
+    import { test, expect } from '@okep/test';
     test('teardown', async ({}) => {
       console.log('from-teardown');
     });
@@ -230,7 +230,7 @@ for (const useWeb of [true, false]) {
       test.skip(nodeVersion.major < 18);
       const { page, testProcess } = await runUITest({
         'playwright.config.ts': `
-          import { defineConfig } from '@playwright/test';
+          import { defineConfig } from '@okep/test';
           export default defineConfig({
             globalTeardown: './globalTeardown.ts',
           });
@@ -243,7 +243,7 @@ for (const useWeb of [true, false]) {
           };
         `,
         'a.test.js': `
-          import { test, expect } from '@playwright/test';
+          import { test, expect } from '@okep/test';
           test('should work', async ({}) => {});
         `
       }, null, { useWeb });
@@ -264,7 +264,7 @@ test('should restart webserver on reload', async ({ runUITest }) => {
 
   const { page } = await runUITest({
     'playwright.config.ts': `
-      import { defineConfig } from '@playwright/test';
+      import { defineConfig } from '@okep/test';
       export default defineConfig({
         webServer: {
           command: 'node ${JSON.stringify(SIMPLE_SERVER_PATH)} ${port}',
@@ -274,7 +274,7 @@ test('should restart webserver on reload', async ({ runUITest }) => {
       });
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('should work', async ({ page }) => {
         await page.goto('http://localhost:${port}');
       });

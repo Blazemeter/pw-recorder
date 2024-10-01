@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Fixtures } from '@pw-recorder/test';
+import type { Fixtures } from '@okep/test';
 import path from 'path';
 import { TestServer } from './testserver';
 import { TestProxy } from './proxy';

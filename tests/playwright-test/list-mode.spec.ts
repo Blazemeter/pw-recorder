@@ -24,7 +24,7 @@ test('should list tests', async ({ runInlineTest }) => {
       module.exports = { projects: [{ name: 'foo' }, {}] };
     `,
     'a.test.js': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('example1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -50,7 +50,7 @@ test('should list tests to stdout when JSON reporter outputs to a file', async (
       module.exports = { projects: [{ name: 'foo' }, {}] };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('example1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -87,13 +87,13 @@ test('globalSetup and globalTeardown should not run', async ({ runInlineTest }) 
       };
     `,
     'a.test.js': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('should work 1', async ({}, testInfo) => {
         console.log('Running test 1');
       });
     `,
     'b.test.js': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('should work 2', async ({}, testInfo) => {
         console.log('Running test 2');
       });
@@ -116,7 +116,7 @@ test('outputDir should not be removed', async ({ runInlineTest }, testInfo) => {
       module.exports = { outputDir: ${JSON.stringify(outputDir)} };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('my test', async ({}, testInfo) => {
         console.log(testInfo.outputDir);
         require('fs').writeFileSync(testInfo.outputPath('myfile.txt'), 'hello');
@@ -131,7 +131,7 @@ test('outputDir should not be removed', async ({ runInlineTest }, testInfo) => {
       module.exports = { outputDir: ${JSON.stringify(outputDir)} };
     `,
     'a.test.js': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('my test', async ({}, testInfo) => {
         console.log(testInfo.outputDir);
       });
@@ -155,7 +155,7 @@ test('should report errors', async ({ runInlineTest }) => {
 test('should ignore .only', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'a.test.js': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('example1', async ({}) => {
         expect(1 + 1).toBe(2);
       });
@@ -204,7 +204,7 @@ test('should list tests once', async ({ runInlineTest }) => {
       module.exports = { };
     `,
     'a.test.js': `
-      const { test, expect } = require('@playwright/test');
+      const { test, expect } = require('@okep/test');
       test('test 1', ({}) => {});
     `
   }, { 'list': true });

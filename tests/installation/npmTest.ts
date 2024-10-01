@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { _baseTest as _test, expect as _expect } from '@playwright/test';
+import { _baseTest as _test, expect as _expect } from '@okep/test';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Fixtures, FrameLocator, Locator, Page, Browser, BrowserContext } from '@pw-recorder/test';
+import type { Fixtures, FrameLocator, Locator, Page, Browser, BrowserContext } from '@okep/test';
 import { step } from './baseTest';
 import { runTraceViewerApp } from '../../packages/pw-recorder-core/lib/server';
 
@@ -26,7 +26,7 @@ type BaseWorkerFixtures = {
   headless: boolean;
   browser: Browser;
   browserName: 'chromium' | 'firefox' | 'webkit';
-  playwright: typeof import('@pw-recorder/test');
+  playwright: typeof import('@okep/test');
 };
 
 export type TraceViewerFixtures = {

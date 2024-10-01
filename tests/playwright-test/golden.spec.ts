@@ -21,8 +21,8 @@ import { test, expect, createWhiteImage, paintBlackPixels } from './playwright-t
 
 const files = {
   'helper.ts': `
-    import { test as base } from '@playwright/test';
-    export { expect } from '@playwright/test';
+    import { test as base } from '@okep/test';
+    export { expect } from '@okep/test';
     export const test = base.extend({
       auto: [ async ({}, run, testInfo) => {
         testInfo.snapshotSuffix = '';
@@ -163,7 +163,7 @@ test('should generate separate actual results for repeating names', async ({ run
 test('should compile with different option combinations', async ({ runTSC }) => {
   const result = await runTSC({
     'a.spec.ts': `
-      import { test, expect } from '@playwright/test';
+      import { test, expect } from '@okep/test';
       test('is a test', async ({ page }) => {
         expect('foo').toMatchSnapshot();
         expect('foo').toMatchSnapshot({ threshold: 0.2 });
@@ -897,8 +897,8 @@ test('should use snapshotDir with nested test suite and path segments', async ({
 test('should use project snapshotDir over base snapshotDir', async ({ runInlineTest }) => {
   const result = await runInlineTest({
     'helper.ts': `
-      import { test as base } from '@playwright/test';
-      export { expect } from '@playwright/test';
+      import { test as base } from '@okep/test';
+      export { expect } from '@okep/test';
       export const test = base.extend({
         auto: [ async ({}, run, testInfo) => {
           testInfo.snapshotSuffix = 'suffix';

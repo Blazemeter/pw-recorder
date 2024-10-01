@@ -20,11 +20,11 @@ test.describe.configure({ mode: 'parallel', retries });
 
 const basicTestTree = {
   'playwright.config.ts': `
-    import { defineConfig } from '@playwright/experimental-ct-react';
+    import { defineConfig } from '@okep/experimental-ct-react';
     export default defineConfig({
       use: {
         ctPort: ${3200 + (+process.env.TEST_PARALLEL_INDEX)}
-      }  
+      }
     });
   `,
   'playwright/index.html': `<script type="module" src="./index.ts"></script>`,
@@ -33,7 +33,7 @@ const basicTestTree = {
     export const Button = () => <button>Button</button>;
   `,
   'src/button.test.tsx': `
-    import { test, expect } from '@playwright/experimental-ct-react';
+    import { test, expect } from '@okep/experimental-ct-react';
     import { Button } from './button';
 
     test('pass', async ({ mount }) => {
@@ -70,7 +70,7 @@ test('should run component tests after editing test', async ({ runUITest, writeF
 
   await writeFiles({
     'src/button.test.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './button';
 
       test('fail', async ({ mount }) => {
@@ -128,7 +128,7 @@ test('should run component tests after editing test and component', async ({ run
 
   await writeFiles({
     'src/button.test.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './button';
 
       test('pass 2', async ({ mount }) => {
@@ -169,7 +169,7 @@ test('should watch test', async ({ runUITest, writeFiles }) => {
 
   await writeFiles({
     'src/button.test.tsx': `
-      import { test, expect } from '@playwright/experimental-ct-react';
+      import { test, expect } from '@okep/experimental-ct-react';
       import { Button } from './button';
 
       test('pass', async ({ mount }) => {

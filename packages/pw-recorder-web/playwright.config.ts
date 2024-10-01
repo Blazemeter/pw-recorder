@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { devices, defineConfig } from '@playwright/experimental-ct-react';
-import type { ReporterDescription } from '@playwright/test';
+import { devices, defineConfig } from '@okep/experimental-ct-react';
+import type { ReporterDescription } from '@okep/test';
 
 const reporters = () => {
   const result: ReporterDescription[] = process.env.CI ? [

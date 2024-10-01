@@ -33,17 +33,17 @@ function printPlaywrightTestError(command: string) {
     packages.push('playwright');
   const packageManager = getPackageManager();
   if (packageManager === 'yarn') {
-    console.error(`Please install @playwright/test package before running "yarn playwright ${command}"`);
+    console.error(`Please install @okep/test package before running "yarn playwright ${command}"`);
     console.error(`  yarn remove ${packages.join(' ')}`);
-    console.error('  yarn add -D @playwright/test');
+    console.error('  yarn add -D @okep/test');
   } else if (packageManager === 'pnpm') {
-    console.error(`Please install @playwright/test package before running "pnpm exec playwright ${command}"`);
+    console.error(`Please install @okep/test package before running "pnpm exec playwright ${command}"`);
     console.error(`  pnpm remove ${packages.join(' ')}`);
-    console.error('  pnpm add -D @playwright/test');
+    console.error('  pnpm add -D @okep/test');
   } else {
-    console.error(`Please install @playwright/test package before running "npx playwright ${command}"`);
+    console.error(`Please install @okep/test package before running "npx playwright ${command}"`);
     console.error(`  npm uninstall ${packages.join(' ')}`);
-    console.error('  npm install -D @playwright/test');
+    console.error('  npm install -D @okep/test');
   }
 }
 
@@ -55,7 +55,7 @@ const kExternalPlaywrightTestCommands = [
 function addExternalPlaywrightTestCommands() {
   for (const [command, description] of kExternalPlaywrightTestCommands) {
     const playwrightTest = program.command(command).allowUnknownOption(true);
-    playwrightTest.description(`${description} Available in @playwright/test package.`);
+    playwrightTest.description(`${description} Available in @okep/test package.`);
     playwrightTest.action(async () => {
       printPlaywrightTestError(command);
       gracefullyProcessExitDoNotHang(1);

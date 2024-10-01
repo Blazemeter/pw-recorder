@@ -15,8 +15,8 @@
  */
 
 import path from 'path';
-import { defineConfig } from '@playwright/test';
-import type { ReporterDescription } from '@playwright/test';
+import { defineConfig } from '@okep/test';
+import type { ReporterDescription } from '@okep/test';
 import { config as loadEnv } from 'dotenv';
 loadEnv({ path: path.join(__dirname, '..', '..', '.env') });
 

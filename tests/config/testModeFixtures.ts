@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { test } from '@pw-recorder/test';
+import { test } from '@okep/test';
 import type { TestModeName } from './testMode';
 import { DefaultTestMode, DriverTestMode } from './testMode';
 import * as playwrightLibrary from 'pw-recorder-core';
@@ -30,7 +30,7 @@ export type TestModeTestFixtures = {
 
 export type TestModeWorkerFixtures = {
   toImplInWorkerScope: (rpcObject?: any) => any;
-  playwright: typeof import('@pw-recorder/test');
+  playwright: typeof import('@okep/test');
 };
 
 export const testModeTest = test.extend<TestModeTestFixtures, TestModeWorkerOptions & TestModeWorkerFixtures>({

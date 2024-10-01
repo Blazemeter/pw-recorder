@@ -30,10 +30,10 @@ export default defineConfig({
     alias: {
       '@injected': path.resolve(__dirname, '../pw-recorder-core/src/server/injected'),
       '@isomorphic': path.resolve(__dirname, '../pw-recorder-core/src/utils/isomorphic'),
-      '@protocol': path.resolve(__dirname, '../protocol/src'),
-      '@testIsomorphic': path.resolve(__dirname, '../playwright/src/isomorphic'),
-      '@trace': path.resolve(__dirname, '../trace/src'),
-      '@web': path.resolve(__dirname, '../web/src'),
+      '@protocol': path.resolve(__dirname, '../pw-recorder-protocol/src'),
+      '@testIsomorphic': path.resolve(__dirname, '../pw-recorder/src/isomorphic'),
+      '@trace': path.resolve(__dirname, '../pw-recorder-trace/src'),
+      '@web': path.resolve(__dirname, '../pw-recorder-web/src'),
     },
   },
   build: {

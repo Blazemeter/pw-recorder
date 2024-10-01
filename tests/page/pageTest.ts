@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Frame, Page, TestType } from '@pw-recorder/test';
+import type { Frame, Page, TestType } from '@okep/test';
 import type { PlatformWorkerFixtures } from '../config/platformFixtures';
 import type { TestModeTestFixtures, TestModeWorkerFixtures, TestModeWorkerOptions } from '../config/testModeFixtures';
 import { androidTest } from '../android/androidTest';
@@ -23,7 +23,7 @@ import { electronTest } from '../electron/electronTest';
 import { webView2Test } from '../webview2/webView2Test';
 import type { PageTestFixtures, PageWorkerFixtures } from './pageTestApi';
 import type { ServerFixtures, ServerWorkerOptions } from '../config/serverFixtures';
-export { expect } from '@pw-recorder/test';
+export { expect } from '@okep/test';
 
 let impl: TestType<PageTestFixtures & ServerFixtures & TestModeTestFixtures, PageWorkerFixtures & PlatformWorkerFixtures & TestModeWorkerFixtures & TestModeWorkerOptions & ServerWorkerOptions> = browserTest;
 

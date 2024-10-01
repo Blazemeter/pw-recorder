@@ -1,5 +1,5 @@
 import '../src/assets/index.css';
-import { beforeMount, afterMount } from '@playwright/experimental-ct-svelte/hooks';
+import { beforeMount, afterMount } from '@okep/experimental-ct-svelte/hooks';
 
 export type HooksConfig = {
   context?: string;
